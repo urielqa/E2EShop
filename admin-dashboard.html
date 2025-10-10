@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador - E2E SHOP (EM DESENVOLVIMENTO)</title>
+    <meta name="description" content="Painel de controle administrativo completo da E2E SHOP - Funcionalidade em desenvolvimento">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f97316">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/ecommerce.css?v=1.0">
+</head>
+<body class="bg-gray-50">
+    <!-- Header Moderno -->
+    <header class="bg-white shadow-xl border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-3">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-crown text-primary-200"></i>
+                            <span>Painel Administrativo - E2E SHOP</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-4 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-light.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-12 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+                        </a>
+                    </div>
+            
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Notificações -->
+                        <div class="relative">
+                            <button class="p-3 text-gray-600 hover:text-primary-600 transition-all duration-300 hover:scale-110">
+                                <i class="fas fa-bell text-xl"></i>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Usuário -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-semibold text-gray-900" id="admin-name">Admin Sistema</span>
+                                <span class="text-xs text-gray-500">Administrador</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Logout -->
+                        <button onclick="openLogoutModal()" class="px-4 py-2 text-gray-600 hover:text-red-600 transition-colors duration-300 font-medium">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            Sair
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-8">
+        <!-- Aviso de Desenvolvimento -->
+        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-6 mb-8 rounded-2xl shadow-lg">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-tools mr-3 text-3xl"></i>
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold mb-2">Painel Administrativo em Desenvolvimento</h2>
+                        <p class="text-lg opacity-90">Esta funcionalidade está sendo desenvolvida e estará disponível em breve.</p>
+                        <div class="mt-4 bg-white bg-opacity-20 rounded-lg p-4 max-w-2xl mx-auto">
+                            <h3 class="font-semibold mb-2">Funcionalidades Planejadas:</h3>
+                            <ul class="text-sm text-left space-y-1">
+                                <li>• Gestão completa de usuários e vendedores</li>
+                                <li>• Relatórios avançados de vendas e performance</li>
+                                <li>• Controle de estoque global e produtos</li>
+                                <li>• Análise de dados e métricas</li>
+                                <li>• Configurações avançadas do sistema</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Bem-vindo ao Painel Administrativo</h1>
+                <p class="text-gray-600">Gerencie todos os aspectos da sua loja online</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total de Vendas -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total de Vendas</p>
+                            <p class="text-2xl font-bold text-gray-900" id="total-sales">R$ 0,00</p>
+                            <p class="text-sm text-green-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +12% este mês
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total de Pedidos -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total de Pedidos</p>
+                            <p class="text-2xl font-bold text-gray-900" id="total-orders">0</p>
+                            <p class="text-sm text-blue-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +8% este mês
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-shopping-bag text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total de Clientes -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total de Clientes</p>
+                            <p class="text-2xl font-bold text-gray-900" id="total-customers">0</p>
+                            <p class="text-sm text-purple-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +15% este mês
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-users text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total de Produtos -->
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total de Produtos</p>
+                            <p class="text-2xl font-bold text-gray-900" id="total-products">0</p>
+                            <p class="text-sm text-orange-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +5% este mês
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-box text-orange-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produtos em Destaque -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Produtos em Destaque</h2>
+                    <a href="products.html" class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold">
+                        Ver todos <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <div id="admin-products" class="products-grid-products" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 16px; max-width: 1400px; margin: 0 auto; opacity: 1; visibility: visible;">
+                    <!-- Renderizado via ecommerce-system.js -->
+                </div>
+            </div>
+
+            <!-- Main Dashboard Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Recent Orders -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-bold text-gray-900">Pedidos Recentes</h2>
+                                <a href="#" class="text-primary-600 hover:text-primary-700 font-medium">Ver todos</a>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pedido</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200" id="recent-orders-table">
+                                    <!-- Pedidos serão carregados via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Product Management -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-bold text-gray-900">Gestão de Produtos</h2>
+                                <button onclick="openAddProductModal()" class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors duration-300">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Adicionar Produto
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="products-grid">
+                                <!-- Produtos serão carregados via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-8">
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Ações Rápidas</h2>
+                        <div class="space-y-3">
+                            <button onclick="openUserManagement()" class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-users text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Gerenciar Usuários</p>
+                                    <p class="text-sm text-gray-500">Clientes, vendedores e admins</p>
+                                </div>
+                            </button>
+                            
+                            <button onclick="openOrderManagement()" class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-cart text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Gerenciar Pedidos</p>
+                                    <p class="text-sm text-gray-500">Visualizar e atualizar pedidos</p>
+                                </div>
+                            </button>
+                            
+                            <button onclick="openAnalytics()" class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-chart-bar text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Relatórios</p>
+                                    <p class="text-sm text-gray-500">Analytics e relatórios</p>
+                                </div>
+                            </button>
+                            
+                            <button onclick="openSettings()" class="w-full flex items-center space-x-3 p-3 text-left hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                                <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-cog text-gray-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Configurações</p>
+                                    <p class="text-sm text-gray-500">Configurações da loja</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- System Status -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">Status do Sistema</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">API de Produtos</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full" id="api-status">Online</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">Sistema de Pagamento</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Online</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">Banco de Dados</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Online</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-600">Servidor</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-gray-900">Adicionar Produto</h3>
+                        <button onclick="closeAddProductModal()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <form id="add-product-form" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Produto</label>
+                                <input type="text" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Preço</label>
+                                <input type="number" name="price" step="0.01" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Descrição</label>
+                            <textarea name="description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Categoria</label>
+                                <select name="category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option value="smartphones">Smartphones</option>
+                                    <option value="notebooks">Notebooks</option>
+                                    <option value="tablets">Tablets</option>
+                                    <option value="acessorios">Acessórios</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Estoque</label>
+                                <input type="number" name="stock" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3">
+                            <button type="button" onclick="closeAddProductModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors duration-300">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="px-6 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-300">
+                                Adicionar Produto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p>&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                <p class="text-gray-400 mt-2">Painel Administrativo - Sistema de Gestão Completo</p>
+                <p class="text-sm text-gray-500 mt-2">
+                    Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/clean-modals.js?v=3.3"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/ecommerce-system.js?v=1.0"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/products-api.js?v=1.0"></script>
+    <!-- integrações antigas removidas para build clean -->
+    <script src="assets/js/modern-cart-system.js?v=1.0"></script>
+    <script src="assets/js/cart-functions.js?v=1.0"></script>
+    
+    <script>
+        // Dados mockados para demonstração
+        let adminData = {
+            totalSales: 125000.00,
+            totalOrders: 342,
+            totalCustomers: 1250,
+            totalProducts: 156,
+            recentOrders: [
+                { id: '#001', customer: 'João Silva', status: 'Entregue', total: 'R$ 299,90', date: '2024-01-15' },
+                { id: '#002', customer: 'Maria Santos', status: 'Processando', total: 'R$ 599,90', date: '2024-01-14' },
+                { id: '#003', customer: 'Pedro Costa', status: 'Enviado', total: 'R$ 199,90', date: '2024-01-13' },
+                { id: '#004', customer: 'Ana Lima', status: 'Pendente', total: 'R$ 899,90', date: '2024-01-12' }
+            ],
+            products: [
+                { id: 1, name: 'Smartphone Galaxy S24', price: 2999.90, stock: 15, category: 'smartphones' },
+                { id: 2, name: 'Notebook Dell Inspiron', price: 3999.90, stock: 8, category: 'notebooks' },
+                { id: 3, name: 'Tablet iPad Pro', price: 5999.90, stock: 5, category: 'tablets' }
+            ]
+        };
+
+        // Função para carregar dados do usuário
+        function loadUserData() {
+            console.log('👤 Carregando dados do usuário admin...');
+            
+            // Tentar carregar do localStorage primeiro
+            const savedUser = localStorage.getItem('e2e_current_user');
+            if (savedUser) {
+                try {
+                    const userData = JSON.parse(savedUser);
+                    console.log('✅ Dados do usuário encontrados:', userData);
+                    
+                    // Atualizar nome do admin
+                    const adminNameElement = document.getElementById('admin-name');
+                    if (adminNameElement && userData.firstName && userData.lastName) {
+                        adminNameElement.textContent = `${userData.firstName} ${userData.lastName}`;
+                        console.log('✅ Nome do admin atualizado:', `${userData.firstName} ${userData.lastName}`);
+                    }
+                    
+                    return;
+                } catch (error) {
+                    console.error('❌ Erro ao parsear dados do usuário:', error);
+                }
+            }
+            
+            // Fallback: usar dados da URL (se vier do formulário de registro)
+            const urlParams = new URLSearchParams(window.location.search);
+            const firstName = urlParams.get('firstName');
+            const lastName = urlParams.get('lastName');
+            
+            if (firstName && lastName) {
+                console.log('📝 Usando dados da URL:', firstName, lastName);
+                const adminNameElement = document.getElementById('admin-name');
+                if (adminNameElement) {
+                    adminNameElement.textContent = `${firstName} ${lastName}`;
+                    console.log('✅ Nome do admin atualizado da URL:', `${firstName} ${lastName}`);
+                }
+                
+                // Salvar no localStorage para próximas visitas
+                const userData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: urlParams.get('email') || '',
+                    profile: 'admin',
+                    timestamp: new Date().toISOString()
+                };
+                localStorage.setItem('e2e_current_user', JSON.stringify(userData));
+                console.log('💾 Dados do usuário salvos no localStorage');
+            } else {
+                console.log('⚠️ Nenhum dado de usuário encontrado, usando nome padrão');
+            }
+        }
+
+        // Função para carregar dados do dashboard
+        function loadDashboardData() {
+            console.log('📊 Carregando dados do dashboard admin...');
+            
+            // Carregar nome do usuário
+            loadUserData();
+            
+            // Atualizar estatísticas
+            document.getElementById('total-sales').textContent = `R$ ${adminData.totalSales.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            document.getElementById('total-orders').textContent = adminData.totalOrders.toLocaleString('pt-BR');
+            document.getElementById('total-customers').textContent = adminData.totalCustomers.toLocaleString('pt-BR');
+            document.getElementById('total-products').textContent = adminData.totalProducts.toLocaleString('pt-BR');
+            
+            // Carregar pedidos recentes
+            loadRecentOrders();
+            
+            // Carregar produtos
+            loadProducts();
+            
+            // Verificar status da API
+            checkAPIStatus();
+        }
+
+        // Função para carregar pedidos recentes
+        function loadRecentOrders() {
+            const tableBody = document.getElementById('recent-orders-table');
+            tableBody.innerHTML = adminData.recentOrders.map(order => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${order.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${order.customer}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 py-1 text-xs rounded-full ${getStatusClass(order.status)}">${order.status}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${order.total}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button onclick="viewOrder('${order.id}')" class="text-primary-600 hover:text-primary-900 mr-3">Ver</button>
+                        <button onclick="editOrder('${order.id}')" class="text-blue-600 hover:text-blue-900">Editar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Função para carregar produtos
+        function loadProducts() {
+            const productsGrid = document.getElementById('products-grid');
+            productsGrid.innerHTML = adminData.products.map(product => `
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <h3 class="font-semibold text-gray-900 mb-2">${product.name}</h3>
+                    <p class="text-sm text-gray-600 mb-2">R$ ${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                    <p class="text-sm text-gray-500 mb-3">Estoque: ${product.stock} unidades</p>
+                    <div class="flex space-x-2">
+                        <button onclick="editProduct(${product.id})" class="text-blue-600 hover:text-blue-800 text-sm">Editar</button>
+                        <button onclick="deleteProduct(${product.id})" class="text-red-600 hover:text-red-800 text-sm">Excluir</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Função para verificar status da API
+        async function checkAPIStatus() {
+            try {
+                const response = await fetch('https://catalogo-products.pages.dev/api/products?page=1&pageSize=1');
+                if (response.ok) {
+                    document.getElementById('api-status').textContent = 'Online';
+                    document.getElementById('api-status').className = 'px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full';
+                } else {
+                    throw new Error('API não disponível');
+                }
+            } catch (error) {
+                document.getElementById('api-status').textContent = 'Offline';
+                document.getElementById('api-status').className = 'px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full';
+            }
+        }
+
+        // Função para obter classe de status
+        function getStatusClass(status) {
+            const statusClasses = {
+                'Entregue': 'bg-green-100 text-green-800',
+                'Processando': 'bg-yellow-100 text-yellow-800',
+                'Enviado': 'bg-blue-100 text-blue-800',
+                'Pendente': 'bg-gray-100 text-gray-800'
+            };
+            return statusClasses[status] || 'bg-gray-100 text-gray-800';
+        }
+
+        // Funções de modal
+        function openAddProductModal() {
+            document.getElementById('add-product-modal').classList.remove('hidden');
+        }
+
+        function closeAddProductModal() {
+            document.getElementById('add-product-modal').classList.add('hidden');
+        }
+
+        // Funções de ação
+        function openUserManagement() {
+            alert('Funcionalidade de gerenciamento de usuários será implementada em breve!');
+        }
+
+        function openOrderManagement() {
+            alert('Funcionalidade de gerenciamento de pedidos será implementada em breve!');
+        }
+
+        function openAnalytics() {
+            alert('Funcionalidade de relatórios será implementada em breve!');
+        }
+
+        function openSettings() {
+            alert('Funcionalidade de configurações será implementada em breve!');
+        }
+
+        function viewOrder(orderId) {
+            alert(`Visualizando pedido ${orderId}`);
+        }
+
+        function editOrder(orderId) {
+            alert(`Editando pedido ${orderId}`);
+        }
+
+        function editProduct(productId) {
+            alert(`Editando produto ${productId}`);
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                alert(`Produto ${productId} excluído com sucesso!`);
+                loadProducts(); // Recarregar lista
+            }
+        }
+
+        // Função para abrir modal de logout
+        function openLogoutModal() {
+            document.getElementById('logout-modal').classList.remove('hidden');
+        }
+        
+        function confirmLogout() {
+            // Limpar dados do localStorage
+            localStorage.removeItem('e2e_current_user');
+            localStorage.removeItem('user');
+            localStorage.removeItem('user_orders');
+            localStorage.removeItem('user_favorites');
+            localStorage.removeItem('user_reviews');
+            localStorage.removeItem('cart');
+            localStorage.removeItem('vendor_data');
+            
+            // Redirecionar para login
+            window.location.href = 'index.html';
+        }
+        
+        function cancelLogout() {
+            document.getElementById('logout-modal').classList.add('hidden');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Dashboard Admin carregado!');
+            
+            // Carregar dados do dashboard
+            loadDashboardData();
+            
+            // Event listener para formulário de produto
+            document.getElementById('add-product-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const newProduct = {
+                    id: adminData.products.length + 1,
+                    name: formData.get('name'),
+                    price: parseFloat(formData.get('price')),
+                    stock: parseInt(formData.get('stock')),
+                    category: formData.get('category')
+                };
+                
+                adminData.products.push(newProduct);
+                loadProducts();
+                closeAddProductModal();
+                this.reset();
+                
+                alert('Produto adicionado com sucesso!');
+            });
+        });
+    </script>
+
+    <!-- Logout Modal -->
+    <div id="logout-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm hidden z-50 cursor-pointer">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full cursor-default animate-slideIn">
+                <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-pink-50 relative">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-t-3xl"></div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">Confirmar Logout</h3>
+                            <p class="text-sm text-gray-500">Você será redirecionado para a página inicial</p>
+                        </div>
+                        <button onclick="cancelLogout()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 flex items-center justify-center transition-all duration-200 text-gray-600 hover:text-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="text-center space-y-4">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto">
+                            <i class="fas fa-sign-out-alt text-red-500 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Sair da Conta</h4>
+                            <p class="text-sm text-gray-500 mt-1">Você será redirecionado para a página inicial e todos os dados serão mantidos.</p>
+                        </div>
+                        <div class="flex space-x-3 pt-4">
+                            <button onclick="cancelLogout()" class="flex-1 px-4 py-3 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl font-semibold transition-all duration-200">
+                                Cancelar
+                            </button>
+                            <button onclick="confirmLogout()" class="flex-1 px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                Confirmar Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Logo System -->
+    <!-- Logo System - Solução Direta -->
+    <script>
+        // Sistema de logo simplificado e robusto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Carregando logos...');
+            loadAllLogos();
+        });
+        
+        function loadAllLogos() {
+            // Carregar logos do header
+            const headerLogos = document.querySelectorAll('.header-logo');
+            headerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/header/logo-light.png' : 
+                    'assets/images/logo/header/logo-dark.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do header falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-sm"></i>
+                                </div>
+                                <span class="text-xl font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do header carregado: ${isDarkBackground ? 'light' : 'dark'}`);
+            });
+            
+            // Carregar logos do footer
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                logo.src = 'assets/images/logo/footer/logo-footer.png';
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do footer falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log('✅ Logo do footer carregado');
+            });
+            
+            // Carregar favicon
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = 'assets/images/logo/favicon/favicon.png';
+            } else {
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.type = 'image/png';
+                newFavicon.href = 'assets/images/logo/favicon/favicon.png';
+                document.head.appendChild(newFavicon);
+            }
+            console.log('✅ Favicon carregado');
+        }
+        
+        // Função para detectar se o fundo é escuro
+        function isElementDarkBackground(element) {
+            // Verificar classes CSS que indicam fundo escuro
+            const darkClasses = ['bg-gray-900', 'bg-black', 'bg-gray-800', 'bg-gray-700', 'bg-blue-900', 'bg-indigo-900'];
+            const parent = element.closest('header, footer, div');
+            
+            if (parent) {
+                // Verificar se o elemento pai tem classes de fundo escuro
+                for (let className of darkClasses) {
+                    if (parent.classList.contains(className)) {
+                        return true;
+                    }
+                }
+                
+                // Verificar estilos computados
+                const computedStyle = window.getComputedStyle(parent);
+                const backgroundColor = computedStyle.backgroundColor;
+                
+                if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
+                    const rgb = backgroundColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const r = parseInt(rgb[0]);
+                        const g = parseInt(rgb[1]);
+                        const b = parseInt(rgb[2]);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        return brightness < 128; // Se brightness < 128, é fundo escuro
+                    }
+                }
+            }
+            
+            // Por padrão, assumir fundo claro
+            return false;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E2E SHOP - Sua Loja Online Moderna e Tecnológica</title>
+    <meta name="description" content="E2E SHOP - Marketplace moderno com produtos de tecnologia. Smartphones, notebooks, tablets e acessórios com os melhores preços e qualidade.">
+    
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ea580c">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/product-images.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/ecommerce.css?v=1.0">
+</head>
+<body>
+    <!-- Header Moderno Shopify-Style -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-2">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-3 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+            <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+            </a>
+                    </div>
+            
+                    <!-- Search Bar -->
+                    <div class="flex-1 max-w-2xl mx-8">
+                        <div class="relative">
+                            <div class="flex rounded-xl border border-gray-300 hover:border-primary-400 focus-within:border-primary-500 transition-all duration-300 shadow-sm hover:shadow-md">
+                                <select class="bg-gray-50 text-gray-700 px-3 py-2.5 rounded-l-xl border-0 focus:ring-0 focus:outline-none text-sm font-medium min-w-[140px]">
+                                    <option value="">Todas as categorias</option>
+                                    <option value="smartphones">Smartphones</option>
+                                    <option value="notebooks">Notebooks</option>
+                                    <option value="tablets">Tablets</option>
+                                    <option value="acessorios">Acessórios</option>
+                                </select>
+                                <div class="flex-1 relative">
+                                    <input type="text" class="search-input w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                                    <button class="search-btn absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-1.5 rounded-lg transition-all duration-300 hover:scale-105">
+                                        <i class="fas fa-search text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg mt-1 p-4 hidden search-suggestions">
+                                <div class="flex items-center space-x-4 text-sm">
+                                    <span class="text-gray-500 font-medium">Sugestões:</span>
+                                    <a href="#" class="text-primary-600 hover:text-primary-700 transition-colors duration-200">Smartphone</a>
+                                    <a href="#" class="text-primary-600 hover:text-primary-700 transition-colors duration-200">Notebook</a>
+                                    <a href="#" class="text-primary-600 hover:text-primary-700 transition-colors duration-200">Tablet</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-3">
+                        <!-- Favoritos -->
+                        <a href="favorites.html" class="relative p-2.5 text-gray-600 hover:text-primary-600 transition-all duration-300 hover:scale-110" title="Favoritos">
+                            <i class="fas fa-heart text-lg"></i>
+                            <span class="favorites-count-badge absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" style="display:none">0</span>
+                        </a>
+                        
+                        <!-- Carrinho -->
+                        <a href="cart.html" class="relative p-2.5 text-gray-600 hover:text-primary-600 transition-all duration-300 hover:scale-110 group">
+                            <i class="fas fa-shopping-cart text-lg"></i>
+                            <span class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center cart-count">0</span>
+                            <div class="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <div class="text-sm">
+                                    <div class="font-medium text-gray-900">Carrinho</div>
+                                    <div class="text-gray-500 cart-total">R$ 0,00</div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <!-- Usuário -->
+                        <div class="flex items-center space-x-2">
+                            <!-- Dashboard do Vendedor (se logado como vendedor) -->
+                            <a href="vendor-dashboard.html" id="dashboard-link" class="px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm hidden">
+                                <i class="fas fa-store mr-1"></i>
+                                Dashboard
+                            </a>
+                            
+                            <!-- Painel do Cliente (se logado como cliente) -->
+                            <a href="profile.html" id="client-profile-link" class="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm hidden">
+                                <i class="fas fa-user mr-1"></i>
+                                Meu Perfil
+                            </a>
+                            
+                            <!-- Dashboard do Admin (se logado como admin) - EM DESENVOLVIMENTO -->
+                            <button id="admin-dashboard-link" onclick="showAdminComingSoon()" class="px-3 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm hidden">
+                                <i class="fas fa-crown mr-1"></i>
+                                Admin
+                            </button>
+                            
+                            <!-- Links padrão (se não logado) -->
+                            <a href="login.html" id="login-link" class="px-3 py-2 text-primary-600 bg-primary-50 rounded-lg font-medium transition-all duration-300 hover:bg-primary-100 text-sm">
+                                Entrar
+                            </a>
+                            <a href="register.html" id="register-link" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm">
+                                Cadastrar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="bg-gray-50 border-t border-gray-200">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between py-2">
+                    <div class="flex items-center space-x-8">
+                        <!-- Categorias -->
+                        <div class="relative categories-container">
+                            <button class="categories-btn flex items-center space-x-2 px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm">
+                                <i class="fas fa-bars"></i>
+                                <span>Categorias</span>
+                            </button>
+                            <div class="categories-sidebar">
+                                <!-- Categorias serão carregadas pelo JavaScript -->
+                            </div>
+                            <div class="mega-menu">
+                                <!-- Mega menu será carregado pelo JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Principal -->
+                        <div class="flex items-center space-x-6">
+                            <a href="index.html" class="flex items-center space-x-2 px-3 py-2 text-primary-600 bg-primary-50 rounded-lg font-medium transition-all duration-300 hover:bg-primary-100 text-sm">
+                                <i class="fas fa-home text-sm"></i>
+                                <span>Início</span>
+                            </a>
+                            <a href="products.html" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-th-large text-sm"></i>
+                                <span>Produtos</span>
+                            </a>
+                            <a href="products.html?category=best-sellers" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-fire text-sm"></i>
+                                <span>Mais Vendidos</span>
+                            </a>
+                            <a href="products.html?category=offers" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-percentage text-sm"></i>
+                                <span>Ofertas</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Utilitários -->
+                    <div class="flex items-center space-x-3">
+                        <a href="vendor-dashboard.html" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-primary-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-chart-line text-sm"></i>
+                            <span class="text-xs">Vendedor</span>
+                        </a>
+                        <a href="profile.html" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-primary-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-user text-sm"></i>
+                            <span class="text-xs">Cliente</span>
+                        </a>
+                        <button onclick="showAdminComingSoon()" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-primary-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-cog text-sm"></i>
+                            <span class="text-xs">Admin</span>
+                        </button>
+                        <button id="logout-btn" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-red-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-sign-out-alt text-sm"></i>
+                            <span class="text-xs">Sair</span>
+            </button>
+        </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Section - Logo após o header -->
+    <section class="py-4 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+        <div class="w-full px-2 md:px-4">
+            <div id="banner-container" class="banner-container">
+                <!-- Banners serão carregados aqui pelo JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+
+        <!-- Flash Sale Banner - Modernizado -->
+        <section class="relative py-2 bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 text-white overflow-hidden">
+            <!-- Efeitos tecnológicos de fundo -->
+            <div class="absolute inset-0 overflow-hidden">
+                <!-- Partículas flutuantes -->
+                <div class="absolute top-3 left-3 w-1.5 h-1.5 bg-yellow-300 rounded-full opacity-30 animate-ping particle"></div>
+                <div class="absolute top-6 right-6 w-1 h-1 bg-orange-300 rounded-full opacity-20 animate-pulse particle"></div>
+                <div class="absolute bottom-6 left-1/4 w-1.5 h-1.5 bg-red-300 rounded-full opacity-25 animate-bounce particle"></div>
+                <div class="absolute bottom-3 right-1/3 w-1 h-1 bg-yellow-200 rounded-full opacity-30 animate-ping particle"></div>
+                
+                <!-- Linhas de energia -->
+                <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-yellow-300 to-transparent opacity-20 energy-line"></div>
+                <div class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-orange-300 to-transparent opacity-20 energy-line" style="animation-delay: 1s;"></div>
+                
+                <!-- Grid tecnológico -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="grid grid-cols-12 h-full">
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div class="border-r border-white/20"></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center">
+                    <!-- Título com efeito neon -->
+                    <div class="mb-2">
+                        <h2 class="text-lg md:text-xl font-black mb-1 bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent animate-pulse flex items-center justify-center gap-1">
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                            </svg>
+                            PROMOÇÃO RELÂMPAGO!
+                            <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                            </svg>
+                    </h2>
+                        <div class="w-16 h-0.5 bg-gradient-to-r from-yellow-300 to-orange-300 mx-auto rounded-full animate-pulse"></div>
+                    </div>
+                    
+                    <!-- Subtítulo com efeito glow -->
+                    <p class="text-xs md:text-sm mb-2 font-semibold text-white/90 drop-shadow-lg flex items-center justify-center gap-1">
+                        <svg class="w-3 h-3 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Ofertas imperdíveis por tempo limitado
+                        <svg class="w-3 h-3 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </p>
+                    
+                    <!-- Countdown modernizado -->
+                    <div class="flex justify-center space-x-1 md:space-x-2 mb-2" id="countdown">
+                        <div class="countdown-box bg-gradient-to-br from-yellow-300/20 to-orange-400/20 backdrop-blur-md border border-yellow-300/30 rounded-lg px-2 py-1 text-center shadow-lg hover:scale-105 transition-all duration-300">
+                            <span class="block text-lg md:text-xl font-black text-yellow-300 drop-shadow-lg" id="hours">23</span>
+                            <span class="text-xs font-bold text-yellow-200 uppercase tracking-wider">H</span>
+                        </div>
+                        <div class="countdown-box bg-gradient-to-br from-orange-300/20 to-red-400/20 backdrop-blur-md border border-orange-300/30 rounded-lg px-2 py-1 text-center shadow-lg hover:scale-105 transition-all duration-300">
+                            <span class="block text-lg md:text-xl font-black text-orange-300 drop-shadow-lg" id="minutes">59</span>
+                            <span class="text-xs font-bold text-orange-200 uppercase tracking-wider">M</span>
+                        </div>
+                        <div class="countdown-box bg-gradient-to-br from-red-300/20 to-pink-400/20 backdrop-blur-md border border-red-300/30 rounded-lg px-2 py-1 text-center shadow-lg hover:scale-105 transition-all duration-300">
+                            <span class="block text-lg md:text-xl font-black text-red-300 drop-shadow-lg" id="seconds">59</span>
+                            <span class="text-xs font-bold text-red-200 uppercase tracking-wider">S</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Botão com efeito neon -->
+                    <a href="products.html" class="group inline-flex items-center space-x-1 px-4 py-2 bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 text-white font-black text-xs rounded-lg transition-all duration-300 hover:scale-105 shadow-md hover:shadow-orange-400/50 relative overflow-hidden wave-effect">
+                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <svg class="w-3 h-3 relative z-10 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                        </svg>
+                        <span class="relative z-10">VER OFERTAS</span>
+                        <svg class="w-3 h-3 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thumbnails Estratégicos - Categorias Principais -->
+        <section class="py-12 bg-gradient-to-br from-gray-50 via-white to-gray-100 border-b border-gray-200">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-4 bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
+                        Explore Nossas Categorias
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Descubra produtos incríveis em cada categoria com tecnologia de ponta
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- Thumbnail 1: Eletrônicos -->
+                    <a href="products.html?category=eletronicos" class="thumbnail-card group">
+                        <div class="thumbnail-image-container">
+                            <img src="assets/images/banners/thumbnails/banner-01-thumb-hd.jpg" 
+                                 alt="Eletrônicos" 
+                                 class="thumbnail-image thumbnail-desktop">
+                            <img src="assets/images/banners/thumbnails/banner-01-thumb-mobile.jpg" 
+                                 alt="Eletrônicos" 
+                                 class="thumbnail-image thumbnail-mobile">
+                            <div class="thumbnail-overlay">
+                                <div class="thumbnail-content">
+                                    <div class="thumbnail-icon-container">
+                                        <i class="fas fa-microchip text-4xl mb-3"></i>
+                </div>
+                                    <h3 class="text-2xl font-bold mb-2">Eletrônicos</h3>
+                                    <p class="text-base opacity-95">Smartphones, Notebooks, Tablets e mais</p>
+                                    <div class="thumbnail-arrow">
+                                        <i class="fas fa-arrow-right text-xl"></i>
+            </div>
+                    </div>
+                        </div>
+                            </div>
+                    </a>
+                    
+                    <!-- Thumbnail 2: Vestuário -->
+                    <a href="products.html?category=beleza" class="thumbnail-card group">
+                        <div class="thumbnail-image-container">
+                            <img src="assets/images/banners/thumbnails/banner-02-thumb-hd.jpg" 
+                                 alt="Vestuário e Moda" 
+                                 class="thumbnail-image thumbnail-desktop">
+                            <img src="assets/images/banners/thumbnails/banner-02-thumb-mobile.jpg" 
+                                 alt="Vestuário e Moda" 
+                                 class="thumbnail-image thumbnail-mobile">
+                            <div class="thumbnail-overlay">
+                                <div class="thumbnail-content">
+                                    <div class="thumbnail-icon-container">
+                                        <i class="fas fa-tshirt text-4xl mb-3"></i>
+                                </div>
+                                    <h3 class="text-2xl font-bold mb-2">Vestuário</h3>
+                                    <p class="text-base opacity-95">Roupas, Acessórios e Moda</p>
+                                    <div class="thumbnail-arrow">
+                                        <i class="fas fa-arrow-right text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Thumbnail 3: Casa e Cozinha -->
+                    <a href="products.html?category=casa-jardim" class="thumbnail-card group">
+                        <div class="thumbnail-image-container">
+                            <img src="assets/images/banners/thumbnails/banner-03-thumb-hd.jpg" 
+                                 alt="Casa e Cozinha" 
+                                 class="thumbnail-image thumbnail-desktop">
+                            <img src="assets/images/banners/thumbnails/banner-03-thumb-mobile.jpg" 
+                                 alt="Casa e Cozinha" 
+                                 class="thumbnail-image thumbnail-mobile">
+                            <div class="thumbnail-overlay">
+                                <div class="thumbnail-content">
+                                    <div class="thumbnail-icon-container">
+                                        <i class="fas fa-home text-4xl mb-3"></i>
+                                </div>
+                                    <h3 class="text-2xl font-bold mb-2">Casa e Cozinha</h3>
+                                    <p class="text-base opacity-95">Utensílios, Decoração e Móveis</p>
+                                    <div class="thumbnail-arrow">
+                                        <i class="fas fa-arrow-right text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mais Vendidos da Semana - NOVA VERSÃO MODERNA -->
+        <section class="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-orange-400 to-red-500 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full blur-3xl"></div>
+                        </div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-full mb-6 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <i class="fas fa-fire text-white text-3xl"></i>
+                    </div>
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">
+                        <span class="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
+                            🔥 Mais Vendidos da Semana
+                        </span>
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Os produtos mais procurados pelos nossos clientes esta semana. 
+                        <span class="font-semibold text-orange-600">Tecnologia de ponta</span> com 
+                        <span class="font-semibold text-red-600">preços imperdíveis</span>!
+                    </p>
+                </div>
+
+                <!-- Products Grid (dinâmico) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="modern-bestsellers-grid"></div>
+
+                <!-- View All Button -->
+                <div class="text-center mt-16">
+                    <a href="products.html" class="group inline-flex items-center px-10 py-5 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25">
+                        <i class="fas fa-shopping-bag mr-4 text-xl group-hover:rotate-12 transition-transform duration-300"></i>
+                        <span class="text-lg">Ver Todos os Produtos</span>
+                        <i class="fas fa-arrow-right ml-4 text-xl group-hover:translate-x-2 transition-transform duration-300"></i>
+                    </a>
+                    
+                            </div>
+                        </div>
+        </section>
+
+        <!-- Features -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Por que escolher o E2E SHOP?</h2>
+                    <p class="section-subtitle">Tecnologia, qualidade e inovação em um só lugar</p>
+                    </div>
+                    
+                <div class="grid grid-cols-4">
+                    <div class="text-center">
+                        <div class="feature-icon" style="background: var(--gradient-primary); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); color: white; font-size: 2rem;">
+                            <i class="fas fa-shipping-fast"></i>
+                            </div>
+                        <h3>Frete Grátis</h3>
+                        <p>Frete grátis para compras acima de R$ 399,00</p>
+                                </div>
+                    
+                    <div class="text-center">
+                        <div class="feature-icon" style="background: var(--gradient-secondary); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); color: white; font-size: 2rem;">
+                            <i class="fas fa-shield-alt"></i>
+                                </div>
+                        <h3>Compra Segura</h3>
+                        <p>Pagamento seguro com PIX e cartão</p>
+                            </div>
+                    
+                    <div class="text-center">
+                        <div class="feature-icon" style="background: var(--gradient-accent); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); color: white; font-size: 2rem;">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3>Devolução Fácil</h3>
+                        <p>Devolução em até 30 dias para produtos com defeito</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="feature-icon" style="background: var(--gradient-tech); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4); color: white; font-size: 2rem;">
+                            <i class="fas fa-headset"></i>
+                            </div>
+                        <h3>Suporte 24/7</h3>
+                        <p>Atendimento ao cliente sempre disponível</p>
+                        </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Moderno Shopify-Style -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" 
+                             alt="E2E Shop Logo" 
+                             class="footer-logo h-8 w-auto"
+                             data-context="footer">
+                            </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sua loja online moderna e tecnológica com os melhores produtos de qualidade. 
+                        Tecnologia, inovação e praticidade em um só lugar.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produtos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Conta -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                        <p class="text-gray-500 text-xs mt-1">
+                    Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                </p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-500 text-xs">Formas de Pagamento:</span>
+                        <div class="flex space-x-2">
+                            <i class="fab fa-cc-visa text-gray-400 text-lg"></i>
+                            <i class="fab fa-cc-mastercard text-gray-400 text-lg"></i>
+                            <i class="fas fa-credit-card text-gray-400 text-lg"></i>
+                            <i class="fas fa-mobile-alt text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <script src="assets/js/products-local.js"></script>
+    <!-- Scripts comentados para evitar conflitos com funções locais -->
+    <!-- <script src="assets/js/clean-modals.js?v=3.3"></script> -->
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/ecommerce-system.js?v=1.0"></script>
+    <!-- <script src="assets/js/cart-api-integration.js?v=1.0"></script> -->
+    <!-- <script src="assets/js/modern-cart-system.js?v=1.0"></script> -->
+    <script src="assets/js/cart-functions.js?v=1.0"></script>
+    <!-- <script src="assets/js/components.js?v=2.0"></script> -->
+    <script src="assets/js/auth.js?v=3.0"></script>
+    
+    
+    <script>
+        // Funções movidas para o final do arquivo para garantir execução
+
+        // Forçar limpeza de cache
+        if ('caches' in window) {
+            caches.keys().then(function(names) {
+                for (let name of names) {
+                    caches.delete(name);
+                }
+            });
+        }
+        
+        // Forçar reload completo da página
+        if (performance.navigation.type === 1) {
+            console.log('🔄 Página recarregada - aplicando novas cores...');
+        }
+        
+        
+        // Forçar reload das imagens
+            setTimeout(() => {
+            const images = document.querySelectorAll('img[src*="category-icons"]');
+            images.forEach(img => {
+                const src = img.src;
+                img.src = '';
+                setTimeout(() => {
+                    img.src = src + '?v=' + Date.now();
+                }, 100);
+            });
+        }, 1000);
+        
+        // Forçar recriação da sidebar
+        setTimeout(() => {
+            if (window.categoriesSystem) {
+                console.log('🔄 Forçando recriação da sidebar...');
+                window.categoriesSystem.createCategoriesSidebar();
+            }
+        }, 2000);
+        
+        // Funções para geração de imagens
+        function generateProductImage(product) {
+            console.log('🖼️ Gerando imagem para produto:', product.title, 'Categoria:', product.category);
+            
+            // Se já tem imagem da API, usar ela
+            if (product.image && product.image.startsWith('http')) {
+                console.log('✅ Usando imagem da API:', product.image);
+                return product.image;
+            }
+            
+            // Imagens diretas e simples
+            const images = [
+                'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&auto=format',
+                'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop&auto=format'
+            ];
+            
+            // Usar ID do produto para selecionar imagem
+            const productId = product.id || 'default';
+            const hash = productId.split('').reduce((a, b) => {
+                a = ((a << 5) - a) + b.charCodeAt(0);
+                return a & a;
+            }, 0);
+            const imageIndex = Math.abs(hash) % images.length;
+            const imageUrl = images[imageIndex];
+            
+            console.log('✅ Usando imagem selecionada:', imageUrl);
+            return imageUrl;
+        }
+
+        function getFallbackImage(product) {
+            return 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&auto=format';
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+            return `
+                ${'<i class="fas fa-star"></i>'.repeat(fullStars)}
+                ${hasHalfStar ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                ${'<i class="far fa-star"></i>'.repeat(emptyStars)}
+            `;
+        }
+
+        function openProductDetail(productId) {
+            console.log('🔍 Abrindo detalhes do produto:', productId);
+            console.log('🔗 URL:', `product-detail.html?id=${productId}`);
+            if (!productId) {
+                console.error('❌ ID do produto não fornecido');
+                return;
+            }
+            try { localStorage.setItem('last_product_id', String(productId)); } catch {}
+            window.location.href = `product-detail.html?id=${productId}`;
+        }
+        window.openProductDetail = openProductDetail;
+
+        function toggleFavorite(productId) {
+            try {
+                if (typeof window.__cart_toggleFavorite === 'function') {
+                    window.__cart_toggleFavorite(productId);
+                } else if (typeof window.toggleFavorite === 'function') {
+                    window.toggleFavorite(productId);
+                }
+            } catch (e) { console.error('Erro ao favoritar:', e); }
+        }
+
+        // Funções do carrinho movidas para cart-functions.js
+
+        // Função duplicada removida
+        
+        // Função duplicada removida
+        
+        // Função duplicada removida
+            // Função duplicada removida
+                {
+                    id: 1,
+                    name: "Smartphone Samsung Galaxy A54",
+                    brand: "Samsung",
+                    price: 1104.99,
+                    originalPrice: 1299.99,
+                    discount: 15,
+                    rating: 4.5,
+                    stock: 25,
+                    image: "assets/images/products/13_smartphone_samsung_galaxy_a54.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Notebook Dell Inspiron 15 3000",
+                    brand: "Dell",
+                    price: 2249.99,
+                    originalPrice: 2499.99,
+                    discount: 10,
+                    rating: 4.3,
+                    stock: 12,
+                    image: "assets/images/products/14_laptop_dell_inspiron_15_3000.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Tablet Apple iPad Air 5",
+                    brand: "Apple",
+                    price: 3799.99,
+                    originalPrice: 3999.99,
+                    discount: 5,
+                    rating: 4.8,
+                    stock: 8,
+                    image: "assets/images/products/16_tablet_apple_ipad_air_5.jpg"
+                },
+                {
+                    id: 4,
+                    name: "Smart TV Lenovo 55 4K UHD",
+                    brand: "Lenovo",
+                    price: 1519.99,
+                    originalPrice: 1899.99,
+                    discount: 20,
+                    rating: 4.2,
+                    stock: 15,
+                    image: "assets/images/products/01_smart_tv_lenovo_55_4k_uhd.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Monitor Dell 24 75Hz",
+                    brand: "Dell",
+                    price: 899.99,
+                    originalPrice: 1099.99,
+                    discount: 18,
+                    rating: 4.4,
+                    stock: 8,
+                    image: "assets/images/products/06_monitor_dell_24_75hz.jpg"
+                },
+                {
+                    id: 6,
+                    name: "Headphone Sony WH-1000XM4",
+                    brand: "Sony",
+                    price: 899.99,
+                    originalPrice: 1124.99,
+                    discount: 20,
+                    rating: 4.7,
+                    stock: 8,
+                    image: "assets/images/products/15_headphone_sony_wh_1000xm4.jpg"
+                },
+                {
+                    id: 7,
+                    name: "Smartwatch Apple Watch Series 8",
+                    brand: "Apple",
+                    price: 1999.99,
+                    originalPrice: 2499.99,
+                    discount: 20,
+                    rating: 4.6,
+                    stock: 15,
+                    image: "assets/images/products/17_smartwatch_apple_watch_series_8.jpg"
+                },
+                {
+                    id: 8,
+                    name: "Console PlayStation 5",
+                    brand: "Sony",
+                    price: 3999.99,
+                    originalPrice: 4499.99,
+                    discount: 11,
+                    rating: 4.9,
+                    stock: 5,
+                    image: "assets/images/products/19_console_playstation_5.jpg"
+                }
+            ];
+            
+            return products.find(p => p.id === productId);
+        }
+
+        // Carregar produtos em destaque
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('🚀 Página carregada! - Versão 3.0 - Header Moderno');
+            
+            // Fazer chamada à API para mostrar no network
+            try {
+                console.log('🔍 Verificando disponibilidade da API...');
+                console.log('📡 window.productsAPI:', window.productsAPI);
+                
+                if (window.productsAPI && typeof window.productsAPI.getProducts === 'function') {
+                    console.log('🌐 Fazendo chamada à API para mostrar no network...');
+                    const apiData = await window.productsAPI.getProducts({ page: 1, pageSize: 30 });
+                    console.log('✅ API chamada realizada! Produtos no network:', apiData.products?.length || 0);
+                } else {
+                    console.log('⚠️ ProductsAPI não disponível, tentando chamada direta...');
+                    
+                    // Tentar chamada direta para garantir que apareça no network
+                    try {
+                        const response = await fetch('https://catalogo-products.pages.dev/api/products?page=1&pageSize=30');
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log('✅ Chamada direta realizada! Produtos no network:', data.products?.length || 0);
+                        }
+                    } catch (directError) {
+                        console.log('⚠️ Erro na chamada direta:', directError.message);
+                    }
+                }
+            } catch (apiError) {
+                console.log('⚠️ API não disponível, continuando com produtos locais:', apiError.message);
+            }
+            
+            // Inicializar integração com API
+            if (window.ProductsAPIIntegration) {
+                window.productsAPIIntegration = new window.ProductsAPIIntegration();
+                console.log('✅ ProductsAPIIntegration inicializado');
+            }
+            
+            // Inicializar carrinho
+            if (window.CartAPIIntegration) {
+                window.cartAPIIntegration = new window.CartAPIIntegration();
+                console.log('✅ CartAPIIntegration inicializado');
+            }
+            
+            // Produtos carregados automaticamente pelo ecommerce-system.js
+            
+            // Produtos mais vendidos já estão carregados estaticamente no HTML
+            console.log('✅ Produtos mais vendidos carregados estaticamente');
+        });
+
+        // Função MODERNA para carregar produtos mais vendidos - VERSÃO ROBUSTA
+        function loadModernBestsellers() {
+            console.log('🚀 INICIANDO CARREGAMENTO DE PRODUTOS...');
+            
+            try {
+                // Aguardar um pouco para garantir que o DOM esteja pronto
+                setTimeout(() => {
+                    console.log('🔍 Procurando grid com ID: modern-bestsellers-grid');
+                    
+                    const grid = document.getElementById('modern-bestsellers-grid');
+                    console.log('📦 Grid encontrado:', grid);
+                    
+                    if (!grid) {
+                        console.error('❌ Grid moderno não encontrado!');
+                        console.log('🔍 Todos os elementos com ID:', document.querySelectorAll('[id]'));
+                        console.log('🔍 Procurando por classe:', document.querySelectorAll('.grid'));
+                        return;
+                    }
+                    
+                    console.log('✅ Grid encontrado, aplicando conteúdo...');
+                    
+                    // Carregar produtos com botões funcionais
+                    grid.innerHTML = `
+                        <!-- Produto 1 -->
+                        <div class="bg-white rounded-3xl shadow-xl p-6 text-center flex flex-col h-full" onclick="openProductDetail(1)" style="cursor:pointer">
+                            <div class="relative overflow-hidden h-64 mb-4">
+                                <img src="assets/images/products/13_smartphone_samsung_galaxy_a54.jpg" alt="Smartphone Samsung Galaxy A54" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                    🔥 #1 Mais Vendido
+                                </div>
+                                <div class="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                    -15%
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 h-14 flex items-center justify-center">Smartphone Samsung Galaxy A54</h3>
+                                <p class="text-sm text-gray-500 mb-3 h-6 flex items-center justify-center">Samsung</p>
+                                <div class="mb-4 h-12 flex items-center justify-center">
+                                    <p class="text-sm text-gray-600 line-clamp-2 text-center">Smartphone Samsung Galaxy A54 com tela de 6.4 polegadas, câmera tripla de 50MP, processador Exynos 1380, 128GB de armazenamento e bateria de 5000mAh.</p>
+                                </div>
+                                <div class="mb-4 h-16 flex flex-col justify-center">
+                                    <div class="flex items-center space-x-3 justify-center">
+                                        <span class="text-3xl font-bold text-gray-900">R$ 1.104,99</span>
+                                        <span class="text-lg text-gray-500 line-through">R$ 1.299,99</span>
+                                    </div>
+                                    <div class="text-sm text-green-600 font-medium mt-1">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Em estoque (25 unidades)
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 mt-auto">
+                                    <button class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); addToCart(1)">
+                                        <i class="fas fa-shopping-cart mr-2"></i>
+                                        Adicionar
+                                    </button>
+                                    <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); buyNow(1)">
+                                        <i class="fas fa-bolt mr-2"></i>
+                                        Comprar
+                        </button>
+                    </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Produto 2 -->
+                        <div class="bg-white rounded-3xl shadow-xl p-6 text-center flex flex-col h-full" onclick="openProductDetail(2)" style="cursor:pointer">
+                            <div class="relative overflow-hidden h-64 mb-4">
+                                <img src="assets/images/products/14_laptop_dell_inspiron_15_3000.jpg" alt="Notebook Dell Inspiron 15 3000" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                    ⚡ #2 Mais Vendido
+                                </div>
+                                <div class="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                    -10%
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 h-14 flex items-center justify-center">Notebook Dell Inspiron 15 3000</h3>
+                                <p class="text-sm text-gray-500 mb-3 h-6 flex items-center justify-center">Dell</p>
+                                <div class="mb-4 h-12 flex items-center justify-center">
+                                    <p class="text-sm text-gray-600 line-clamp-2 text-center">Notebook Dell Inspiron 15 3000 com processador Intel Core i5, 8GB RAM, SSD 256GB, tela 15.6 polegadas Full HD e Windows 11.</p>
+                                </div>
+                                <div class="mb-4 h-16 flex flex-col justify-center">
+                                    <div class="flex items-center space-x-3 justify-center">
+                                        <span class="text-3xl font-bold text-gray-900">R$ 2.249,99</span>
+                                        <span class="text-lg text-gray-500 line-through">R$ 2.499,99</span>
+                                    </div>
+                                    <div class="text-sm text-green-600 font-medium mt-1">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Em estoque (18 unidades)
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 mt-auto">
+                                    <button class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); addToCart(2)">
+                                        <i class="fas fa-shopping-cart mr-2"></i>
+                                        Adicionar
+                                    </button>
+                                    <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); buyNow(2)">
+                                        <i class="fas fa-bolt mr-2"></i>
+                                        Comprar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Produto 3 -->
+                        <div class="bg-white rounded-3xl shadow-xl p-6 text-center flex flex-col h-full" onclick="openProductDetail(3)" style="cursor:pointer">
+                            <div class="relative overflow-hidden h-64 mb-4">
+                                <img src="assets/images/products/16_tablet_apple_ipad_air_5.jpg" alt="Tablet Apple iPad Air 5" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                    💎 #3 Mais Vendido
+                                </div>
+                                <div class="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                    -5%
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 h-14 flex items-center justify-center">Tablet Apple iPad Air 5</h3>
+                                <p class="text-sm text-gray-500 mb-3 h-6 flex items-center justify-center">Apple</p>
+                                <div class="mb-4 h-12 flex items-center justify-center">
+                                    <p class="text-sm text-gray-600 line-clamp-2 text-center">Tablet Apple iPad Air 5 com chip M1, tela Liquid Retina 10.9 polegadas, 64GB de armazenamento, câmera 12MP e Touch ID.</p>
+                                </div>
+                                <div class="mb-4 h-16 flex flex-col justify-center">
+                                    <div class="flex items-center space-x-3 justify-center">
+                                        <span class="text-3xl font-bold text-gray-900">R$ 3.799,99</span>
+                                        <span class="text-lg text-gray-500 line-through">R$ 3.999,99</span>
+                                    </div>
+                                    <div class="text-sm text-green-600 font-medium mt-1">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                        Em estoque (12 unidades)
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 mt-auto">
+                                    <button class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); addToCart(3)">
+                                        <i class="fas fa-shopping-cart mr-2"></i>
+                                        Adicionar
+                                    </button>
+                                    <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); buyNow(3)">
+                                        <i class="fas fa-bolt mr-2"></i>
+                                        Comprar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Produto 4 -->
+                        <div class="bg-white rounded-3xl shadow-xl p-6 text-center flex flex-col h-full" onclick="openProductDetail(4)" style="cursor:pointer">
+                            <div class="relative overflow-hidden h-64 mb-4">
+                                <img src="assets/images/products/01_smart_tv_lenovo_55_4k_uhd.jpg" alt="Smart TV Lenovo 55 4K UHD" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                                    📺 #4 Mais Vendido
+                                </div>
+                                <div class="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                    -20%
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 h-14 flex items-center justify-center">Smart TV Lenovo 55 4K UHD</h3>
+                                <p class="text-sm text-gray-500 mb-3 h-6 flex items-center justify-center">Lenovo</p>
+                                <div class="mb-4 h-12 flex items-center justify-center">
+                                    <p class="text-sm text-gray-600 line-clamp-2 text-center">Smart TV Lenovo 55 polegadas 4K UHD com Android TV, HDR10, Wi-Fi, Bluetooth e 3 portas HDMI.</p>
+                                </div>
+                                <div class="mb-4 h-16 flex flex-col justify-center">
+                                    <div class="flex items-center space-x-3 justify-center">
+                                        <span class="text-3xl font-bold text-gray-900">R$ 1.519,99</span>
+                                        <span class="text-lg text-gray-500 line-through">R$ 1.899,99</span>
+                                    </div>
+                                    <div class="text-sm text-green-600 font-medium mt-1">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Em estoque (8 unidades)
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 mt-auto">
+                                    <button class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); addToCart(4)">
+                            <i class="fas fa-shopping-cart mr-2"></i>
+                                        Adicionar
+                                    </button>
+                                    <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-3 px-4 rounded-xl" onclick="event.stopPropagation(); buyNow(4)">
+                                        <i class="fas fa-bolt mr-2"></i>
+                                        Comprar
+                        </button>
+                    </div>
+                </div>
+                        </div>
+                    `;
+                    console.log('✅ PRODUTOS COM BOTÕES FUNCIONAIS CARREGADOS!');
+                }, 100);
+                
+            } catch (error) {
+                console.error('❌ ERRO na função loadModernBestsellers:', error);
+            }
+        }
+        
+        
+        // ESTRATÉGIA SIMPLIFICADA - Manter produtos estáticos
+        console.log('🚀 INICIANDO ESTRATÉGIA SIMPLIFICADA...');
+        
+        // Não carregar via JavaScript - manter produtos estáticos do HTML
+        console.log('✅ Mantendo produtos estáticos do HTML - sem sobrescrever');
+        
+        // DESABILITAR COMPLETAMENTE A FUNÇÃO loadModernBestsellers
+        function loadModernBestsellers() {
+            console.log('🚫 loadModernBestsellers DESABILITADA - usando produtos estáticos');
+            return; // Não fazer nada
+        }
+
+        // Funções duplicadas removidas - usando apenas as definidas no início
+
+        // Função de teste removida
+
+        function toggleFavorite(productId) {
+            try {
+                if (typeof window.__cart_toggleFavorite === 'function') {
+                    window.__cart_toggleFavorite(productId);
+                } else if (typeof window.toggleFavorite === 'function') {
+                    window.toggleFavorite(productId);
+                }
+            } catch (e) { console.error('Erro ao favoritar:', e); }
+        }
+
+        // Funções carregadas com sucesso
+        
+        // Teste simples para verificar se as funções estão funcionando
+        console.log('🔍 VERIFICAÇÃO: addToCart disponível:', typeof addToCart);
+        console.log('🔍 VERIFICAÇÃO: buyNow disponível:', typeof buyNow);
+        console.log('🔍 VERIFICAÇÃO: products disponível:', typeof products);
+        
+        // Teste automático após 2 segundos
+        setTimeout(() => {
+            console.log('🧪 TESTE AUTOMÁTICO: Verificando funções...');
+            if (typeof addToCart === 'function' && typeof buyNow === 'function') {
+                console.log('✅ FUNÇÕES CARREGADAS COM SUCESSO!');
+                console.log('🧪 TESTE: Executando addToCart(1) para verificar...');
+                try {
+                    addToCart(1);
+                } catch (error) {
+                    console.error('❌ ERRO ao executar addToCart(1):', error);
+                }
+            } else {
+                console.error('❌ ERRO: Funções não carregadas!');
+            }
+        }, 2000);
+
+        // Função removida - agora usa apenas ecommerce-system.js
+
+        // Funcionalidade de busca moderna
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            const suggestionsContainer = document.querySelector('.search-suggestions');
+            
+            // Sugestões de busca
+            const searchSuggestions = [
+                'Smartphone', 'Notebook', 'Tablet', 'Fone de ouvido', 'Monitor',
+                'Teclado', 'Mouse', 'Câmera', 'Console', 'Smartwatch'
+            ];
+            
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `products.html?q=${encodeURIComponent(query)}`;
+                }
+            }
+            
+            function showSuggestions() {
+                if (suggestionsContainer) {
+                    suggestionsContainer.classList.remove('hidden');
+                }
+            }
+            
+            function hideSuggestions() {
+                if (suggestionsContainer) {
+                    suggestionsContainer.classList.add('hidden');
+                }
+            }
+            
+            if (searchBtn) {
+                searchBtn.addEventListener('click', performSearch);
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+                
+                // Busca em tempo real com sugestões
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.trim().toLowerCase();
+                    if (query.length >= 2) {
+                        showSuggestions();
+                    } else {
+                        hideSuggestions();
+                    }
+                });
+                
+                searchInput.addEventListener('focus', showSuggestions);
+                searchInput.addEventListener('blur', function() {
+                    setTimeout(hideSuggestions, 200);
+                });
+            }
+        });
+
+        // Countdown Timer
+        function startCountdown() {
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+            
+            if (!hoursElement || !minutesElement || !secondsElement) return;
+            
+            // Definir tempo final (24 horas a partir de agora)
+            const endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = endTime - now;
+                
+                if (timeLeft > 0) {
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    
+                    hoursElement.textContent = hours.toString().padStart(2, '0');
+                    minutesElement.textContent = minutes.toString().padStart(2, '0');
+                    secondsElement.textContent = seconds.toString().padStart(2, '0');
+                } else {
+                    // Reset countdown when it reaches zero
+                    hoursElement.textContent = '23';
+                    minutesElement.textContent = '59';
+                    secondsElement.textContent = '59';
+                }
+            }
+            
+            // Atualizar imediatamente e depois a cada segundo
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Iniciar countdown quando a página carregar
+        document.addEventListener('DOMContentLoaded', startCountdown);
+        
+        // Função para mostrar modal de "Em Desenvolvimento" para Admin
+        function showAdminComingSoon() {
+            // Criar modal se não existir
+            let modal = document.getElementById('admin-coming-soon-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'admin-coming-soon-modal';
+                modal.className = 'fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm hidden z-50 cursor-pointer';
+                modal.innerHTML = `
+                    <div class="flex items-center justify-center min-h-screen p-4">
+                        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full cursor-default animate-slideIn">
+                            <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-pink-50 relative">
+                                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-t-3xl"></div>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Painel Administrativo</h3>
+                                        <p class="text-sm text-gray-500">Funcionalidade em desenvolvimento</p>
+                                    </div>
+                                    <button onclick="closeAdminComingSoon()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 flex items-center justify-center transition-all duration-200 text-gray-600 hover:text-red-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6 text-center">
+                                <div class="mb-6">
+                                    <i class="fas fa-tools text-purple-500 text-6xl mb-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-900 mb-2">Em Desenvolvimento</h4>
+                                    <p class="text-gray-600 mb-4">
+                                        O painel administrativo está sendo desenvolvido e estará disponível em breve.
+                                    </p>
+                                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                                        <div class="flex items-center justify-center mb-2">
+                                            <i class="fas fa-clock text-purple-500 mr-2"></i>
+                                            <span class="text-sm font-medium text-purple-700">Funcionalidades Planejadas:</span>
+                                        </div>
+                                        <ul class="text-sm text-purple-600 text-left space-y-1">
+                                            <li>• Gestão completa de usuários</li>
+                                            <li>• Relatórios avançados de vendas</li>
+                                            <li>• Controle de estoque global</li>
+                                            <li>• Análise de performance</li>
+                                            <li>• Configurações do sistema</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button onclick="closeAdminComingSoon()" class="w-full bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg transition-colors duration-200 font-medium">
+                                    Entendi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+            
+            // Mostrar modal
+            modal.classList.remove('hidden');
+        }
+        
+        // Função para fechar modal de "Em Desenvolvimento"
+        function closeAdminComingSoon() {
+            const modal = document.getElementById('admin-coming-soon-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Verificar se usuário está logado e mostrar botão do dashboard
+        function checkUserLogin() {
+            const userData = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+            const dashboardLink = document.getElementById('dashboard-link');
+            const clientProfileLink = document.getElementById('client-profile-link');
+            const adminDashboardLink = document.getElementById('admin-dashboard-link');
+            const loginLink = document.getElementById('login-link');
+            const registerLink = document.getElementById('register-link');
+            
+            if (userData.email && userData.profile) {
+                // Usuário logado - esconder links de login/cadastro
+                if (loginLink) loginLink.style.display = 'none';
+                if (registerLink) registerLink.style.display = 'none';
+            } else {
+                // Usuário não logado - mostrar links de login/cadastro
+                if (loginLink) loginLink.style.display = 'inline-flex';
+                if (registerLink) registerLink.style.display = 'inline-flex';
+            }
+                
+                // Mostrar botão do dashboard baseado no tipo de usuário
+                if (userData.profile === 'vendedor' && dashboardLink) {
+                    dashboardLink.classList.remove('hidden');
+                    dashboardLink.style.display = 'inline-flex';
+                } else if (userData.profile === 'cliente' && clientProfileLink) {
+                    clientProfileLink.classList.remove('hidden');
+                    clientProfileLink.style.display = 'inline-flex';
+                } else if (userData.profile === 'admin' && adminDashboardLink) {
+                    adminDashboardLink.classList.remove('hidden');
+                    adminDashboardLink.style.display = 'inline-flex';
+                }
+            } else {
+                // Usuário não logado - mostrar links de login/cadastro
+                if (loginLink) loginLink.style.display = 'inline-flex';
+                if (registerLink) registerLink.style.display = 'inline-flex';
+            }
+        }
+        
+        // Verificar login quando a página carregar
+        document.addEventListener('DOMContentLoaded', checkUserLogin);
+    </script>
+    
+    <!-- Script removido - função duplicada -->
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+          });
+        });
+      }
+    </script>
+    
+    <!-- Fix Product Navigation -->
+    <script>
+        // Navegação dos produtos agora é gerenciada pelo ecommerce-system.js
+
+        // Funções de carrinho movidas para cart-functions.js
+
+        // Função para mostrar feedback visual
+        function showAddToCartFeedback() {
+            // Criar notificação temporária
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full';
+            notification.innerHTML = '<i class="fas fa-check mr-2"></i>Produto adicionado ao carrinho!';
+            
+            document.body.appendChild(notification);
+            
+            // Animar entrada
+        setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remover após 3 segundos
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+
+    <!-- CSS personalizado para banners -->
+    <style>
+        /* Estilos para o sistema de banners */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            max-width: 1400px; /* Aumentado para aproveitar mais espaço */
+            margin: 0 auto;
+            padding: 0 10px; /* Padding lateral para não colar nas bordas */
+            min-height: 300px; /* Garantir altura mínima */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Fallback para quando não há banners */
+        .banner-container:empty::before {
+            content: '🎨 Carregando banners...';
+            color: #6b7280;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .banner-slide {
+            width: 100%;
+            border-radius: 16px; /* Bordas mais arredondadas */
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); /* Sombra mais pronunciada */
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        /* Efeito de brilho nas laterais */
+        .banner-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(249, 115, 22, 0.1) 0%, 
+                transparent 20%, 
+                transparent 80%, 
+                rgba(249, 115, 22, 0.1) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .banner-slide:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .banner-image {
+            width: 100%;
+            height: auto; /* Mantém proporção original */
+            max-width: 100%;
+            object-fit: contain; /* Mantém proporção e qualidade */
+            object-position: center;
+            transition: transform 0.5s ease;
+            image-rendering: -webkit-optimize-contrast; /* Melhora qualidade */
+            image-rendering: crisp-edges; /* Mantém nitidez */
+            image-rendering: auto; /* Qualidade automática */
+            image-rendering: high-quality; /* Máxima qualidade */
+            -webkit-backface-visibility: hidden; /* Melhora performance */
+            backface-visibility: hidden;
+            -webkit-transform: translateZ(0); /* Acelera renderização */
+            transform: translateZ(0);
+        }
+        
+        .banner-slide:hover .banner-image {
+            transform: scale(1.05);
+        }
+        
+        /* Controles de navegação dos banners */
+        .banner-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #374151;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .banner-controls:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .banner-prev {
+            left: 20px;
+        }
+        
+        .banner-next {
+            right: 20px;
+        }
+        
+        /* Indicadores de página */
+        .banner-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .banner-indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .banner-indicator:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+        }
+        
+        .banner-indicator.active {
+            background: #f97316;
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+        }
+        
+        /* Elementos decorativos nas laterais */
+        .banner-container::before,
+        .banner-container::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .banner-container::before {
+            left: -30px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .banner-container::after {
+            right: -30px;
+            animation: float 3s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateY(0px); }
+            50% { transform: translateY(-50%) translateY(-10px); }
+        }
+        
+        /* Responsividade para elementos decorativos */
+        @media (max-width: 768px) {
+            .banner-container::before,
+            .banner-container::after {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .banner-container::before {
+                left: -20px;
+            }
+            
+            .banner-container::after {
+                right: -20px;
+            }
+            
+            /* Controles menores em mobile */
+            .banner-controls {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .banner-prev {
+                left: 10px;
+            }
+            
+            .banner-next {
+                right: 10px;
+            }
+            
+            /* Indicadores menores em mobile */
+            .banner-indicators {
+                bottom: 15px;
+                gap: 8px;
+                padding: 6px 12px;
+            }
+            
+            .banner-indicator {
+                width: 12px;
+                height: 12px;
+            }
+        }
+        
+        /* Estilos para Flash Sale Banner modernizado */
+        .countdown-box {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Efeito neon para o título */
+        .neon-text {
+            text-shadow: 
+                0 0 5px currentColor,
+                0 0 10px currentColor,
+                0 0 15px currentColor,
+                0 0 20px currentColor;
+        }
+        
+        /* Animação de partículas */
+        @keyframes float-particles {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .particle {
+            animation: float-particles 4s ease-in-out infinite;
+        }
+        
+        /* Efeito de energia pulsante */
+        @keyframes energy-pulse {
+            0%, 100% { opacity: 0.3; transform: scaleX(1); }
+            50% { opacity: 0.8; transform: scaleX(1.1); }
+        }
+        
+        .energy-line {
+            animation: energy-pulse 2s ease-in-out infinite;
+        }
+        
+        /* Botão com efeito de onda */
+        .wave-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .wave-effect:hover::before {
+            left: 100%;
+        }
+        
+        /* Estilos para Thumbnails Estratégicos - Modernos e Tecnológicos */
+        .thumbnail-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .thumbnail-image-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+        
+        .thumbnail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+            image-rendering: high-quality;
+            image-rendering: -webkit-optimize-contrast;
+        }
+        
+        /* Controle responsivo das imagens */
+        .thumbnail-desktop {
+            display: block;
+        }
+        
+        .thumbnail-mobile {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .thumbnail-desktop {
+                display: none;
+            }
+            
+            .thumbnail-mobile {
+                display: block;
+            }
+        }
+        
+        .thumbnail-card:hover .thumbnail-image {
+            transform: scale(1.08);
+            filter: brightness(1.1) contrast(1.1);
+        }
+        
+        .thumbnail-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.3) 0%, 
+                rgba(0, 0, 0, 0.6) 50%, 
+                rgba(0, 0, 0, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(0px);
+        }
+        
+        .thumbnail-card:hover .thumbnail-overlay {
+            opacity: 1;
+            backdrop-filter: blur(2px);
+        }
+        
+        .thumbnail-content {
+            text-align: center;
+            color: #ffffff;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .thumbnail-card:hover .thumbnail-content {
+            transform: translateY(0);
+        }
+        
+        .thumbnail-icon-container {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        
+        .thumbnail-icon-container i {
+            color: #fbbf24;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
+            filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail-card:hover .thumbnail-icon-container i {
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .thumbnail-content h3 {
+            margin: 0 0 8px 0;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail-card:hover .thumbnail-content h3 {
+            color: #ffffff;
+            text-shadow: 0 2px 12px rgba(255, 255, 255, 0.8);
+        }
+        
+        .thumbnail-content p {
+            font-size: 1rem;
+            line-height: 1.4;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail-card:hover .thumbnail-content p {
+            color: #f3f4f6;
+            text-shadow: 0 1px 6px rgba(255, 255, 255, 0.6);
+        }
+        
+        .thumbnail-arrow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail-card:hover .thumbnail-arrow {
+            opacity: 1;
+            bottom: -10px;
+        }
+        
+        .thumbnail-arrow i {
+            color: #fbbf24;
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+            animation: bounce-arrow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes bounce-arrow {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Efeitos tecnológicos adicionais */
+        .thumbnail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(59, 130, 246, 0.1) 50%, 
+                transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .thumbnail-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Responsividade para thumbnails */
+        @media (max-width: 1024px) {
+            .thumbnail-image-container {
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .thumbnail-image-container {
+                height: 240px;
+            }
+            
+            .thumbnail-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .thumbnail-content p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .thumbnail-image-container {
+                height: 200px;
+            }
+            
+            .thumbnail-content h3 {
+                font-size: 1.25rem;
+            }
+            
+            .thumbnail-content p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
+    <!-- Banner System -->
+    <script src="assets/js/banner-system.js?v=1.0"></script>
+    
+    <!-- Banner Initialization -->
+    <script>
+        // Garantir que os banners sejam carregados
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Verificando sistema de banners...');
+            
+            // Verificar se o container existe
+            const bannerContainer = document.getElementById('banner-container');
+            if (!bannerContainer) {
+                console.error('❌ Container de banners não encontrado');
+                return;
+            }
+            
+            console.log('✅ Container de banners encontrado');
+            
+            // Aguardar um pouco para garantir que o banner-system.js carregou
+            setTimeout(() => {
+                if (window.bannerSystem) {
+                    console.log('✅ Sistema de banners carregado com sucesso');
+                    console.log('📊 Banners disponíveis:', window.bannerSystem.banners.length);
+                    
+                    // Verificar se os controles foram criados corretamente
+                    const controls = bannerContainer.querySelectorAll('.banner-controls');
+                    const indicators = bannerContainer.querySelectorAll('.banner-indicators');
+                    const navBtns = bannerContainer.querySelectorAll('.banner-nav-btn');
+                    
+                    console.log('🎮 Controles encontrados:', controls.length);
+                    console.log('🔘 Indicadores encontrados:', indicators.length);
+                    console.log('🔘 Botões de navegação encontrados:', navBtns.length);
+                    
+                    if (controls.length === 0) {
+                        console.warn('⚠️ Controles de navegação não encontrados');
+                    }
+                    
+                    if (indicators.length === 0) {
+                        console.warn('⚠️ Indicadores não encontrados');
+                    }
+                    
+                    if (navBtns.length > 0) {
+                        console.warn('⚠️ Botões de navegação duplicados encontrados:', navBtns.length);
+                        // Remover botões duplicados se existirem
+                        navBtns.forEach(btn => btn.remove());
+                        console.log('🗑️ Botões duplicados removidos');
+                    }
+                    
+                    // Verificar e limpar controles duplicados periodicamente
+                    setInterval(() => {
+                        const duplicateControls = bannerContainer.querySelectorAll('.banner-nav-btn');
+                        if (duplicateControls.length > 0) {
+                            console.log('🧹 Limpando controles duplicados...');
+                            duplicateControls.forEach(btn => btn.remove());
+                        }
+                    }, 5000);
+                } else {
+                    console.warn('⚠️ Sistema de banners não carregado, tentando inicializar...');
+                    // Tentar inicializar manualmente se necessário
+                    if (typeof BannerSystem !== 'undefined') {
+                        window.bannerSystem = new BannerSystem();
+                        console.log('✅ Sistema de banners inicializado manualmente');
+                    } else {
+                        console.error('❌ BannerSystem não encontrado');
+                        // Fallback: mostrar mensagem de erro
+                        bannerContainer.innerHTML = `
+                            <div style="text-align: center; padding: 40px; color: #6b7280;">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                                <p>Erro ao carregar banners</p>
+                            </div>
+                        `;
+                    }
+                }
+            }, 2000);
+        });
+    </script>
+    
+    <!-- Logo System - Solução Direta -->
+    <script>
+        // Sistema de logo simplificado e robusto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Carregando logos...');
+            loadAllLogos();
+        });
+        
+        function loadAllLogos() {
+            // Carregar logos do header
+            const headerLogos = document.querySelectorAll('.header-logo');
+            headerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/header/logo-light.png' : 
+                    'assets/images/logo/header/logo-dark.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do header falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-sm"></i>
+                                </div>
+                                <span class="text-xl font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do header carregado: ${isDarkBackground ? 'dark' : 'light'}`);
+            });
+            
+            // Carregar logos do footer
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/footer/logo-footer.png' : 
+                    'assets/images/logo/footer/logo-white.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do footer falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do footer carregado: ${isDarkBackground ? 'white' : 'default'}`);
+            });
+            
+            // Carregar favicon
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = 'assets/images/logo/favicon/favicon.png';
+            } else {
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.type = 'image/png';
+                newFavicon.href = 'assets/images/logo/favicon/favicon.png';
+                document.head.appendChild(newFavicon);
+            }
+            console.log('✅ Favicon carregado');
+        }
+        
+        // Função para detectar se o fundo é escuro
+        function isElementDarkBackground(element) {
+            // Verificar classes CSS que indicam fundo escuro
+            const darkClasses = ['bg-gray-900', 'bg-black', 'bg-gray-800', 'bg-gray-700', 'bg-blue-900', 'bg-indigo-900'];
+            const parent = element.closest('header, footer, div');
+            
+            if (parent) {
+                // Verificar se o elemento pai tem classes de fundo escuro
+                for (let className of darkClasses) {
+                    if (parent.classList.contains(className)) {
+                        return true;
+                    }
+                }
+                
+                // Verificar estilos computados
+                const computedStyle = window.getComputedStyle(parent);
+                const backgroundColor = computedStyle.backgroundColor;
+                
+                if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
+                    const rgb = backgroundColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const r = parseInt(rgb[0]);
+                        const g = parseInt(rgb[1]);
+                        const b = parseInt(rgb[2]);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        return brightness < 128; // Se brightness < 128, é fundo escuro
+                    }
+                }
+            }
+            
+            // Por padrão, assumir fundo claro
+            return false;
+        }
+    </script>
+
+    <!-- Custom Styles for Bestsellers Section -->
+    <style>
+        /* Bestsellers Section Styles */
+        .bestsellers-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        /* Product Card Hover Effects */
+        .bestseller-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bestseller-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Bestseller Badge Animation */
+        .bestseller-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Sales Count Styling */
+        .sales-count {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Discount Badge */
+        .discount-badge {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.4);
+        }
+        
+        /* Add to Cart Button */
+        .add-to-cart-bestseller {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.4);
+        }
+        
+        .add-to-cart-bestseller:hover {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            box-shadow: 0 8px 25px 0 rgba(249, 115, 22, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Buy Now Button for Bestsellers */
+        .buy-now-bestseller {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            box-shadow: 0 4px 14px 0 rgba(22, 163, 74, 0.4);
+        }
+        
+        .buy-now-bestseller:hover {
+            background: linear-gradient(135deg, #15803d, #166534);
+            box-shadow: 0 8px 25px 0 rgba(22, 163, 74, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Trophy Icon Animation */
+        .trophy-icon {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* View All Button */
+        .view-all-btn {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            box-shadow: 0 8px 25px 0 rgba(249, 115, 22, 0.4);
+        }
+        
+        .view-all-btn:hover {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            box-shadow: 0 12px 35px 0 rgba(249, 115, 22, 0.6);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .bestseller-card:hover {
+                transform: translateY(-4px) scale(1.01);
+            }
+        }
+
+        /* Estilos para notificações simples */
+        .simple-notification {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-icon {
+            font-size: 16px;
+        }
+
+        .notification-message {
+            flex: 1;
+        }
+
+        /* Animação suave para notificações */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Estilos para modal de login */
+        .login-modal {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            animation: slideInUp 0.3s ease;
+        }
+
+        .login-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .login-modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .login-modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-close:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .login-modal-body {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .login-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .login-message {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+
+        .login-submessage {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0 0 24px 0;
+        }
+
+        .login-modal-footer {
+            padding: 0 24px 24px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .login-btn, .register-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-1px);
+        }
+
+        .register-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <!-- FUNÇÕES DE CARRINHO - FINAL DO ARQUIVO PARA GARANTIR EXECUÇÃO -->
+    <script>
+        console.log('🚀 CARREGANDO FUNÇÕES DE CARRINHO...');
+        
+        // Array de produtos
+        const products = [
+            {
+                id: 1,
+                name: "Smartphone Samsung Galaxy A54",
+                brand: "Samsung",
+                price: 1104.99,
+                image: "assets/images/products/13_smartphone_samsung_galaxy_a54.jpg",
+                stock: 25
+            },
+            {
+                id: 2,
+                name: "Notebook Dell Inspiron 15 3000",
+                brand: "Dell",
+                price: 2249.99,
+                image: "assets/images/products/14_laptop_dell_inspiron_15_3000.jpg",
+                stock: 18
+            },
+            {
+                id: 3,
+                name: "Tablet Apple iPad Air 5",
+                brand: "Apple",
+                price: 3799.99,
+                image: "assets/images/products/16_tablet_apple_ipad_air_5.jpg",
+                stock: 12
+            },
+            {
+                id: 4,
+                name: "Smart TV Lenovo 55 4K UHD",
+                brand: "Lenovo",
+                price: 1519.99,
+                image: "assets/images/products/01_smart_tv_lenovo_55_4k_uhd.jpg",
+                stock: 8
+            },
+            {
+                id: 5,
+                name: "Fone Bluetooth JBL",
+                brand: "JBL",
+                price: 493.25,
+                image: "assets/images/products/02_fone_bluetooth_jbl_cancelamento_ruido.jpg",
+                stock: 30
+            },
+            {
+                id: 6,
+                name: "Monitor Dell 24 75Hz",
+                brand: "Dell",
+                price: 789.90,
+                image: "assets/images/products/06_monitor_dell_24_75hz.jpg",
+                stock: 15
+            },
+            {
+                id: 7,
+                name: "Headphone Sony WH-1000XM4",
+                brand: "Sony",
+                price: 899.99,
+                image: "assets/images/products/15_headphone_sony_wh_1000xm4.jpg",
+                stock: 20
+            },
+            {
+                id: 8,
+                name: "Smartwatch Apple Watch Series 8",
+                brand: "Apple",
+                price: 1999.99,
+                image: "assets/images/products/17_smartwatch_apple_watch_series_8.jpg",
+                stock: 10
+            }
+        ];
+
+        // Delegar para funções globais do carrinho unificadas
+        function addToCart(productId) {
+            if (window.addToCart) { window.addToCart(productId, 1); return; }
+            console.warn('addToCart global não carregado; fallback simples');
+        }
+
+        // Função buyNow
+        function buyNow(productId) {
+            if (window.buyNow) { window.buyNow(productId, 1); return; }
+            console.warn('buyNow global não carregado; fallback simples');
+        }
+
+        // Função updateCartCount
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('e2e_cart_items') || '[]');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Função para mostrar modal de login
+        function showLoginModal(productId) {
+            // Remover modal anterior se existir
+            const existingModal = document.querySelector('.login-modal-overlay');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            // Criar overlay do modal
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'login-modal-overlay';
+            modalOverlay.innerHTML = `
+                <div class="login-modal">
+                    <div class="login-modal-header">
+                        <h3>🔐 Login Necessário</h3>
+                        <button class="login-modal-close" onclick="closeLoginModal()">×</button>
+                    </div>
+                    <div class="login-modal-body">
+                        <div class="login-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <p class="login-message">
+                            Para finalizar sua compra, você precisa estar logado.
+                        </p>
+                        <p class="login-submessage">
+                            Faça login ou crie uma conta para continuar.
+                        </p>
+                    </div>
+                    <div class="login-modal-footer">
+                        <button class="login-btn" onclick="goToLogin()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Fazer Login
+                        </button>
+                        <button class="register-btn" onclick="goToRegister()">
+                            <i class="fas fa-user-plus"></i>
+                            Criar Conta
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Adicionar estilos inline
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+
+            // Adicionar ao DOM
+            document.body.appendChild(modalOverlay);
+
+            // Armazenar productId para uso posterior
+            modalOverlay.dataset.productId = productId;
+
+            // Fechar modal ao clicar no overlay
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeLoginModal();
+                }
+            });
+        }
+
+        // Função para fechar modal de login
+        function closeLoginModal() {
+            const modal = document.querySelector('.login-modal-overlay');
+            if (modal) {
+                modal.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            }
+        }
+
+        // Função para ir para login
+        function goToLogin() {
+            closeLoginModal();
+            showNotification('🔐 Redirecionando para login...', 'info');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+
+        // Função para ir para registro
+        function goToRegister() {
+            closeLoginModal();
+            showNotification('📝 Redirecionando para cadastro...', 'info');
+            setTimeout(() => {
+                window.location.href = 'register.html';
+            }, 1000);
+        }
+
+        // Função para mostrar notificações simples (sem modal)
+        function showNotification(message, type = 'info') {
+            // Remover notificação anterior se existir
+            const existingNotification = document.querySelector('.simple-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Criar elemento da notificação
+            const notification = document.createElement('div');
+            notification.className = 'simple-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-icon">${type === 'success' ? '✅' : '⚡'}</span>
+                    <span class="notification-message">${message}</span>
+                </div>
+            `;
+
+            // Adicionar estilos inline
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : '#3b82f6'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 9999;
+                font-weight: 500;
+                font-size: 14px;
+                max-width: 300px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+
+            // Adicionar ao DOM
+            document.body.appendChild(notification);
+
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Remover automaticamente após 3 segundos
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Verificação imediata
+        console.log('✅ FUNÇÕES DEFINIDAS:');
+        console.log('addToCart:', typeof addToCart);
+        console.log('buyNow:', typeof buyNow);
+        console.log('updateCartCount:', typeof updateCartCount);
+        console.log('products:', products.length, 'produtos');
+
+        // Teste automático após 3 segundos
+        setTimeout(() => {
+            console.log('🧪 TESTE AUTOMÁTICO: Verificando funções...');
+            if (typeof addToCart === 'function' && typeof buyNow === 'function') {
+                console.log('✅ FUNÇÕES CARREGADAS COM SUCESSO!');
+                console.log('🧪 TESTE: Executando addToCart(1) para verificar...');
+                try {
+                    // Não executar automaticamente, apenas verificar
+                    console.log('✅ addToCart(1) está disponível para execução');
+                } catch (error) {
+                    console.error('❌ ERRO ao verificar addToCart(1):', error);
+                }
+            } else {
+                console.error('❌ ERRO: Funções não carregadas!');
+            }
+        }, 3000);
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        function getFavKey(){
+          let u=null; try{u=JSON.parse(localStorage.getItem('e2e_current_user')||'null');}catch{}
+          return (u&&u.id)?('e2e_favorites_'+u.id):'e2e_favorites_guest';
+        }
+        function updateFavBadge(){
+          const badge=document.querySelector('.favorites-count-badge');
+          if(!badge) return;
+          let favs=[]; try{favs=JSON.parse(localStorage.getItem(getFavKey())||'[]');}catch{}
+          badge.textContent=(favs||[]).length;
+          badge.style.display=(favs&&favs.length>0)?'flex':'none';
+        }
+        updateFavBadge();
+        window.addEventListener('favoritesUpdated', updateFavBadge);
+      });
+    </script>
+    <script>
+      // Garantir que openProductDetail exista no escopo global para fallbacks estáticos
+      if (typeof window.openProductDetail !== 'function') {
+        window.openProductDetail = function(productId){
+          try { localStorage.setItem('last_product_id', String(productId)); } catch {}
+          window.location.href = 'product-detail.html?id=' + productId;
+        };
+      }
+    </script>
+    <!-- Scripts da API e Sistema E-commerce -->
+    <script src="assets/js/products-api.js"></script>
+    <script src="assets/js/ecommerce-system.js"></script>
+    <script src="assets/js/api-network-call.js"></script>
+    <script src="assets/js/product-images.js"></script>
+    <script src="assets/js/modern-cart-system.js"></script>
+    <script src="assets/js/cart-functions.js"></script>
+    <script src="assets/js/mobile-ui.js"></script>
+</body>
+</html>

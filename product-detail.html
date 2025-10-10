@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E2E SHOP - Detalhes do Produto</title>
+    <meta name="description" content="Detalhes do produto, avaliações e compra rápida na E2E SHOP.">
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#fff7ed',
+                100: '#ffedd5',
+                200: '#fed7aa',
+                300: '#fdba74',
+                400: '#fb923c',
+                500: '#f97316',
+                600: '#ea580c',
+                700: '#c2410c',
+                800: '#9a3412',
+                900: '#7c2d12'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Removido React/Router/Babel para versão vanilla estável -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/ecommerce.css">
+    <link rel="stylesheet" href="assets/css/product-images.css?v=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Header padrão embutido -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-2">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white py-3 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" alt="E2E Shop Logo" class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105" data-context="header">
+                        </a>
+                    </div>
+                    <div class="hidden md:block flex-1 max-w-2xl mx-8">
+                        <div class="relative">
+                            <div class="flex rounded-xl border border-gray-300 hover:border-primary-400 focus-within:border-primary-500 transition-all duration-300 shadow-sm hover:shadow-md">
+                                <select class="bg-gray-50 text-gray-700 px-3 py-2.5 rounded-l-xl border-0 focus:ring-0 focus:outline-none text-sm font-medium min-w-[140px]">
+                                    <option value="">Todas as categorias</option>
+                                    <option value="smartphones">Smartphones</option>
+                                    <option value="notebooks">Notebooks</option>
+                                    <option value="tablets">Tablets</option>
+                                    <option value="acessorios">Acessórios</option>
+                                </select>
+                                <div class="flex-1 relative">
+                                    <input type="text" class="search-input w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                                    <button class="search-btn absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-1.5 rounded-lg transition-all duration-300 hover:scale-105">
+                                        <i class="fas fa-search text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="hidden md:flex items-center space-x-2">
+                            <a href="login.html" id="login-link" class="px-3 py-2 text-gray-900 bg-gray-100 rounded-lg font-medium transition-all duration-300 hover:bg-gray-200 text-sm">Entrar</a>
+                            <a href="register.html" id="register-link" class="px-4 py-2 bg-primary-700 hover:bg-primary-800 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm">Cadastrar</a>
+                        </div>
+                        <button id="mobile-search-btn" class="md:hidden p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 active:scale-95" aria-label="Buscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700 active:scale-95" aria-label="Abrir menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="hidden md:block bg-gray-50 border-t border-gray-200">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between py-2">
+                    <div class="flex items-center space-x-8">
+                        <div class="relative categories-container">
+                            <button class="categories-btn flex items-center space-x-2 px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm">
+                                <i class="fas fa-bars"></i>
+                                <span>Categorias</span>
+                            </button>
+                            <div class="categories-sidebar"></div>
+                            <div class="mega-menu"></div>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                            <a href="index.html" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm"><i class="fas fa-home text-sm"></i><span>Início</span></a>
+                            <a href="products.html" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm"><i class="fas fa-th-large text-sm"></i><span>Produtos</span></a>
+                            <a href="products.html?category=best-sellers" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm"><i class="fas fa-fire text-sm"></i><span>Mais Vendidos</span></a>
+                            <a href="products.html?category=offers" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm"><i class="fas fa-percentage text-sm"></i><span>Ofertas</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Mobile Search Bar -->
+    <div id="mobile-search-bar" class="md:hidden hidden border-b border-gray-200 bg-white">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex rounded-xl border border-gray-300">
+                <input type="text" class="flex-1 w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                <button class="px-3 text-white bg-primary-500 rounded-r-xl"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- App React -->
+    <div id="root" class="min-h-screen"></div>
+
+    <!-- Footer padrão embutido -->
+    <footer class="bg-gray-900 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" alt="E2E Shop Logo" class="footer-logo h-8 w-auto" data-context="footer">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Sua loja online moderna e tecnológica com os melhores produtos de qualidade.</p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts base do projeto -->
+    <script src="assets/js/products-api.js"></script>
+    <script src="assets/js/products-local.js"></script>
+    <script src="assets/js/ecommerce-system.js"></script>
+    <script src="assets/js/product-detail-system.js"></script>
+    <script src="assets/js/api-network-call.js"></script>
+    <script src="assets/js/product-images.js"></script>
+    <script src="assets/js/cart-functions.js"></script>
+    <script src="assets/js/modern-cart-system.js"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/mobile-ui.js"></script>
+
+    <!-- Header/Footer injectors removidos para evitar CORS via file:// -->
+
+    <!-- App Vanilla: Detalhes do Produto -->
+    <script>
+      function formatBRL(value) {
+        try { return Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); } catch { return 'R$ ' + Number(value).toFixed(2); }
+      }
+
+      function getRouteProductId() {
+        // Suporta: ?id=123 | #/produto/123 | #id=123 | #123
+        var params = new URLSearchParams(location.search);
+        if (params.get('id')) return params.get('id');
+        var hash = location.hash || '';
+        var m = hash.match(/produto\/(\d+)/i) || hash.match(/id=(\d+)/i) || hash.match(/#(\d+)/) || document.URL.match(/id=(\d+)/i);
+        if (m && m[1]) return m[1];
+        try {
+          var last = localStorage.getItem('last_product_id');
+          if (last) return last;
+        } catch {}
+        return null;
+      }
+
+      async function findProductById(id) {
+        // 1) localProducts embutido
+        if (Array.isArray(window.localProducts)) {
+          var p1 = window.localProducts.find(function(x){ return String(x.id) === String(id) || String(x.slug || '') === String(id); });
+          if (p1) return p1;
+        }
+        // 2) cache local
+        try {
+          var cache = JSON.parse(localStorage.getItem('e2e_products_cache') || '[]');
+          var p2 = cache.find(function(x){ return String(x.id) === String(id) || String(x.slug || '') === String(id); });
+          if (p2) return p2;
+        } catch {}
+        // 3) API
+        if (window.productsAPI && typeof window.productsAPI.getProduct === 'function') {
+          try { return await window.productsAPI.getProduct(id); } catch {}
+        }
+        return null;
+      }
+
+      function renderStars(value) {
+        var rating = Math.round(Number(value) || 0);
+        var svgFull = '<svg aria-hidden="true" class="w-4 h-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+        var svgEmpty = '<svg aria-hidden="true" class="w-4 h-4 text-gray-300" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+        var html = '';
+        for (var i=0;i<5;i++) html += (i<rating ? svgFull : svgEmpty);
+        return html;
+      }
+
+      function buildSkeleton() {
+        return '<div class="container mx-auto px-4 py-12">\
+          <div class="animate-pulse grid md:grid-cols-2 gap-8">\
+            <div class="h-96 bg-gray-100 rounded-2xl"></div>\
+            <div class="space-y-4">\
+              <div class="h-8 bg-gray-100 rounded"></div>\
+              <div class="h-6 bg-gray-100 rounded w-1/2"></div>\
+              <div class="h-10 bg-gray-100 rounded w-1/3"></div>\
+              <div class="h-24 bg-gray-100 rounded"></div>\
+            </div>\
+          </div>\
+        </div>';
+      }
+
+      function buildDetailHTML(product) {
+        var discount = (Number(product.originalPrice) && Number(product.originalPrice) > Number(product.price))
+          ? Math.round((1 - (product.price / product.originalPrice)) * 100)
+          : (product.discountPercent || 0);
+        var stockLabel = product.stock > 10 ? 'Em estoque' : (product.stock > 0 ? 'Últimas unidades' : 'Indisponível');
+        var stockClass = product.stock > 10 ? 'text-green-600' : (product.stock > 0 ? 'text-yellow-600' : 'text-red-600');
+        return '\
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 py-6">\
+          <nav class="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">\
+            <ol class="flex items-center gap-2">\
+              <li><a href="index.html" class="hover:text-primary-600">Início</a></li>\
+              <li>/</li>\
+              <li><a href="products.html" class="hover:text-primary-600">Produtos</a></li>\
+              <li>/</li>\
+              <li class="text-gray-700 line-clamp-1">'+(product.title||product.name)+'</li>\
+            </ol>\
+          </nav>\
+          <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">\
+            <!-- Galeria -->\
+            <div class="lg:col-span-7">\
+              <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-4 group">\
+                <div class="relative w-full aspect-[4/3] overflow-hidden rounded-2xl bg-gray-50 flex items-center justify-center">\
+                  <img id="pd-main" src="'+product.image+'" alt="'+(product.title||product.name)+'" class="max-h-[520px] w-auto object-contain transition-transform duration-500 hover:scale-[1.03]" />\
+                  '+(discount>0?'<div class="absolute top-4 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">-'+discount+'%</div>':'')+'\
+                </div>\
+                <div class="mt-4 grid grid-cols-4 gap-3">\
+                  '+[1,2,3,4].map(function(){return '<button class="thumb-item rounded-xl border border-gray-200 bg-white hover:border-primary-500 transition-colors p-2 flex items-center justify-center"><img src="'+product.image+'" class="h-16 w-auto object-contain" /></button>';}).join('')+'\
+                </div>\
+              </div>\
+            </div>\
+            <!-- Infos -->\
+            <div class="lg:col-span-5">\
+              <div class="lg:sticky lg:top-6">\
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">'+(product.title||product.name)+'</h1>\
+                <div class="mt-3 flex items-center gap-3">\
+                  <div id="pd-rating-stars" class="flex text-yellow-400">'+renderStars(product.rating && product.rating.average || product.rating)+'</div>\
+                  <span id="pd-rating-count" class="text-sm text-gray-500">'+(product.rating&&product.rating.count || '0')+' avaliações</span>\
+                </div>\
+                <div class="mt-2 flex items-center gap-2">\
+                  '+(discount>0?'<span class="px-2 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600">Promoção</span>':'')+'\
+                  <span class="px-2 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600">Tecnologia</span>\
+                </div>\
+                <div class="mt-5 flex items-end gap-3">\
+          <div class="text-4xl md:text-5xl font-extrabold text-gray-900">'+formatBRL(Number(product.price))+'</div>\
+          '+(Number(product.originalPrice) && Number(product.originalPrice)>Number(product.price) ? '<div class="text-lg md:text-xl text-gray-500 line-through">'+formatBRL(Number(product.originalPrice))+'</div>':'' )+'\
+                </div>\
+                <div class="mt-2 text-sm text-gray-600">em até <strong>10x</strong> de <strong>'+formatBRL((Number(product.price)||0)/10)+'</strong> sem juros</div>\
+                <div class="mt-2 flex items-center gap-3">\
+                  <span class="text-sm font-medium '+stockClass+'">'+stockLabel+'</span>\
+                  <span class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700">'+(Number(product.stock)||0)+' em estoque</span>\
+                </div>\
+                <div class="mt-6 flex items-center gap-3">\
+                  <button id="pd-buy" class="px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all min-w-[220px] md:min-w-[260px]"><i class="fas fa-bolt mr-2"></i>Comprar Agora</button>\
+                  <button id="pd-fav-main" class="w-12 h-12 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 flex items-center justify-center" title="Adicionar aos favoritos">\
+                    <svg viewBox="0 0 24 24" class="w-6 h-6 text-red-600" fill="currentColor" aria-hidden="true">\
+                      <path d="M12.1 21.35l-1.1-1.01C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41 1.01 4.1 2.44C11.09 5.01 12.76 4 14.5 4 17 4 19 6 19 8.5c0 3.78-3.4 6.86-8.9 11.84l-1.0 1.01z"></path>\
+                    </svg>\
+                  </button>\
+                </div>\
+                <p class="mt-6 text-gray-700 leading-relaxed">'+(product.description || 'Produto de alta qualidade com tecnologia avançada e design moderno.')+'</p>\
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">\
+                  <div class="p-4 rounded-2xl bg-gray-50"><div class="text-sm text-gray-500">Marca</div><div class="font-semibold">'+(product.brand||'—')+'</div></div>\
+                  <div class="p-4 rounded-2xl bg-gray-50"><div class="text-sm text-gray-500">Categoria</div><div class="font-semibold">'+(product.category||'—')+'</div></div>\
+                  <div class="p-4 rounded-2xl bg-gray-50"><div class="text-sm text-gray-500">SKU</div><div class="font-semibold">'+(product.sku||product.id)+'</div></div>\
+                  <div class="p-4 rounded-2xl bg-gray-50"><div class="text-sm text-gray-500">Garantia</div><div class="font-semibold">12 meses</div></div>\
+                </div>\
+                <div class="mt-6 flex items-center gap-6 text-sm text-gray-600">\
+                  <div class="flex items-center gap-2"><i class="fas fa-shield-alt text-primary-600"></i> Compra segura</div>\
+                  <div class="flex items-center gap-2"><i class="fas fa-shipping-fast text-primary-600"></i> Entrega rápida</div>\
+                  <div class="flex items-center gap-2"><i class="fas fa-undo text-primary-600"></i> 7 dias para troca</div>\
+                </div>\
+              </div>\
+            </div>\
+          </div>\
+          <div class="mt-12 grid md:grid-cols-3 gap-10">\
+            <div class="md:col-span-2">\
+              <h2 class="text-2xl font-bold mb-4">Descrição</h2>\
+              <div class="prose max-w-none text-gray-700 leading-relaxed">'+(product.description||'Experiência de uso superior, desempenho consistente e qualidade de construção premium para o seu dia a dia.')+'</div>\
+            </div>\
+            <div>\
+              <div class="rounded-2xl border border-gray-200 p-6">\
+                <h3 class="text-lg font-bold mb-4">Entrega</h3>\
+                <ul class="text-sm text-gray-600 space-y-2">\
+                  <li><i class="fas fa-shipping-fast mr-2"></i>Frete para todo Brasil</li>\
+                  <li><i class="fas fa-undo mr-2"></i>Devolução grátis em 7 dias</li>\
+                  <li><i class="fas fa-shield-alt mr-2"></i>Compra garantida</li>\
+                </ul>\
+              </div>\
+            </div>\
+          </div>\
+          <div class="mt-12" id="reviews-block" style="display:none">\
+            <div class="flex items-center justify-between mb-4">\
+              <h2 class="text-2xl font-bold">Avaliações de Clientes</h2>\
+              <select id="reviews-sort" class="text-sm border border-gray-200 rounded-lg px-3 py-2 bg-white text-gray-700">\
+                <option value="newest">Mais recentes</option>\
+                <option value="highest">Maior nota</option>\
+                <option value="lowest">Menor nota</option>\
+              </select>\
+            </div>\
+            <div id="reviews-list" class="space-y-4"></div>\
+            <div id="reviews-pagination" class="flex items-center gap-2 mt-4"></div>\
+          </div>\
+          <div class="mt-12" id="similar-block" style="display:none">\
+            <div class="flex items-center justify-between mb-4">\
+              <h2 class="text-2xl font-bold">Produtos Similares</h2>\
+              <a href="products.html" class="text-primary-600 hover:text-primary-700 font-semibold">Ver todos</a>\
+            </div>\
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="similar-grid"></div>\
+          </div>\
+          <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur border-t border-gray-200 p-3 flex items-center justify-between md:hidden hidden">\
+            <div class="font-bold text-gray-900">'+formatBRL(product.price)+'</div>\
+            <div class="flex items-center gap-2">\
+              <button id="sticky-add" class="px-4 py-2 rounded-lg bg-primary-500 text-white text-sm font-semibold">Adicionar</button>\
+              <button id="sticky-buy" class="px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-semibold">Comprar</button>\
+            </div>\
+          </div>\
+        </div>';
+      }
+
+      function renderSimilar(baseProduct) {
+        var grid = document.getElementById('similar-grid');
+        if (!grid || !Array.isArray(window.localProducts)) return;
+        var list = window.localProducts.filter(function(p){ return p.category === baseProduct.category && p.id !== baseProduct.id; });
+        if (list.length < 4) {
+          var others = window.localProducts.filter(function(p){ return p.id !== baseProduct.id; });
+          while (list.length < 4 && others.length) {
+            var idx = Math.floor(Math.random()*others.length);
+            var pick = others.splice(idx,1)[0];
+            if (!list.some(function(x){return x.id===pick.id;})) list.push(pick);
+          }
+        }
+        list = list.slice(0,8);
+        if (!list.length) return;
+        document.getElementById('similar-block').style.display = 'block';
+        grid.innerHTML = list.map(function(p){
+          var rating = (Math.random()*2+3.5).toFixed(1);
+          return '\
+            <div class="similar-card group rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all bg-white cursor-pointer relative" data-id="'+p.id+'">\
+              <div class=\"relative\">\
+                <img src=\"'+p.image+'\" alt=\"'+(p.title||p.name)+'\" class=\"w-full h-40 object-cover group-hover:scale-[1.02] transition-transform\" />\
+              </div>\
+              <div class="p-4">\
+                <div class="font-semibold line-clamp-2 h-12">'+(p.title||p.name)+'</div>\
+                <div class="mt-1 flex items-center gap-2">'+renderStars(rating)+'<span class="text-xs text-gray-500">'+rating+'</span></div>\
+                <div class="flex items-center justify-between mt-2">\
+                  <div class="text-primary-600 font-bold">'+formatBRL(p.price)+'</div>\
+                  <button class="similar-cart text-white bg-primary-500 hover:bg-primary-600 px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow" data-id="'+p.id+'"><i class="fas fa-cart-plus mr-1"></i>Comprar</button>\
+                </div>\
+                <a href="product-detail.html?id='+p.id+'" class="absolute inset-0" onclick="try{localStorage.setItem(\'last_product_id\', \''+p.id+'\');}catch{}"></a>\
+              </div>\
+            </div>';
+        }).join('');
+        bindSimilarEvents();
+      }
+
+      function bindSimilarEvents() {
+        var grid = document.getElementById('similar-grid');
+        if (!grid) return;
+        grid.addEventListener('click', function(e){
+          var cartBtn = e.target.closest('.similar-cart');
+          var favBtn = null; // removido favoritos dos similares nesta página
+          var card = e.target.closest('.similar-card');
+          if (cartBtn) {
+            e.preventDefault(); e.stopPropagation();
+            var id = Number(cartBtn.getAttribute('data-id'));
+            if (window.modernCartSystem) window.modernCartSystem.addItem({ id: id, name: 'Produto', price: 0, image: '', stock: 99, quantity: 1 });
+            if (typeof addToCart === 'function') addToCart(id);
+            showToast('✅ Produto adicionado');
+            return;
+          }
+          if (favBtn) {
+            e.preventDefault(); e.stopPropagation();
+            var idf = String(favBtn.getAttribute('data-id'));
+            try {
+              var list = JSON.parse(localStorage.getItem('e2e_favorites')||'[]');
+              if (list.includes(idf)) { list = list.filter(function(x){return x!==idf;}); favBtn.classList.remove('bg-red-50'); }
+              else { list.push(idf); favBtn.classList.add('bg-red-50'); }
+              localStorage.setItem('e2e_favorites', JSON.stringify(list));
+            } catch {}
+            return;
+          }
+          if (card) {
+            var pid = card.getAttribute('data-id');
+            try { localStorage.setItem('last_product_id', String(pid)); } catch {}
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', async function(){
+        // Fazer chamada à API para mostrar no network
+        try {
+          console.log('🔍 Verificando disponibilidade da API...');
+          console.log('📡 window.productsAPI:', window.productsAPI);
+          
+          if (window.productsAPI && typeof window.productsAPI.getProducts === 'function') {
+            console.log('🌐 Fazendo chamada à API para mostrar no network...');
+            const apiData = await window.productsAPI.getProducts({ page: 1, pageSize: 30 });
+            console.log('✅ API chamada realizada! Produtos no network:', apiData.products?.length || 0);
+          } else {
+            console.log('⚠️ ProductsAPI não disponível, tentando chamada direta...');
+            
+            // Tentar chamada direta para garantir que apareça no network
+            try {
+              const response = await fetch('https://catalogo-products.pages.dev/api/products?page=1&pageSize=30');
+              if (response.ok) {
+                const data = await response.json();
+                console.log('✅ Chamada direta realizada! Produtos no network:', data.products?.length || 0);
+              }
+            } catch (directError) {
+              console.log('⚠️ Erro na chamada direta:', directError.message);
+            }
+          }
+        } catch (apiError) {
+          console.log('⚠️ API não disponível, continuando com produtos locais:', apiError.message);
+        }
+        
+        var root = document.getElementById('root');
+        root.innerHTML = buildSkeleton();
+        var id = getRouteProductId();
+        if (!id) {
+          // Fallback automático: usar primeiro produto local
+          if (Array.isArray(window.localProducts) && window.localProducts.length) {
+            id = String(window.localProducts[0].id);
+            try { localStorage.setItem('last_product_id', id); } catch {}
+            if (!location.search.includes('id=')) {
+              var url = new URL(location.href);
+              url.searchParams.set('id', id);
+              history.replaceState({}, '', url.toString());
+            }
+          } else {
+            root.innerHTML = '<div class="container mx-auto px-4 py-16 text-center"><h2 class="text-2xl font-bold">Produto não encontrado</h2><p class="text-gray-600 mt-2">ID inválido.</p><a href="products.html" class="inline-block mt-6 px-5 py-3 rounded-xl bg-primary-500 text-white hover:bg-primary-600">Voltar para Produtos</a></div>';
+            return;
+          }
+        }
+        var product = await findProductById(id);
+        if (!product) {
+          root.innerHTML = '<div class="container mx-auto px-4 py-16 text-center"><h2 class="text-2xl font-bold">Produto não encontrado</h2><p class="text-gray-600 mt-2">Tente voltar à lista de produtos.</p><a href="products.html" class="inline-block mt-6 px-5 py-3 rounded-xl bg-primary-500 text-white hover:bg-primary-600">Voltar para Produtos</a></div>';
+          return;
+        }
+        document.title = (product.title||product.name) + ' | E2E SHOP';
+        root.innerHTML = buildDetailHTML(product);
+        // Thumbnails
+        var main = document.getElementById('pd-main');
+        document.querySelectorAll('.thumb-item img').forEach(function(el){
+          el.addEventListener('click', function(){ if (main) main.src = this.src; });
+        });
+        // Ações
+        var addBtn = null; // botão de adicionar removido nesta página
+        var buyBtn = document.getElementById('pd-buy');
+        var favMainBtn = document.getElementById('pd-fav-main');
+        var favBtn = document.getElementById('pd-fav');
+        // favorito principal
+        if (favMainBtn) favMainBtn.onclick = function(){
+          try {
+            var list = JSON.parse(localStorage.getItem('e2e_favorites')||'[]');
+            var pid = String(product.id);
+            if (list.includes(pid)) { list = list.filter(function(x){return x!==pid;}); showToast('❤ Removido dos favoritos'); }
+            else { list.push(pid); showToast('❤ Adicionado aos favoritos'); }
+            localStorage.setItem('e2e_favorites', JSON.stringify(list));
+          } catch {}
+        };
+        if (buyBtn) buyBtn.onclick = function(){
+          // Verificar login com modal padronizado
+          var user = null;
+          try {
+            if (window.authSystem && typeof window.authSystem.getCurrentUser === 'function') user = window.authSystem.getCurrentUser();
+            else user = JSON.parse(localStorage.getItem('e2e_current_user')||'null');
+          } catch {}
+          if (!user || !user.id) { if (typeof window.showLoginRequiredModal==='function'){ window.showLoginRequiredModal(); } return; }
+          if (typeof buyNow === 'function') buyNow(product.id); else {
+            if (window.modernCartSystem) window.modernCartSystem.addItem({ id: product.id, name: product.name||product.title, price: product.price, image: product.image, stock: product.stock, quantity: 1 });
+            window.location.href = 'checkout.html';
+          }
+        };
+        // Favoritos
+        (function initFav(){
+          var favs = [];
+          try { favs = JSON.parse(localStorage.getItem('e2e_favorites')||'[]'); } catch {}
+          var pid = String(product.id);
+          var isFav = favs.includes(pid);
+          updateFavIcon(isFav);
+          if (favBtn) favBtn.onclick = function(){
+            try {
+              var list = JSON.parse(localStorage.getItem('e2e_favorites')||'[]');
+              if (list.includes(pid)) { list = list.filter(function(x){return x!==pid;}); updateFavIcon(false); showToast('❤ Removido dos favoritos'); }
+              else { list.push(pid); updateFavIcon(true); showToast('❤ Adicionado aos favoritos'); }
+              localStorage.setItem('e2e_favorites', JSON.stringify(list));
+            } catch {}
+          };
+        })();
+        // Similares
+        renderSimilar(product);
+        // Reviews
+        renderReviews();
+        // Forçar cor dos ícones do header (coração e carrinho)
+        (function fixHeaderIconColors(){
+          ['header .fa-heart', 'header .fa-shopping-cart'].forEach(function(sel){
+            document.querySelectorAll(sel).forEach(function(icon){
+              icon.style.setProperty('color', '#475569', 'important'); // slate-600
+              icon.classList.remove('text-white');
+            });
+          });
+        })();
+        // Mobile header controls
+        var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        var mobileMenuClose = document.getElementById('mobile-menu-close');
+        var mobileDrawer = document.getElementById('mobile-drawer');
+        var mobileDrawerPanel = document.getElementById('mobile-drawer-panel');
+        var mobileDrawerOverlay = document.getElementById('mobile-drawer-overlay');
+        var mobileSearchBtn = document.getElementById('mobile-search-btn');
+        var mobileSearchBar = document.getElementById('mobile-search-bar');
+
+        function openDrawer(){
+          if (!mobileDrawer || !mobileDrawerPanel) return;
+          mobileDrawer.classList.remove('hidden');
+          requestAnimationFrame(function(){
+            mobileDrawerPanel.classList.remove('-translate-x-full');
+            document.body.style.overflow = 'hidden';
+          });
+        }
+        function closeDrawer(){
+          if (!mobileDrawer || !mobileDrawerPanel) return;
+          mobileDrawerPanel.classList.add('-translate-x-full');
+          setTimeout(function(){
+            mobileDrawer.classList.add('hidden');
+            document.body.style.overflow = '';
+          }, 300);
+        }
+        if (mobileMenuBtn) mobileMenuBtn.onclick = function(e){ e.preventDefault(); openDrawer(); };
+        if (mobileMenuClose) mobileMenuClose.onclick = function(e){ e.preventDefault(); closeDrawer(); };
+        if (mobileDrawerOverlay) mobileDrawerOverlay.onclick = closeDrawer;
+        if (mobileDrawer) mobileDrawer.addEventListener('click', function(e){ var link = e.target.closest('a'); if (link) closeDrawer(); });
+        if (mobileSearchBtn && mobileSearchBar) {
+          mobileSearchBtn.onclick = function(e){ e.preventDefault(); mobileSearchBar.classList.toggle('hidden'); };
+        }
+
+        // Sticky CTA (mobile)
+        var sticky = document.getElementById('sticky-cta');
+        var stickyAdd = document.getElementById('sticky-add');
+        var stickyBuy = document.getElementById('sticky-buy');
+        function toggleSticky(){
+          if (!sticky) return;
+          var threshold = (window.innerWidth < 768) ? 120 : 300;
+          sticky.classList.toggle('hidden', window.scrollY < threshold);
+        }
+        window.addEventListener('scroll', toggleSticky, { passive: true });
+        toggleSticky();
+        if (stickyAdd) stickyAdd.onclick = function(){ var _=null; showToast('Abra o carrinho para adicionar mais itens'); };
+        if (stickyBuy) stickyBuy.onclick = function(){ var buyBtn2=document.getElementById('pd-buy'); if (buyBtn2) buyBtn2.click(); };
+      });
+
+      function updateFavIcon(active) {
+        var favBtn = document.getElementById('pd-fav');
+        if (!favBtn) return;
+        var icon = favBtn.querySelector('i');
+        if (!icon) return;
+        if (active) { icon.classList.add('text-red-500'); favBtn.classList.add('bg-red-50','border-red-200','text-red-600'); }
+        else { icon.classList.remove('text-red-500'); favBtn.classList.remove('bg-red-50','border-red-200','text-red-600'); }
+      }
+
+      function showToast(message) {
+        var n = document.createElement('div');
+        n.className = 'fixed top-5 right-5 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+        n.textContent = message;
+        document.body.appendChild(n);
+        setTimeout(function(){ n.remove(); }, 2500);
+      }
+
+      function showLoginRequiredModal() {
+        var existing = document.getElementById('login-required-modal');
+        if (existing) existing.remove();
+        var modal = document.createElement('div');
+        modal.id = 'login-required-modal';
+        modal.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+        modal.innerHTML = '\
+          <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl">\
+            <div class="p-6 border-b border-gray-100">\
+              <h3 class="text-xl font-bold text-gray-900">Faça login para continuar</h3>\
+              <p class="text-gray-600 mt-2">Para finalizar sua compra, entre na sua conta ou crie um cadastro.</p>\
+            </div>\
+            <div class="p-6 flex items-center justify-end gap-3">\
+              <button id="lr-cancel" class="px-4 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50">Agora não</button>\
+              <a href="register.html" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200">Cadastrar</a>\
+              <a href="login.html" class="px-4 py-2 rounded-lg bg-primary-500 text-white hover:bg-primary-600">Entrar</a>\
+            </div>\
+          </div>';
+        document.body.appendChild(modal);
+        modal.querySelector('#lr-cancel').onclick = function(){ modal.remove(); };
+      }
+
+      function renderReviews() {
+        var container = document.getElementById('reviews-list');
+        if (!container) return;
+        var names = ['Ana', 'Carlos', 'Mariana', 'João', 'Lucas', 'Beatriz', 'Rafaela','Gabriel','Camila','Paulo','Renata','Thiago'];
+        var sortSel = document.getElementById('reviews-sort');
+        function gen(n){
+          var arr = [];
+          for (var i=0;i<n;i++) {
+            arr.push({
+              id: 'r'+Date.now()+i,
+              name: names[i%names.length],
+              initials: names[i%names.length].slice(0,1),
+              stars: Number((Math.random()*2+3).toFixed(1)),
+              date: Date.now()-Math.random()*1000*60*60*24*90,
+              text: 'Produto excelente, atendeu minhas expectativas. Entrega rápida e bem embalado.'
+            });
+          }
+          return arr;
+        }
+        // 20 comentários para simular produtos com muitas avaliações
+        var list = gen(20);
+        var page = 1; var perPage = 5;
+        function updateHeaderFrom(items){
+          var countEl = document.getElementById('pd-rating-count');
+          var starsEl = document.getElementById('pd-rating-stars');
+          var total = items.length;
+          if (countEl) countEl.textContent = (total>0? total : 0) + ' avaliações';
+          if (starsEl) {
+            if (total === 0) { starsEl.innerHTML = renderStars(0); }
+            else {
+              var avg = items.reduce(function(a,b){return a + Number(b.stars||0);}, 0) / total;
+              starsEl.innerHTML = renderStars(avg);
+            }
+          }
+        }
+        function render(){
+          var items = list.slice();
+          if (sortSel) {
+            var v = sortSel.value;
+            if (v==='newest') items.sort(function(a,b){return b.date-a.date;});
+            if (v==='highest') items.sort(function(a,b){return b.stars-a.stars;});
+            if (v==='lowest') items.sort(function(a,b){return a.stars-b.stars;});
+          }
+          var start = (page-1)*perPage; var end = start+perPage;
+          var pageItems = items.slice(start,end);
+          container.innerHTML = pageItems.map(function(r){
+            return '\
+              <div class="p-5 rounded-2xl border border-gray-200">\
+                <div class="flex items-center justify-between mb-2">\
+                  <div class="flex items-center gap-3">\
+                    <div class="w-9 h-9 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold">'+r.initials+'</div>\
+                    <div class="font-semibold">'+r.name+'</div>\
+                  </div>\
+                  <div class="text-sm text-gray-500">'+new Date(r.date).toLocaleDateString('pt-BR')+'</div>\
+                </div>\
+                <div class="mb-2 flex items-center gap-2">'+renderStars(r.stars)+'<span class="text-sm text-gray-600">'+r.stars.toFixed(1)+'</span></div>\
+                <div class="text-gray-700">'+r.text+'</div>\
+                <div class="mt-3 flex items-center gap-4 text-sm text-gray-500">\
+                  <button class="review-like hover:text-gray-700" data-id="'+r.id+'"><i class="far fa-thumbs-up mr-1"></i>Útil</button>\
+                  <button class="review-reply hover:text-gray-700" data-id="'+r.id+'"><i class="far fa-comment mr-1"></i>Responder</button>\
+                </div>\
+              </div>';
+          }).join('');
+          document.getElementById('reviews-block').style.display = 'block';
+          updateHeaderFrom(items);
+          renderPagination(items);
+        }
+        if (sortSel) sortSel.onchange = render;
+        render();
+
+        // Interações
+        container.addEventListener('click', function(e){
+          var like = e.target.closest('.review-like');
+          var reply = e.target.closest('.review-reply');
+          if (like) { e.preventDefault(); showToast('👍 Obrigado pelo feedback!'); }
+          if (reply) { e.preventDefault(); showToast('💬 Em breve adicionaremos respostas.'); }
+        });
+
+        // Paginação
+        function renderPagination(items){
+          var totalPages = Math.ceil(items.length / perPage);
+          var el = document.getElementById('reviews-pagination');
+          if (!el) return;
+          if (totalPages <= 1) { el.innerHTML=''; return; }
+          var html = '';
+          html += '<button class="px-3 py-1 text-sm rounded-lg border border-gray-200 '+(page===1?'opacity-50 cursor-not-allowed':'hover:bg-gray-50')+'" data-page="prev">Anterior</button>';
+          for (var i=1;i<=totalPages;i++) {
+            html += '<button class="px-3 py-1 text-sm rounded-lg border '+(i===page?'bg-primary-500 text-white border-primary-500':'border-gray-200 hover:bg-gray-50')+'" data-page="'+i+'">'+i+'</button>';
+          }
+          html += '<button class="px-3 py-1 text-sm rounded-lg border border-gray-200 '+(page===totalPages?'opacity-50 cursor-not-allowed':'hover:bg-gray-50')+'" data-page="next">Próximo</button>';
+          el.innerHTML = html;
+          el.onclick = function(ev){
+            var btn = ev.target.closest('button'); if (!btn) return;
+            var val = btn.getAttribute('data-page');
+            var total = Math.ceil(items.length / perPage);
+            if (val==='prev' && page>1) { page--; render(); }
+            else if (val==='next' && page<total) { page++; render(); }
+            else if (!isNaN(Number(val))) { page = Number(val); render(); }
+          };
+        }
+        // Formulário removido a pedido do usuário (apenas exibição)
+      }
+    </script>
+</body>
+</html>
+

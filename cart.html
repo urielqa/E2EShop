@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - E2E SHOP</title>
+    <meta name="description" content="Seu carrinho de compras E2E SHOP com produtos selecionados">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f97316">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/product-images.css?v=1.0">
+    
+    <!-- Modal de Login Styles -->
+    <style>
+        /* Estilos para modal de login */
+        .login-modal {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            animation: slideInUp 0.3s ease;
+        }
+
+        .login-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .login-modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .login-modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-close:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .login-modal-body {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .login-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .login-message {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+
+        .login-submessage {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0 0 24px 0;
+        }
+
+        .login-modal-footer {
+            padding: 0 24px 24px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .login-btn, .register-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-1px);
+        }
+
+        .register-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilos para notificações simples */
+        .simple-notification {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-icon {
+            font-size: 16px;
+        }
+
+        .notification-message {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Moderno Shopify-Style -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-2">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-3 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+                        </a>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="flex-1 max-w-2xl mx-8">
+                        <div class="relative">
+                            <div class="flex rounded-xl border border-gray-300 hover:border-primary-400 focus-within:border-primary-500 transition-all duration-300 shadow-sm hover:shadow-md">
+                                <select class="bg-gray-50 text-gray-700 px-3 py-2.5 rounded-l-xl border-0 focus:ring-0 focus:outline-none text-sm font-medium min-w-[140px]">
+                                    <option value="">Todas as categorias</option>
+                                    <option value="smartphones">Smartphones</option>
+                                    <option value="notebooks">Notebooks</option>
+                                    <option value="tablets">Tablets</option>
+                                    <option value="acessorios">Acessórios</option>
+                                </select>
+                                <div class="flex-1 relative">
+                                    <input type="text" class="search-input w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                                    <button class="search-btn absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-1.5 rounded-lg transition-all duration-300 hover:scale-105">
+                                        <i class="fas fa-search text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-3">
+                        <!-- Favoritos -->
+                        <a href="#" class="relative p-2.5 text-gray-600 hover:text-primary-600 transition-all duration-300 hover:scale-110">
+                            <i class="fas fa-heart text-lg"></i>
+                            <span class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                        
+                        <!-- Carrinho -->
+                        <a href="cart.html" class="relative p-2.5 text-primary-600 hover:text-primary-700 transition-all duration-300 hover:scale-110 group">
+                            <i class="fas fa-shopping-cart text-lg"></i>
+                            <span class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center cart-count">0</span>
+                            <div class="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <div class="text-sm">
+                                    <div class="font-medium text-gray-900">Carrinho</div>
+                                    <div class="text-gray-500 cart-total">R$ 0,00</div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Usuário -->
+                        <div class="flex items-center space-x-2">
+                            <a href="login.html" class="px-3 py-2 text-primary-600 bg-primary-50 rounded-lg font-medium transition-all duration-300 hover:bg-primary-100 text-sm">
+                                Entrar
+                            </a>
+                            <a href="register.html" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm">
+                                Cadastrar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="bg-gray-50 border-t border-gray-200">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between py-2">
+                    <div class="flex items-center space-x-8">
+                        <!-- Categorias -->
+                        <div class="relative categories-container">
+                            <button class="categories-btn flex items-center space-x-2 px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-all duration-300 hover:scale-105 font-medium text-sm">
+                                <i class="fas fa-bars"></i>
+                                <span>Categorias</span>
+                            </button>
+                            <div class="categories-sidebar">
+                                <!-- Categorias serão carregadas pelo JavaScript -->
+                            </div>
+                            <div class="mega-menu">
+                                <!-- Mega menu será carregado pelo JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Principal -->
+                        <div class="flex items-center space-x-6">
+                            <a href="index.html" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-home text-sm"></i>
+                                <span>Início</span>
+                            </a>
+                            <a href="products.html" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-th-large text-sm"></i>
+                                <span>Produtos</span>
+                            </a>
+                            <a href="products.html?category=best-sellers" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-fire text-sm"></i>
+                                <span>Mais Vendidos</span>
+                            </a>
+                            <a href="products.html?category=offers" class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg font-medium transition-all duration-300 text-sm">
+                                <i class="fas fa-percentage text-sm"></i>
+                                <span>Ofertas</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Utilitários -->
+                    <div class="flex items-center space-x-3">
+                        <a href="vendor-dashboard.html" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-primary-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-chart-line text-sm"></i>
+                            <span class="text-xs">Vendedor</span>
+                        </a>
+                        <a href="admin-dashboard.html" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-primary-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-cog text-sm"></i>
+                            <span class="text-xs">Admin</span>
+                        </a>
+                        <button id="logout-btn" class="flex items-center space-x-2 px-2 py-1.5 text-gray-500 hover:text-red-600 transition-colors duration-300 text-sm" style="display: none;">
+                            <i class="fas fa-sign-out-alt text-sm"></i>
+                            <span class="text-xs">Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        <!-- Page Header -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-10">
+            <div class="container mx-auto px-4">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shopping-cart text-2xl text-white"></i>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-3 animate-fade-in">
+                        Meu Carrinho
+                    </h1>
+                    <p class="text-lg opacity-90 animate-slide-up">
+                        Revise seus produtos e finalize sua compra
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Content -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Cart Items -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                                <h2 class="text-xl font-semibold text-gray-900 flex items-center justify-between">
+                                    <span class="flex items-center">
+                                        <i class="fas fa-shopping-bag mr-2 text-primary-600"></i>
+                                        Produtos no Carrinho
+                                    </span>
+                                    <button id="clear-cart" class="text-sm text-red-600 hover:text-red-700 font-medium">Limpar carrinho</button>
+                                </h2>
+                            </div>
+                            <div class="p-6">
+                                <div id="cart-items" class="space-y-4">
+                            <!-- Itens do carrinho serão carregados via JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Summary -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 md:sticky md:top-8">
+                            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                                <h3 class="text-xl font-semibold text-gray-900 flex items-center">
+                                    <i class="fas fa-receipt mr-2 text-primary-600"></i>
+                                    Resumo do Pedido
+                                </h3>
+                            </div>
+                            <div class="p-6">
+                                <div id="cart-total" class="space-y-4">
+                                    <!-- Resumo será carregado via JavaScript -->
+                                </div>
+                                
+                                <div class="pt-6 border-t border-gray-200">
+                                    <button id="checkout-btn" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100" disabled>
+                                        <i class="fas fa-credit-card mr-2"></i>
+                                    Finalizar Compra
+                                </button>
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <div class="bg-primary-50 rounded-xl p-4">
+                                        <h4 class="font-semibold text-primary-800 mb-2 flex items-center">
+                                            <i class="fas fa-shield-alt mr-2"></i>
+                                            Compra Segura
+                                        </h4>
+                                        <p class="text-sm text-primary-700">
+                                            Seus dados estão protegidos com criptografia SSL
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <h4 class="font-semibold text-gray-900 mb-3">Formas de pagamento:</h4>
+                                    <div class="flex items-center space-x-4">
+                                        <i class="fab fa-cc-visa text-2xl text-blue-600"></i>
+                                        <i class="fab fa-cc-mastercard text-2xl text-red-600"></i>
+                                        <i class="fas fa-credit-card text-2xl text-gray-600"></i>
+                                        <i class="fas fa-mobile-alt text-2xl text-green-600"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <div class="bg-green-50 rounded-xl p-4">
+                                        <div class="flex items-center text-green-700">
+                                            <i class="fas fa-truck mr-2"></i>
+                                            <span class="font-medium">Frete grátis para compras acima de R$ 399,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Moderno Shopify-Style -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" 
+                             alt="E2E Shop Logo" 
+                             class="footer-logo h-8 w-auto"
+                             data-context="footer">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sua loja online moderna e tecnológica com os melhores produtos de qualidade. 
+                        Tecnologia, inovação e praticidade em um só lugar.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produtos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Conta -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-500 text-xs">Formas de Pagamento:</span>
+                        <div class="flex space-x-2">
+                            <i class="fab fa-cc-visa text-gray-400 text-lg"></i>
+                            <i class="fab fa-cc-mastercard text-gray-400 text-lg"></i>
+                            <i class="fas fa-credit-card text-gray-400 text-lg"></i>
+                            <i class="fas fa-mobile-alt text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/mobile-ui.js"></script>
+    
+    <script>
+        // Modal de login padronizado (fallback local)
+        if (typeof window.showLoginRequiredModal !== 'function') {
+            window.showLoginRequiredModal = function() {
+                try {
+                    var existing = document.getElementById('global-login-required-modal');
+                    if (existing) existing.remove();
+                    var overlay = document.createElement('div');
+                    overlay.id = 'global-login-required-modal';
+                    overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[10000] flex items-center justify-center p-4';
+                    overlay.innerHTML = '\
+                      <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden">\
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">\
+                          <h3 class="text-xl font-bold text-gray-900">Faça login para continuar</h3>\
+                          <button class="p-2 rounded-lg hover:bg-gray-100" id="glrm-close"><i class="fas fa-times text-gray-500"></i></button>\
+                        </div>\
+                        <div class="p-6">\
+                          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-500 text-white flex items-center justify-center text-2xl mx-auto mb-4"><i class="fas fa-lock"></i></div>\
+                          <p class="text-gray-700 text-center">Para finalizar sua compra, você precisa estar logado.</p>\
+                        </div>\
+                        <div class="p-4 border-t border-gray-100 flex gap-2 justify-end">\
+                          <a href="register.html" class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200">Cadastrar</a>\
+                          <a href="login.html" class="px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700">Fazer Login</a>\
+                        </div>\
+                      </div>';
+                    document.body.appendChild(overlay);
+                    overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.remove(); });
+                    overlay.querySelector('#glrm-close').onclick = function(){ overlay.remove(); };
+                } catch (e) { console.warn('falha modal login', e); }
+            };
+        }
+
+        // Função para atualizar contador do carrinho no cabeçalho
+        function updateCartCount() {
+            let cartItems = JSON.parse(localStorage.getItem('modern_cart') || '[]');
+            if (cartItems.length === 0) {
+                cartItems = JSON.parse(localStorage.getItem('e2e_cart_items') || '[]');
+            }
+            
+            const totalItems = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+            const cartCount = document.querySelector('.cart-count');
+            
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            console.log('🛒 Contador do carrinho atualizado:', totalItems);
+        }
+
+        // BRL format helper
+        function formatBRL(value) {
+            try {
+                return Number(value || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            } catch (_) {
+                const n = Number(value || 0);
+                return n.toFixed(2).replace('.', ',');
+            }
+        }
+
+        // Função para atualizar exibição do carrinho
+        function updateCartDisplay() {
+            console.log('🛒 ===== ATUALIZANDO CARRINHO =====');
+            
+            // Buscar itens do carrinho (tentar múltiplas chaves)
+            let cartItems = JSON.parse(localStorage.getItem('modern_cart') || '[]');
+            if (cartItems.length === 0) {
+                cartItems = JSON.parse(localStorage.getItem('e2e_cart_items') || '[]');
+                console.log('🛒 Tentando chave alternativa e2e_cart_items:', cartItems);
+            }
+            console.log('🛒 Itens no carrinho:', cartItems);
+            
+            const cartContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (!cartContainer) {
+                console.error('❌ Container do carrinho não encontrado');
+                return;
+            }
+            
+            if (cartItems.length === 0) {
+                console.log('🛒 Carrinho vazio');
+                cartContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shopping-cart text-4xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-600 mb-2">Seu carrinho está vazio</h3>
+                        <p class="text-gray-500 mb-6">Adicione alguns produtos para começar suas compras</p>
+                        <a href="products.html" class="inline-flex items-center space-x-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-xl font-semibold transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Continuar Comprando</span>
+                        </a>
+                    </div>
+                `;
+                
+                if (cartTotal) {
+                    cartTotal.innerHTML = '';
+                }
+                
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = true;
+                }
+            } else {
+                console.log('🛒 Renderizando itens do carrinho:', cartItems.length);
+                cartContainer.innerHTML = cartItems.map(item => {
+                    // Normalizar dados do item
+                    const itemId = item.id || item.productId || item.product_id || 'unknown';
+                    const itemName = item.name || item.title || 'Produto sem nome';
+                    const itemPrice = parseFloat(item.price || item.final_price || item.price_final || 0);
+                    const itemQuantity = parseInt(item.quantity || 1);
+                    const itemCategory = item.category || 'Eletrônicos';
+                    // Corrigir imagem do produto - usar função para obter imagem correta
+                    const itemImage = item.image || item.image_url || getProductImage(itemId, itemName);
+                    
+                    console.log('🛒 Renderizando item:', { 
+                        itemId, 
+                        itemName, 
+                        itemPrice, 
+                        itemQuantity, 
+                        itemCategory,
+                        originalItem: item 
+                    });
+                    
+                    // Garantir que o nome não seja undefined
+                    const displayName = itemName === 'undefined' || !itemName ? 'Produto sem nome' : itemName;
+                    
+                    return `
+                        <div class="bg-white rounded-xl p-4 md:p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 shadow-sm">
+                            <div class="flex items-start md:items-center gap-3 md:space-x-4">
+                                <div class="w-24 h-24 bg-gray-100 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+                                    <img src="${itemImage}" 
+                                         alt="${itemName}" 
+                                         class="w-full h-full object-cover"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5OWEzYWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbWFnZW0gbsOjbyBlbmNvbnRyYWRhPC90ZXh0Pjwvc3ZnPg=='">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-semibold text-gray-900 mb-1 md:mb-2 text-base md:text-lg line-clamp-2">${displayName}</h4>
+                                    <p class="text-xs md:text-sm text-gray-500 mb-2 md:mb-3">Categoria: ${itemCategory}</p>
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                        <div class="flex items-center gap-2 md:space-x-4">
+                                            <div class="flex items-center space-x-2 bg-gray-50 rounded-lg p-1">
+                                                <button class="w-8 h-8 md:w-8 md:h-8 bg-white border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors duration-200 minus" data-product-id="${itemId}">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <input type="number" value="${itemQuantity}" min="1" max="${item.stock || 10}" 
+                                                       class="w-14 md:w-16 text-center border border-gray-300 rounded-lg py-1 quantity-input" data-product-id="${itemId}">
+                                                <button class="w-8 h-8 md:w-8 md:h-8 bg-white border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors duration-200 plus" data-product-id="${itemId}">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                            <button class="text-red-500 hover:text-red-700 transition-colors duration-200 remove-btn" data-product-id="${itemId}" title="Remover">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div class="text-right whitespace-nowrap">
+                                            <div class="text-base md:text-lg font-bold text-primary-600">R$ ${formatBRL(itemPrice * itemQuantity)}</div>
+                                            <div class="text-xs md:text-sm text-gray-500">R$ ${formatBRL(itemPrice)} cada</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Bind clear cart button
+                var clearBtn = document.getElementById('clear-cart');
+                if (clearBtn) {
+                    clearBtn.onclick = function(){
+                        localStorage.removeItem('modern_cart');
+                        localStorage.removeItem('e2e_cart_items');
+                        updateCartCount();
+                        updateCartDisplay();
+                    };
+                }
+
+                // Atualizar resumo do carrinho
+                if (cartTotal) {
+                    const subtotal = cartItems.reduce((total, item) => {
+                        const itemPrice = parseFloat(item.price || item.final_price || item.price_final || 0);
+                        const itemQuantity = parseInt(item.quantity || 1);
+                        const itemTotal = itemPrice * itemQuantity;
+                        console.log('💰 Calculando item:', { 
+                            name: item.name || item.title, 
+                            price: itemPrice, 
+                            quantity: itemQuantity, 
+                            total: itemTotal 
+                        });
+                        return total + itemTotal;
+                    }, 0);
+                    const shipping = subtotal > 100 ? 0 : 15;
+                    const total = subtotal + shipping;
+                    
+                    cartTotal.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Subtotal (${cartItems.length} ${cartItems.length === 1 ? 'item' : 'itens'})</span>
+                                <span class="font-semibold text-gray-900">R$ ${formatBRL(subtotal)}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Frete</span>
+                                <span class="font-semibold ${shipping === 0 ? 'text-green-600' : 'text-gray-900'}">
+                                    ${shipping === 0 ? 'Grátis' : `R$ ${formatBRL(shipping)}`}
+                                </span>
+                            </div>
+                            <div class="border-t border-gray-200 pt-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold text-gray-900">Total</span>
+                                    <span class="text-xl font-bold text-primary-600">R$ ${formatBRL(total)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.onclick = function() {
+                        let currentUser = null;
+                        try {
+                            if (window.authSystem && typeof window.authSystem.getCurrentUser === 'function') {
+                                currentUser = window.authSystem.getCurrentUser();
+                            } else {
+                                currentUser = JSON.parse(localStorage.getItem('e2e_current_user') || 'null');
+                            }
+                        } catch {}
+                        if (!currentUser || !currentUser.id) {
+                    if (typeof window.showLoginRequiredModal === 'function') { window.showLoginRequiredModal(); }
+                            return;
+                        }
+                        console.log('🛒 Redirecionando para checkout...');
+                        window.location.href = 'checkout.html';
+                    };
+                }
+            }
+            
+            console.log('✅ Carrinho atualizado');
+        }
+        
+        // Função para atualizar quantidade
+        function updateQuantity(productId, newQuantity) {
+            console.log('🔄 Atualizando quantidade:', productId, newQuantity);
+            
+            // Tentar encontrar em ambas as chaves
+            let cartItems = JSON.parse(localStorage.getItem('modern_cart') || '[]');
+            let item = cartItems.find(item => String(item.id) === String(productId) || String(item.productId) === String(productId));
+            let useModernCart = true;
+            
+            if (!item) {
+                cartItems = JSON.parse(localStorage.getItem('e2e_cart_items') || '[]');
+                item = cartItems.find(item => String(item.id) === String(productId) || String(item.productId) === String(productId));
+                useModernCart = false;
+            }
+            
+            if (item) {
+                // Validar estoque quando conhecido
+                const maxStock = typeof item.stock === 'number' ? item.stock : Infinity;
+                let desired = parseInt(newQuantity, 10);
+                if (isNaN(desired)) desired = 1;
+                desired = Math.max(1, desired);
+                if (desired > maxStock) {
+                    if (typeof window.showErrorFeedback === 'function') {
+                        window.showErrorFeedback(`Temos apenas ${maxStock} unidade(s) em estoque.`);
+                    } else {
+                        try {
+                            const n = document.createElement('div');
+                            n.className = 'fixed top-5 right-5 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+                            n.textContent = `Temos apenas ${maxStock} unidade(s) em estoque.`;
+                            document.body.appendChild(n);
+                            setTimeout(() => { if (n && n.parentNode) n.remove(); }, 2500);
+                        } catch {}
+                    }
+                    desired = maxStock;
+                }
+
+                if (desired <= 0) {
+                    // Remover item se quantidade for 0 ou menor
+                    const index = cartItems.indexOf(item);
+                    cartItems.splice(index, 1);
+                } else {
+                    item.quantity = desired;
+                }
+                
+                // Salvar na chave correta
+                if (useModernCart) {
+                    localStorage.setItem('modern_cart', JSON.stringify(cartItems));
+                } else {
+                    localStorage.setItem('e2e_cart_items', JSON.stringify(cartItems));
+                }
+                
+                updateCartDisplay();
+                console.log('✅ Quantidade atualizada');
+            } else {
+                console.log('⚠️ Item não encontrado para atualizar quantidade');
+            }
+        }
+        
+        // Função para remover item
+        function removeItem(productId) {
+            console.log('🗑️ Removendo item:', productId);
+            
+            // Tentar remover de ambas as chaves
+            let cartItems = JSON.parse(localStorage.getItem('modern_cart') || '[]');
+            let hasItems = cartItems.length > 0;
+            let usingModernCart = true;
+            
+            if (!hasItems) {
+                cartItems = JSON.parse(localStorage.getItem('e2e_cart_items') || '[]');
+                hasItems = cartItems.length > 0;
+                usingModernCart = false;
+            }
+            
+            if (hasItems) {
+                const originalLength = cartItems.length;
+                const filteredItems = cartItems.filter(item => {
+                    // Tentar diferentes campos de ID
+                    const itemId = item.id || item.productId || item.product_id;
+                    console.log('🔍 Comparando IDs:', itemId, 'com', productId);
+                    return String(itemId) !== String(productId);
+                });
+                
+                console.log('📊 Itens antes:', originalLength, 'Itens depois:', filteredItems.length);
+                
+                // Salvar na chave correta
+                if (usingModernCart) {
+                    localStorage.setItem('modern_cart', JSON.stringify(filteredItems));
+                } else {
+                    localStorage.setItem('e2e_cart_items', JSON.stringify(filteredItems));
+                }
+                
+                // Atualizar contador do carrinho
+                updateCartCount();
+                
+                // Recarregar exibição
+                updateCartDisplay();
+                console.log('✅ Item removido com sucesso');
+            } else {
+                console.log('⚠️ Nenhum item encontrado para remover');
+            }
+        }
+        
+        // Event listeners
+        document.addEventListener('click', function(e) {
+            // Botão de diminuir quantidade
+            if (e.target.classList.contains('minus') || e.target.closest('.minus')) {
+                const button = e.target.classList.contains('minus') ? e.target : e.target.closest('.minus');
+                const productId = button.dataset.productId;
+                const input = button.nextElementSibling;
+                const currentQuantity = parseInt(input.value);
+                updateQuantity(productId, currentQuantity - 1);
+            }
+            
+            // Botão de aumentar quantidade
+            if (e.target.classList.contains('plus') || e.target.closest('.plus')) {
+                const button = e.target.classList.contains('plus') ? e.target : e.target.closest('.plus');
+                const productId = button.dataset.productId;
+                const input = button.previousElementSibling;
+                const currentQuantity = parseInt(input.value);
+                updateQuantity(productId, currentQuantity + 1);
+            }
+            
+            // Botão de remover
+            if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn') || e.target.classList.contains('fa-trash') || e.target.closest('.fa-trash')) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const button = e.target.classList.contains('remove-btn') ? e.target : 
+                              e.target.closest('.remove-btn') || 
+                              e.target.closest('button[data-product-id]');
+                
+                if (button && button.dataset.productId) {
+                    const productId = button.dataset.productId;
+                    console.log('🗑️ Clique detectado no botão remover para produto:', productId);
+                    removeItem(productId);
+                } else {
+                    console.log('⚠️ Botão de remover não encontrado ou sem productId');
+                }
+            }
+        });
+        
+        // Event listener para input de quantidade
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('quantity-input')) {
+                const input = e.target;
+                const productId = input.dataset.productId;
+                let newQuantity = parseInt(input.value, 10);
+                const maxAttr = parseInt(input.getAttribute('max'), 10);
+                if (isNaN(newQuantity) || newQuantity < 1) newQuantity = 1;
+                if (!isNaN(maxAttr) && newQuantity > maxAttr) {
+                    if (typeof window.showErrorFeedback === 'function') {
+                        window.showErrorFeedback(`Temos apenas ${maxAttr} unidade(s) em estoque.`);
+                    }
+                    newQuantity = maxAttr;
+                }
+                input.value = newQuantity;
+                updateQuantity(productId, newQuantity);
+            }
+        });
+        
+        // Observação: handler do botão de checkout é definido dentro de updateCartDisplay()
+        
+        // Função para limpar carrinho completamente
+        function clearCart() {
+            console.log('🧹 Limpando carrinho completamente...');
+            localStorage.removeItem('modern_cart');
+            localStorage.removeItem('e2e_cart_items');
+            updateCartDisplay();
+            console.log('✅ Carrinho limpo');
+        }
+        
+        // Botões de debug removidos por UX
+        
+        // Função para obter imagem correta do produto
+        function getProductImage(productId, productName) {
+            const productImages = {
+                1: 'assets/images/products/13_smartphone_samsung_galaxy_a54.jpg',
+                2: 'assets/images/products/14_laptop_dell_inspiron_15_3000.jpg',
+                3: 'assets/images/products/16_tablet_apple_ipad_air_5.jpg',
+                4: 'assets/images/products/01_smart_tv_lenovo_55_4k_uhd.jpg',
+                5: 'assets/images/products/02_fone_bluetooth_jbl_cancelamento_ruido.jpg',
+                6: 'assets/images/products/06_monitor_dell_24_75hz.jpg',
+                7: 'assets/images/products/15_headphone_sony_wh_1000xm4.jpg',
+                8: 'assets/images/products/17_smartwatch_apple_watch_series_8.jpg',
+                9: 'assets/images/products/03_aspirador_robo_britania_wifi.jpg',
+                10: 'assets/images/products/04_fone_bluetooth_dell_cancelamento_ruido.jpg',
+                11: 'assets/images/products/05_aspirador_robo_mondial_wifi.jpg',
+                12: 'assets/images/products/07_cafeteira_eletrica_mondial_18_xicaras.jpg',
+                13: 'assets/images/products/08_cafeteira_eletrica_arno_18_xicaras.jpg',
+                14: 'assets/images/products/09_cafeteira_eletrica_electrolux_18_xicaras.jpg',
+                15: 'assets/images/products/10_monitor_sony_24_75hz.jpg',
+                16: 'assets/images/products/11_aspirador_robo_arno_wifi.jpg',
+                17: 'assets/images/products/12_monitor_philips_29_75hz.jpg',
+                18: 'assets/images/products/18_camera_canon_eos_r6_mark_ii.jpg',
+                19: 'assets/images/products/19_console_playstation_5.jpg',
+                20: 'assets/images/products/20_teclado_mecanico_razer_blackwidow.jpg',
+                21: 'assets/images/products/21_mouse_gaming_logitech_g502.jpg',
+                22: 'assets/images/products/22_webcam_logitech_c920_hd.jpg',
+                23: 'assets/images/products/23_roteador_wifi_tp_link_archer_ax73.jpg',
+                24: 'assets/images/products/24_ssd_samsung_970_evo_plus_1tb.jpg',
+                25: 'assets/images/products/25_ram_corsair_vengeance_16gb_ddr4.jpg',
+                26: 'assets/images/products/26_placa_mae_asus_rog_strix_b550.jpg',
+                27: 'assets/images/products/27_processador_intel_core_i7_12700k.jpg',
+                28: 'assets/images/products/28_placa_video_nvidia_rtx_4070.jpg',
+                29: 'assets/images/products/29_fonte_corsair_rm850x_850w.jpg',
+                30: 'assets/images/products/30_gabinete_corsair_4000d_airflow.jpg'
+            };
+            
+            return productImages[productId] || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2YzZjRmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5OWEzYWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbWFnZW0gbsOjbyBlbmNvbnRyYWRhPC90ZXh0Pjwvc3ZnPg==';
+        }
+
+        // Função para recarregar dados dos produtos no carrinho
+        async function reloadCartProductData() {
+            console.log('🔄 Recarregando dados dos produtos no carrinho...');
+            
+            let cartItems = JSON.parse(localStorage.getItem('modern_cart') || '[]');
+            if (cartItems.length === 0) {
+                cartItems = JSON.parse(localStorage.getItem('e2e_cart_items') || '[]');
+            }
+            
+            if (cartItems.length > 0) {
+                console.log('🔄 Atualizando dados de', cartItems.length, 'produtos...');
+                
+                for (let item of cartItems) {
+                    try {
+                        const productData = await getProductData(item.id || item.productId);
+                        if (productData) {
+                            // Atualizar dados do item
+                            item.name = productData.name;
+                            item.title = productData.name;
+                            item.price = productData.price;
+                            item.image = getProductImage(item.id || item.productId, productData.name);
+                            item.category = productData.category;
+                            item.stock = productData.stock;
+                            
+                            console.log('✅ Dados atualizados para:', item.id, item.name, item.price);
+                        }
+                    } catch (error) {
+                        console.error('❌ Erro ao atualizar produto:', item.id, error);
+                    }
+                }
+                
+                // Salvar carrinho atualizado
+                if (localStorage.getItem('modern_cart')) {
+                    localStorage.setItem('modern_cart', JSON.stringify(cartItems));
+                } else {
+                    localStorage.setItem('e2e_cart_items', JSON.stringify(cartItems));
+                }
+                
+                // Recarregar exibição
+                updateCartDisplay();
+                console.log('✅ Dados dos produtos recarregados!');
+            }
+        }
+        
+        // Flag para evitar múltiplas inicializações
+        let cartInitialized = false;
+        
+        // Função para limpar event listeners duplicados
+        function cleanupEventListeners() {
+            // Remover event listeners duplicados se existirem
+            const existingListeners = document.querySelectorAll('[data-listener-added]');
+            existingListeners.forEach(element => {
+                element.removeAttribute('data-listener-added');
+            });
+        }
+        
+        // Inicializar página - CONSOLIDADO
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (cartInitialized) {
+                console.log('⚠️ Página já inicializada, ignorando...');
+                return;
+            }
+            
+            // Fazer chamada à API para mostrar no network
+            try {
+                console.log('🔍 Verificando disponibilidade da API...');
+                console.log('📡 window.productsAPI:', window.productsAPI);
+                
+                if (window.productsAPI && typeof window.productsAPI.getProducts === 'function') {
+                    console.log('🌐 Fazendo chamada à API para mostrar no network...');
+                    const apiData = await window.productsAPI.getProducts({ page: 1, pageSize: 30 });
+                    console.log('✅ API chamada realizada! Produtos no network:', apiData.products?.length || 0);
+                } else {
+                    console.log('⚠️ ProductsAPI não disponível, tentando chamada direta...');
+                    
+                    // Tentar chamada direta para garantir que apareça no network
+                    try {
+                        const response = await fetch('https://catalogo-products.pages.dev/api/products?page=1&pageSize=30');
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log('✅ Chamada direta realizada! Produtos no network:', data.products?.length || 0);
+                        }
+                    } catch (directError) {
+                        console.log('⚠️ Erro na chamada direta:', directError.message);
+                    }
+                }
+            } catch (apiError) {
+                console.log('⚠️ API não disponível, continuando com produtos locais:', apiError.message);
+            }
+            
+            console.log('🛒 Inicializando página do carrinho...');
+            cartInitialized = true;
+            
+            // Aguardar um pouco para garantir que tudo carregou
+            setTimeout(async () => {
+                // Limpar event listeners duplicados
+                cleanupEventListeners();
+                
+                // Carregar logos primeiro
+                console.log('🎨 Carregando logos...');
+                try {
+                    if (typeof loadAllLogos === 'function') {
+                        loadAllLogos();
+                    } else {
+                        console.warn('loadAllLogos não definido - ignorando');
+                    }
+                } catch (e) {
+                    console.warn('Falha ao carregar logos:', e);
+                }
+                
+                // Inicializar carrinho
+                updateCartDisplay();
+                updateCartCount();
+                // addDebugButtons(); // removido por UX
+                
+                // Recarregar dados dos produtos se necessário
+                await reloadCartProductData();
+                
+                // Adicionar event listeners específicos para botões de remover
+                const removeButtons = document.querySelectorAll('.remove-btn');
+                console.log('🔍 Encontrados', removeButtons.length, 'botões de remover');
+                
+                removeButtons.forEach(button => {
+                    // Verificar se já tem listener
+                    if (!button.hasAttribute('data-listener-added')) {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const productId = this.dataset.productId;
+                            console.log('🗑️ Clique direto no botão remover:', productId);
+                            removeItem(productId);
+                        });
+                        button.setAttribute('data-listener-added', 'true');
+                    }
+                });
+                
+                console.log('✅ Página do carrinho inicializada');
+            }, 500);
+        });
+    </script>
+    
+    <!-- Scripts -->
+    <script src="assets/js/clean-modals.js?v=3.3"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <!-- Scripts da API e Sistema E-commerce -->
+    <script src="assets/js/products-api.js"></script>
+    <script src="assets/js/ecommerce-system.js"></script>
+    <script src="assets/js/api-network-call.js"></script>
+    <script src="assets/js/product-images.js"></script>
+    <script src="assets/js/modern-cart-system.js"></script>
+    <script src="assets/js/cart-functions.js"></script>
+    
+    <!-- Logo System -->
+    <!-- Logo System - Solução Direta -->
+    <script>
+        // Sistema de logo simplificado e robusto
+        // Função para mostrar modal de login
+        function showLoginModal() {
+            // Remover modal anterior se existir
+            const existingModal = document.querySelector('.login-modal-overlay');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            // Criar overlay do modal
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'login-modal-overlay';
+            modalOverlay.innerHTML = `
+                <div class="login-modal">
+                    <div class="login-modal-header">
+                        <h3>🔐 Login Necessário</h3>
+                        <button class="login-modal-close" onclick="closeLoginModal()">×</button>
+                    </div>
+                    <div class="login-modal-body">
+                        <div class="login-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <p class="login-message">
+                            Para finalizar sua compra, você precisa estar logado.
+                        </p>
+                        <p class="login-submessage">
+                            Faça login ou crie uma conta para continuar.
+                        </p>
+                    </div>
+                    <div class="login-modal-footer">
+                        <button class="login-btn" onclick="goToLogin()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Fazer Login
+                        </button>
+                        <button class="register-btn" onclick="goToRegister()">
+                            <i class="fas fa-user-plus"></i>
+                            Criar Conta
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Adicionar estilos inline
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: fadeIn 0.3s ease;
+            `;
+
+            // Adicionar ao DOM
+            document.body.appendChild(modalOverlay);
+
+            // Fechar modal ao clicar no overlay
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeLoginModal();
+                }
+            });
+        }
+
+        // Função para fechar modal de login
+        function closeLoginModal() {
+            const modal = document.querySelector('.login-modal-overlay');
+            if (modal) {
+                modal.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            }
+        }
+
+        // Função para ir para login
+        function goToLogin() {
+            closeLoginModal();
+            showNotification('🔐 Redirecionando para login...', 'info');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+
+        // Função para ir para registro
+        function goToRegister() {
+            closeLoginModal();
+            showNotification('📝 Redirecionando para cadastro...', 'info');
+            setTimeout(() => {
+                window.location.href = 'register.html';
+            }, 1000);
+        }
+
+        // Função para mostrar notificações simples
+        function showNotification(message, type = 'info') {
+            // Remover notificação anterior se existir
+            const existingNotification = document.querySelector('.simple-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Criar elemento da notificação
+            const notification = document.createElement('div');
+            notification.className = 'simple-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-icon">${type === 'success' ? '✅' : '⚡'}</span>
+                    <span class="notification-message">${message}</span>
+                </div>
+            `;
+
+            // Adicionar estilos inline
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : '#3b82f6'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 9999;
+                font-weight: 500;
+                font-size: 14px;
+                max-width: 300px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+
+            // Adicionar ao DOM
+            document.body.appendChild(notification);
+
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Remover automaticamente após 3 segundos
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Movido para o listener principal para evitar conflitos
+        
+        function loadAllLogos() {
+            // Carregar logos do header
+            const headerLogos = document.querySelectorAll('.header-logo');
+            headerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/header/logo-light.png' : 
+                    'assets/images/logo/header/logo-dark.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do header falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-sm"></i>
+                                </div>
+                                <span class="text-xl font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do header carregado: ${isDarkBackground ? 'dark' : 'light'}`);
+            });
+            
+            // Carregar logos do footer
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/footer/logo-footer.png' : 
+                    'assets/images/logo/footer/logo-white.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do footer falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`

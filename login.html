@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - E2E SHOP</title>
+    <meta name="description" content="Faça login na sua conta E2E SHOP e acesse produtos exclusivos">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f97316">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+</head>
+<body class="bg-gradient-to-br from-primary-50 via-white to-primary-100 min-h-screen">
+    <!-- Header Moderno -->
+    <header class="bg-white shadow-xl border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-3">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-4 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+                        </a>
+                    </div>
+            
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-3">
+                        <button id="mobile-search-btn" class="md:hidden p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="mobile-search-bar" class="md:hidden hidden border-b border-gray-200 bg-white">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex rounded-xl border border-gray-300">
+                <input type="text" class="flex-1 w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                <button class="px-3 text-white bg-primary-500 rounded-r-xl"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen flex items-center justify-center py-12 px-4">
+        <div class="w-full max-w-md">
+            <!-- Login Card -->
+            <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-8 py-6 text-center">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white mb-2">Bem-vindo de volta!</h1>
+                    <p class="text-primary-100">Entre na sua conta E2E SHOP</p>
+                </div>
+
+                <!-- Form -->
+                <div class="px-8 py-8">
+                    <form id="login-form" class="space-y-6">
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope mr-2 text-primary-500"></i>
+                                Email *
+                            </label>
+                            <input type="email" id="email" name="email" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                                   placeholder="seu@email.com" required
+                                   oninvalid="this.setCustomValidity('Por favor, digite um email válido')"
+                                   oninput="this.setCustomValidity('')">
+                            <div class="error-message hidden mt-1 text-sm text-red-600" id="email-error">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <span>Por favor, digite um email válido</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2 text-primary-500"></i>
+                                Senha *
+                            </label>
+                            <div class="relative">
+                                <input type="password" id="password" name="password" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 pr-12"
+                                       placeholder="Sua senha" required
+                                       oninvalid="this.setCustomValidity('Por favor, digite sua senha')"
+                                       oninput="this.setCustomValidity('')">
+                                <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                                    <i class="fas fa-eye" id="password-toggle-icon"></i>
+                                </button>
+                            </div>
+                            <div class="error-message hidden mt-1 text-sm text-red-600" id="password-error">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <span>Por favor, digite sua senha</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Remember & Forgot -->
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="remember" class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500">
+                                <span class="ml-2 text-sm text-gray-600">Lembrar de mim</span>
+                            </label>
+                            <!-- Removido: alterar/recuperar senha aqui. A funcionalidade está no perfil. -->
+                            <span class="text-xs text-gray-400">Alterar senha pelo perfil</span>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Entrar na Conta
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-gray-50 px-8 py-6 text-center">
+                    <p class="text-gray-600 mb-4">
+                        Não tem uma conta? 
+                        <a href="register.html" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-300">
+                            Cadastre-se aqui
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Demo Users Card -->
+            <div class="mt-8 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
+                    <h3 class="text-lg font-semibold text-white flex items-center">
+                        <i class="fas fa-users mr-2"></i>
+                        Usuários Demo
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Cliente</div>
+                                    <div class="text-sm text-gray-500">joao@email.com</div>
+                                </div>
+                            </div>
+                            <button onclick="fillDemoUser('joao@email.com', '1234567890')" class="text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors duration-300">
+                                Usar
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-store text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Vendedor</div>
+                                    <div class="text-sm text-gray-500">maria@email.com</div>
+                                </div>
+                            </div>
+                            <button onclick="fillDemoUser('maria@email.com', '1234567890')" class="text-primary-600 hover:text-primary-700 text-sm font-medium transition-colors duration-300">
+                                Usar
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg opacity-60 cursor-not-allowed">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-crown text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Admin</div>
+                                    <div class="text-sm text-gray-500">admin@email.com</div>
+                                </div>
+                            </div>
+                            <span class="text-orange-600 text-sm font-medium">Em breve</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Moderno Shopify-Style -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" 
+                             alt="E2E Shop Logo" 
+                             class="footer-logo h-8 w-auto"
+                             data-context="footer">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sua loja online moderna e tecnológica com os melhores produtos de qualidade. 
+                        Tecnologia, inovação e praticidade em um só lugar.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produtos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Conta -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-500 text-xs">Formas de Pagamento:</span>
+                        <div class="flex space-x-2">
+                            <i class="fab fa-cc-visa text-gray-400 text-lg"></i>
+                            <i class="fab fa-cc-mastercard text-gray-400 text-lg"></i>
+                            <i class="fas fa-credit-card text-gray-400 text-lg"></i>
+                            <i class="fas fa-mobile-alt text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/mobile-ui.js"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+    <script src="assets/js/clean-modals.js?v=3.3"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/cart-functions.js?v=1.0"></script>
+    
+    <script>
+        // Função para alternar visibilidade da senha
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Função para preencher usuário demo
+        function fillDemoUser(email, password) {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            
+            // Preencher os campos
+            emailInput.value = email;
+            passwordInput.value = password;
+            
+            // Disparar eventos de input para ativar validações em tempo real
+            emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+            passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
+            
+            // Adicionar feedback visual
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Preenchido!';
+            button.classList.add('text-green-600');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('text-green-600');
+            }, 2000);
+            
+            console.log('✅ Usuário demo preenchido:', email);
+        }
+
+        // Função para mostrar erro de campo (compatível com AuthSystem)
+        function showFieldError(fieldId, message) {
+            console.log(`🔄 Mostrando erro para campo: ${fieldId} - ${message}`);
+            
+            const input = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + '-error');
+            
+            console.log(`- Input encontrado:`, input ? '✅' : '❌');
+            console.log(`- Error div encontrado:`, errorDiv ? '✅' : '❌');
+            
+            if (input) {
+                input.classList.add('border-red-500', 'focus:ring-red-500');
+                input.classList.remove('border-green-500', 'focus:ring-green-500');
+                console.log(`- Classes de erro adicionadas ao input`);
+            } else {
+                console.error(`❌ Input não encontrado: ${fieldId}`);
+            }
+            
+            if (errorDiv) {
+                errorDiv.classList.remove('hidden');
+                const span = errorDiv.querySelector('span');
+                if (span) {
+                    span.textContent = message;
+                    console.log(`- Mensagem de erro atualizada: ${message}`);
+                } else {
+                    console.log(`- Span não encontrado no error div`);
+                }
+                console.log(`- Error div agora visível`);
+            } else {
+                console.error(`❌ Error div não encontrado: ${fieldId}-error`);
+            }
+        }
+
+        // Função para mostrar sucesso de campo (compatível com AuthSystem)
+        function showFieldSuccess(fieldId) {
+            const input = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + '-error');
+            
+            if (input) {
+                input.classList.add('border-green-500', 'focus:ring-green-500');
+                input.classList.remove('border-red-500', 'focus:ring-red-500');
+            }
+            
+            if (errorDiv) {
+                errorDiv.classList.add('hidden');
+            }
+        }
+
+        // Função de validação manual para login
+        function validateLoginFormManually() {
+            console.log('🔄 Executando validação manual do login...');
+            
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            
+            if (!email || !password) {
+                console.error('❌ Elementos do formulário de login não encontrados!');
+                return false;
+            }
+            
+            const emailValue = email.value.trim();
+            const passwordValue = password.value;
+            
+            let hasErrors = false;
+            
+            // Limpar erros anteriores
+            ['email', 'password'].forEach(fieldId => {
+                const input = document.getElementById(fieldId);
+                const errorDiv = document.getElementById(fieldId + '-error');
+                if (input) input.classList.remove('border-red-500', 'focus:ring-red-500');
+                if (errorDiv) errorDiv.classList.add('hidden');
+            });
+            
+            // Validações
+            console.log(`🔍 Valores dos campos: email="${emailValue}", password="${passwordValue}"`);
+            
+            if (!emailValue) {
+                console.log('❌ Email vazio');
+                showFieldError('email', 'Por favor, digite seu email');
+                hasErrors = true;
+            }
+            
+            if (!passwordValue) {
+                console.log('❌ Senha vazia');
+                showFieldError('password', 'Por favor, digite sua senha');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) {
+                console.log('❌ Validação do login falhou - campos obrigatórios vazios');
+                return false;
+            }
+            
+            console.log('✅ Validação manual do login passou - todos os campos preenchidos');
+            return true;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 Inicializando página de login...');
+            
+            const form = document.getElementById('login-form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            
+            // Debug: verificar se elementos foram encontrados
+            console.log('🔍 Debug - Elementos encontrados:');
+            console.log('- Formulário:', form ? '✅' : '❌');
+            console.log('- Email:', emailInput ? '✅' : '❌');
+            console.log('- Senha:', passwordInput ? '✅' : '❌');
+
+            // Verificar se todos os elementos foram encontrados
+            if (!form || !emailInput || !passwordInput) {
+                console.error('❌ Alguns elementos do formulário de login não foram encontrados!');
+                return;
+            }
+
+            // Validação em tempo real para email
+            emailInput.addEventListener('input', function() {
+                const value = this.value.trim();
+                if (value) {
+                    showFieldSuccess('email');
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('email-error').classList.add('hidden');
+                }
+            });
+
+            // Validação em tempo real para senha
+            passwordInput.addEventListener('input', function() {
+                const value = this.value;
+                if (value) {
+                    showFieldSuccess('password');
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('password-error').classList.add('hidden');
+                }
+            });
+
+            // Validação do formulário completo - versão que funciona
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('🔄 Formulário de login submetido, iniciando validação...');
+                console.log('🔄 Evento de submit capturado com sucesso!');
+                
+                // Executar validação manual
+                const isValid = validateLoginFormManually();
+                
+                // Se validação passou e AuthSystem estiver disponível, chamar ele
+                if (isValid && window.authSystem && typeof window.authSystem.handleLogin === 'function') {
+                    console.log('✅ Validação passou, chamando AuthSystem...');
+                    window.authSystem.handleLogin(e);
+                } else if (!isValid) {
+                    console.log('❌ Validação falhou, não prosseguindo');
+                } else {
+                    console.warn('⚠️ AuthSystem não encontrado');
+                }
+            });
+            
+            // Teste adicional: adicionar listener no botão também
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.addEventListener('click', function(e) {
+                    console.log('🔄 Botão de login clicado!');
+                    // Forçar submit do formulário
+                    form.dispatchEvent(new Event('submit'));
+                });
+            }
+            
+            // Teste adicional: adicionar listener global para qualquer clique
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('button[type="submit"]') || e.target.closest('button[type="submit"]')) {
+                    console.log('🔄 Clique em botão de submit detectado globalmente!');
+                }
+            });
+            
+            console.log('✅ Página de login inicializada');
+        });
+    </script>
+    
+    <!-- Logo System -->
+    <!-- Logo System - Solução Direta -->
+    <script>
+        // Sistema de logo simplificado e robusto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Carregando logos...');
+            loadAllLogos();
+        });
+        
+        function loadAllLogos() {
+            // Carregar logos do header
+            const headerLogos = document.querySelectorAll('.header-logo');
+            headerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/header/logo-light.png' : 
+                    'assets/images/logo/header/logo-dark.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do header falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-sm"></i>
+                                </div>
+                                <span class="text-xl font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do header carregado: ${isDarkBackground ? 'dark' : 'light'}`);
+            });
+            
+            // Carregar logos do footer
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                logo.src = 'assets/images/logo/footer/logo-footer.png';
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do footer falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log('✅ Logo do footer carregado');
+            });
+            
+            // Carregar favicon
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = 'assets/images/logo/favicon/favicon.png';
+            } else {
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.type = 'image/png';
+                newFavicon.href = 'assets/images/logo/favicon/favicon.png';
+                document.head.appendChild(newFavicon);
+            }
+            console.log('✅ Favicon carregado');
+        }
+        
+        // Função para detectar se o fundo é escuro
+        function isElementDarkBackground(element) {
+            // Verificar classes CSS que indicam fundo escuro
+            const darkClasses = ['bg-gray-900', 'bg-black', 'bg-gray-800', 'bg-gray-700', 'bg-blue-900', 'bg-indigo-900'];
+            const parent = element.closest('header, footer, div');
+            
+            if (parent) {
+                // Verificar se o elemento pai tem classes de fundo escuro
+                for (let className of darkClasses) {
+                    if (parent.classList.contains(className)) {
+                        return true;
+                    }
+                }
+                
+                // Verificar estilos computados
+                const computedStyle = window.getComputedStyle(parent);
+                const backgroundColor = computedStyle.backgroundColor;
+                
+                if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
+                    const rgb = backgroundColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const r = parseInt(rgb[0]);
+                        const g = parseInt(rgb[1]);
+                        const b = parseInt(rgb[2]);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        return brightness < 128; // Se brightness < 128, é fundo escuro
+                    }
+                }
+            }
+            
+            // Por padrão, assumir fundo claro
+            return false;
+        }
+    </script>
+</body>
+</html>

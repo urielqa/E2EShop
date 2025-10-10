@@ -1,0 +1,252 @@
+/**
+ * E2E SHOP - Estilos para Imagens de Produtos
+ * Focado especificamente na melhoria das imagens dos produtos
+ */
+
+/* ===== CONTAINERS DE IMAGEM DE PRODUTOS ===== */
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f8f9fa;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 400px !important;
+    height: 400px !important;
+    margin: 0 auto;
+}
+
+.product-image-container:hover {
+    transform: scale(1.002);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== IMAGENS DE PRODUTOS ===== */
+.product-image {
+    width: 400px !important;
+    height: 400px !important;
+    object-fit: cover !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+    cursor: pointer;
+    display: block !important;
+    margin: 0 auto;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Forçar visibilidade das imagens de produtos */
+#products-grid .product-image,
+.products-grid .product-image,
+.product-card .product-image {
+    width: 400px !important;
+    height: 400px !important;
+    object-fit: cover !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.product-image:hover {
+    transform: scale(1.005);
+    filter: brightness(1.01) contrast(1.005);
+}
+
+/* ===== LOADING STATES ===== */
+.product-image.loading {
+    opacity: 0.7;
+    filter: blur(2px);
+}
+
+.product-image.loaded {
+    opacity: 1;
+    filter: none;
+}
+
+.image-loading {
+    position: relative;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: product-loading 1.5s infinite;
+}
+
+@keyframes product-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===== LIGHTBOX PARA PRODUTOS ===== */
+.product-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.product-lightbox.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.product-lightbox .lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.product-lightbox .lightbox-content {
+    position: relative;
+    max-width: 80vw;
+    max-height: 80vh;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.product-lightbox:not(.hidden) .lightbox-content {
+    transform: scale(1);
+}
+
+.product-lightbox .lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.product-lightbox .lightbox-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.product-lightbox .lightbox-image {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+}
+
+.product-lightbox .lightbox-info {
+    padding: 24px;
+    background: white;
+}
+
+.product-lightbox .lightbox-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+/* ===== EFEITOS HOVER MELHORADOS ===== */
+.product-card:hover .product-image-container {
+    transform: scale(1.002);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.005);
+    filter: brightness(1.01) contrast(1.005);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .product-lightbox .lightbox-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        margin: 20px;
+    }
+    
+    .product-lightbox .lightbox-image {
+        max-height: 60vh;
+    }
+    
+    .product-lightbox .lightbox-info {
+        padding: 16px;
+    }
+    
+    .product-lightbox .lightbox-title {
+        font-size: 20px;
+    }
+}
+
+/* ===== OTIMIZAÇÕES DE PERFORMANCE ===== */
+.product-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* ===== FALLBACK PARA IMAGENS QUEBRADAS ===== */
+.product-image.error-fallback {
+    opacity: 0.8;
+    filter: grayscale(20%);
+}
+
+/* ===== ANIMAÇÕES SUAVES ===== */
+.product-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== ACESSIBILIDADE ===== */
+.product-image:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.product-lightbox .lightbox-close:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== ZOOM SUTIL ===== */
+.hover\:scale-102:hover {
+    transform: scale(1.02);
+}
+
+.hover\:scale-101:hover {
+    transform: scale(1.01);
+}
+
+.group:hover .group-hover\:scale-102 {
+    transform: scale(1.02);
+}

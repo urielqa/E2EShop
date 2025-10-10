@@ -1,0 +1,399 @@
+/**
+ * CSS E-commerce Unificado
+ * Sistema limpo e otimizado
+ */
+
+/* Reset e base */
+* {
+    box-sizing: border-box;
+}
+
+/* Grid de produtos */
+.product-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #f0f0f0;
+    opacity: 1;
+    visibility: visible;
+    display: block !important;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #e0e0e0;
+}
+
+/* Container da imagem */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Badge de desconto */
+.discount-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #ff4444;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Ações do produto */
+.product-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-actions {
+    opacity: 1;
+}
+
+.btn-add-cart,
+.btn-view-product {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.btn-add-cart:hover {
+    background: #ff6b35;
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-view-product:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Informações do produto */
+.product-info {
+    padding: 16px;
+}
+
+.product-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.rating-text {
+    font-size: 12px;
+    color: #666;
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.current-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ff6b35;
+}
+
+.original-price {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.product-stock {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.product-stock.text-green-600 {
+    color: #16a34a;
+}
+
+.product-stock.text-red-500 {
+    color: #dc2626;
+}
+
+.product-brand {
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* Grid layouts */
+.products-grid-home {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.products-grid-products {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .products-grid-home {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid-home {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    .products-grid-home {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (min-width: 640px) {
+    .products-grid-products {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .products-grid-products {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .products-grid-products {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    .products-grid-products {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+/* Estrelas */
+.fas.fa-star,
+.fas.fa-star-half-alt {
+    color: #fbbf24;
+}
+
+.far.fa-star {
+    color: #d1d5db;
+}
+
+/* Botões modernos */
+.btn-add-cart i,
+.btn-view-product i {
+    font-size: 12px;
+}
+
+/* Hover effects */
+.product-card:hover .product-image-container {
+    background: #f0f0f0;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+    .products-grid-home,
+    .products-grid-products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 12px;
+    }
+    
+    .product-image-container {
+        height: 160px;
+    }
+    
+    .product-info {
+        padding: 12px;
+    }
+    
+    .product-title {
+        font-size: 13px;
+        height: 36px;
+    }
+    
+    .current-price {
+        font-size: 14px;
+    }
+}
+
+/* Garantir que as imagens carreguem */
+.product-image {
+    background: #f8f9fa;
+    min-height: 200px;
+}
+
+.product-image[src] {
+    background: transparent;
+}
+
+/* Forçar carregamento das imagens */
+.product-image {
+    background-image: none !important;
+}
+
+/* Evitar flash de conteúdo antigo */
+#products-grid {
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+#products-grid.loaded {
+    opacity: 1 !important;
+}
+
+/* Garantir que os cards apareçam */
+.product-card {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Override para evitar conflitos */
+.products-grid-products .product-card {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Garantir design moderno desde o início */
+#products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Forçar carregamento imediato das imagens */
+.product-image {
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    display: block !important;
+    background: #f8f9fa !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Garantir que as informações dos produtos apareçam */
+.product-title {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+    margin: 0 0 8px 0 !important;
+    line-height: 1.4 !important;
+    height: 40px !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.product-price {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.current-price {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #ff6b35 !important;
+}
+
+.product-stock {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
+.product-stock.text-green-600 {
+    color: #16a34a !important;
+}
+
+.product-stock.text-red-500 {
+    color: #dc2626 !important;
+}
+
+.product-brand {
+    font-size: 11px !important;
+    color: #666 !important;
+    font-weight: 500 !important;
+    margin-top: 4px !important;
+}

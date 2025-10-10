@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - E2E SHOP</title>
+    <meta name="description" content="Gerencie seu perfil e acompanhe seus pedidos na E2E SHOP">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f97316">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+</head>
+<body class="bg-gray-50">
+    <!-- Header Moderno -->
+    <header class="bg-white shadow-xl border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-3">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-4 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+                        </a>
+                    </div>
+            
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Favoritos -->
+                        <a href="#" class="relative p-3 text-gray-600 hover:text-primary-600 transition-all duration-300 hover:scale-110">
+                            <i class="fas fa-heart text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </a>
+                        
+                        <!-- Carrinho -->
+                        <a href="cart.html" class="relative p-3 text-gray-600 hover:text-primary-600 transition-all duration-300 hover:scale-110 group">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center cart-count">2</span>
+                            <div class="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <div class="text-sm">
+                                    <div class="font-medium text-gray-900">Carrinho</div>
+                                    <div class="text-gray-500 cart-total">R$ 299,90</div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <!-- Usuário -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center overflow-hidden">
+                                <img id="header-user-photo" src="" alt="Foto do usuário" class="w-full h-full object-cover hidden">
+                                <i id="header-default-icon" class="fas fa-user text-white"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-sm font-semibold text-gray-900" id="user-name">Carregando...</span>
+                                <span class="text-xs text-gray-500">Cliente</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Logout -->
+                        <button onclick="openLogoutModal()" class="px-4 py-2 text-gray-600 hover:text-red-600 transition-colors duration-300 font-medium">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            Sair
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Meu Perfil</h1>
+                <p class="text-gray-600">Gerencie suas informações e acompanhe seus pedidos</p>
+                
+                <!-- Demo Profile Notice (only for demo users) -->
+                <div id="demo-notice" class="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-4" style="display: none;">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                        <div>
+                            <p class="font-medium text-blue-800 mb-1">Perfil de Demonstração</p>
+                            <p class="text-blue-700 text-sm">
+                                Este é um perfil de demonstração. Alterações feitas não serão salvas permanentemente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid Moderno -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Coluna Esquerda - Informações Pessoais -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Perfil do Cliente -->
+                    <div class="bg-gradient-to-br from-white via-gray-50 to-blue-50 rounded-3xl shadow-2xl border border-gray-100 overflow-hidden backdrop-blur-sm">
+                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-6 text-gray-800 relative overflow-hidden border-b border-gray-200">
+                            <div class="absolute inset-0 bg-white/50"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center space-x-4 mb-4">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-user text-white text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-gray-900" id="profile-name">Carregando...</h3>
+                                        <p class="text-gray-600" id="profile-email">Carregando...</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-blue-600">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Cliente Verificado</span>
+                                </div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-24 h-24 bg-blue-100/30 rounded-full"></div>
+                            <div class="absolute -bottom-2 -left-2 w-16 h-16 bg-indigo-100/30 rounded-full"></div>
+                        </div>
+                        
+                        <div class="p-6">
+                            <!-- Estatísticas do Cliente -->
+                            <div class="grid grid-cols-3 gap-4 mb-6">
+                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-200">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
+                                        <i class="fas fa-shopping-bag text-white"></i>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-800" id="orders-count">0</p>
+                                    <p class="text-xs text-gray-600 font-medium">Pedidos</p>
+                                </div>
+                                
+                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-200">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
+                                        <i class="fas fa-heart text-white"></i>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-800" id="favorites-count">0</p>
+                                    <p class="text-xs text-gray-600 font-medium">Favoritos</p>
+                                </div>
+                                
+                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-200">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-2 shadow-lg">
+                                        <i class="fas fa-star text-white"></i>
+                                    </div>
+                                    <p class="text-2xl font-bold text-gray-800" id="reviews-count">0</p>
+                                    <p class="text-xs text-gray-600 font-medium">Avaliações</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Ações Rápidas -->
+                            <div class="space-y-3">
+                                <button onclick="openEditProfileModal()" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Editar Perfil
+                                </button>
+                                
+                                <button onclick="openDeleteAccountModal()" class="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
+                                    <i class="fas fa-trash-alt mr-2"></i>
+                                    Excluir Conta
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita - Conteúdo Principal -->
+                <div class="lg:col-span-3 space-y-8">
+                    <!-- Pedidos Recentes -->
+                    <div class="bg-gradient-to-br from-white via-gray-50 to-blue-50 rounded-3xl shadow-2xl border border-gray-100 overflow-hidden backdrop-blur-sm">
+                        <div class="bg-gradient-to-r from-gray-50 to-blue-50 p-6 text-gray-800 relative overflow-hidden border-b border-gray-200">
+                            <div class="absolute inset-0 bg-white/50"></div>
+                            <div class="relative z-10 flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-shopping-cart text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-900">Pedidos Recentes</h3>
+                                        <p class="text-gray-600">Acompanhe seus pedidos em tempo real</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-blue-600">
+                                    <i class="fas fa-sync-alt animate-spin"></i>
+                                    <span>Atualizado agora</span>
+                                </div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-24 h-24 bg-blue-100/30 rounded-full"></div>
+                            <div class="absolute -bottom-2 -left-2 w-16 h-16 bg-indigo-100/30 rounded-full"></div>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div id="recent-orders-content">
+                                <!-- Conteúdo será carregado via JavaScript -->
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <a href="products.html" class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span>Ver todos os produtos</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Produtos Favoritos -->
+                    <div class="bg-gradient-to-br from-white via-gray-50 to-indigo-50 rounded-3xl shadow-2xl border border-gray-100 overflow-hidden backdrop-blur-sm">
+                        <div class="bg-gradient-to-r from-gray-50 to-indigo-50 p-6 text-gray-800 relative overflow-hidden border-b border-gray-200">
+                            <div class="absolute inset-0 bg-white/50"></div>
+                            <div class="relative z-10 flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-heart text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-900">Produtos Favoritos</h3>
+                                        <p class="text-gray-600">Seus produtos favoritos em um só lugar</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-indigo-600">
+                                    <i class="fas fa-heart text-indigo-500"></i>
+                                    <span>Personalizado</span>
+                                </div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-24 h-24 bg-indigo-100/30 rounded-full"></div>
+                            <div class="absolute -bottom-2 -left-2 w-16 h-16 bg-purple-100/30 rounded-full"></div>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div id="favorites-content">
+                                <!-- Conteúdo será carregado via JavaScript -->
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <a href="products.html" class="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Explorar produtos</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Edição de Perfil -->
+    <div id="edit-profile-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm hidden z-50 cursor-pointer">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-w-sm sm:max-w-md cursor-default animate-slideIn max-h-[90vh] overflow-hidden flex flex-col">
+                <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-primary-50 to-orange-50 relative">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-orange-500 rounded-t-3xl"></div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">Editar Perfil</h3>
+                            <p class="text-sm text-gray-500">Atualize suas informações pessoais</p>
+                        </div>
+                        <button onclick="closeEditProfileModal()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 flex items-center justify-center transition-all duration-200 text-gray-600 hover:text-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6 overflow-y-auto flex-1">
+                    <form id="edit-profile-form" onsubmit="saveProfile(event)">
+                        <div class="space-y-4">
+                            <!-- Upload de Foto -->
+                            <div class="text-center mb-6">
+                                <div class="relative inline-block">
+                                    <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 relative overflow-hidden">
+                                        <img id="profile-photo-preview" src="" alt="Foto do perfil" class="w-full h-full object-cover hidden">
+                                        <i id="default-avatar-icon" class="fas fa-user text-gray-500 text-2xl"></i>
+                                    </div>
+                                    <input type="file" id="profile-photo-input" accept="image/*" class="hidden" onchange="handleProfilePhotoUpload(event)">
+                                    <button type="button" onclick="document.getElementById('profile-photo-input').click()" class="absolute -bottom-2 -right-2 w-8 h-8 bg-primary-500 hover:bg-primary-600 text-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110">
+                                        <i class="fas fa-camera text-sm"></i>
+                                    </button>
+                                    <button type="button" id="remove-photo-btn" onclick="removeProfilePhoto()" class="absolute -bottom-2 -left-2 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hidden">
+                                        <i class="fas fa-times text-sm"></i>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-500">Clique na câmera para adicionar foto</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+                                <input type="text" id="edit-first-name" class="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base" placeholder="Seu nome" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Sobrenome</label>
+                                <input type="text" id="edit-last-name" class="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base" placeholder="Seu sobrenome" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+                                <input type="email" id="edit-email" class="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base" placeholder="seu@email.com" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nova Senha (opcional)</label>
+                                <input type="password" id="edit-password" class="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base" placeholder="Deixe em branco para manter a atual">
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-6">
+                            <button type="button" onclick="closeEditProfileModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-xl transition-all duration-200 text-sm sm:text-base">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="flex-1 bg-primary-500 hover:bg-primary-600 text-white font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-xl transition-all duration-200 text-sm sm:text-base">
+                                <i class="fas fa-save mr-2"></i>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão de Conta -->
+    <div id="delete-account-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm hidden z-50 cursor-pointer">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-w-sm sm:max-w-md cursor-default animate-slideIn max-h-[90vh] overflow-hidden flex flex-col">
+                <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-pink-50 relative">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-t-3xl"></div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">Excluir Conta</h3>
+                            <p class="text-sm text-gray-500">Esta ação não pode ser desfeita</p>
+                        </div>
+                        <button onclick="closeDeleteAccountModal()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 flex items-center justify-center transition-all duration-200 text-gray-600 hover:text-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6 overflow-y-auto flex-1">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-exclamation-triangle text-red-500 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Tem certeza que deseja excluir sua conta?</h4>
+                        <p class="text-gray-600 text-sm">
+                            Esta ação irá remover permanentemente:
+                        </p>
+                    </div>
+                    
+                    <div class="bg-red-50 rounded-xl p-4 mb-6">
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-red-500"></i>
+                                <span>Seus dados pessoais</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-red-500"></i>
+                                <span>Histórico de pedidos</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-red-500"></i>
+                                <span>Lista de favoritos</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-check text-red-500"></i>
+                                <span>Configurações da conta</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-info-circle text-yellow-600 mt-1"></i>
+                            <div class="text-sm">
+                                <p class="font-medium text-yellow-800 mb-1">Atenção!</p>
+                                <p class="text-yellow-700">
+                                    Esta ação é irreversível. Todos os seus dados serão perdidos permanentemente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                        <button onclick="closeDeleteAccountModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-xl transition-all duration-200 text-sm sm:text-base">
+                            <i class="fas fa-times mr-2"></i>
+                            Cancelar
+                        </button>
+                        <button onclick="confirmDeleteAccount()" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-xl transition-all duration-200 text-sm sm:text-base">
+                            <i class="fas fa-trash-alt mr-2"></i>
+                            Excluir Conta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Moderno Shopify-Style -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" 
+                             alt="E2E Shop Logo" 
+                             class="footer-logo h-8 w-auto"
+                             data-context="footer">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sua loja online moderna e tecnológica com os melhores produtos de qualidade. 
+                        Tecnologia, inovação e praticidade em um só lugar.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produtos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Conta -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-500 text-xs">Formas de Pagamento:</span>
+                        <div class="flex space-x-2">
+                            <i class="fab fa-cc-visa text-gray-400 text-lg"></i>
+                            <i class="fab fa-cc-mastercard text-gray-400 text-lg"></i>
+                            <i class="fas fa-credit-card text-gray-400 text-lg"></i>
+                            <i class="fas fa-mobile-alt text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logout Modal -->
+    <div id="logout-modal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm hidden z-50 cursor-pointer">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full cursor-default animate-slideIn">
+                <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-pink-50 relative">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-t-3xl"></div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-1">Confirmar Logout</h3>
+                            <p class="text-sm text-gray-500">Você será redirecionado para a página inicial</p>
+                        </div>
+                        <button onclick="cancelLogout()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 flex items-center justify-center transition-all duration-200 text-gray-600 hover:text-red-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="text-center space-y-4">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto">
+                            <i class="fas fa-sign-out-alt text-red-500 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Sair da Conta</h4>
+                            <p class="text-sm text-gray-500 mt-1">Você será redirecionado para a página inicial e todos os dados serão mantidos.</p>
+                        </div>
+                        <div class="flex space-x-3 pt-4">
+                            <button onclick="cancelLogout()" class="flex-1 px-4 py-3 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl font-semibold transition-all duration-200">
+                                Cancelar
+                            </button>
+                            <button onclick="confirmLogout()" class="flex-1 px-4 py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                Confirmar Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/mobile-ui.js"></script>
+    <script src="assets/js/clean-modals.js?v=3.3"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/cart-functions.js?v=1.0"></script>
+    
+    <script>
+        // Função para verificar se é usuário demo
+        function isDemoUser() {
+            const userData = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+            const demoEmails = ['joao@email.com', 'maria@email.com', 'admin@email.com', 'joao@demo.com'];
+            const isDemo = demoEmails.includes(userData.email) || userData.profile === 'demo' || userData.id === 'demo';
+            
+            console.log('🎭 Verificando se é usuário demo:', {
+                userData: userData,
+                email: userData.email,
+                profile: userData.profile,
+                id: userData.id,
+                isDemo: isDemo
+            });
+            
+            return isDemo;
+        }
+
+        // Função para abrir modal de logout
+        function openLogoutModal() {
+            document.getElementById('logout-modal').classList.remove('hidden');
+        }
+        
+        function confirmLogout() {
+            // Limpar dados do localStorage
+            localStorage.removeItem('e2e_current_user');
+            localStorage.removeItem('user');
+            localStorage.removeItem('user_orders');
+            localStorage.removeItem('e2e_favorites');
+            localStorage.removeItem('user_reviews');
+            localStorage.removeItem('cart');
+            
+            // Redirecionar para login
+            window.location.href = 'index.html';
+        }
+        
+        function cancelLogout() {
+            document.getElementById('logout-modal').classList.add('hidden');
+        }
+
+        // Função para carregar dados do usuário
+        function loadUserData() {
+            console.log('👤 Carregando dados do usuário...');
+            
+            const userData = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+            console.log('👤 Dados do usuário:', userData);
+            
+            // Verificar se é usuário demo primeiro
+            const isDemo = isDemoUser();
+            console.log('🎭 Verificação de usuário demo:', isDemo);
+            
+            if (isDemo) {
+                console.log('🎭 Usuário demo detectado - permitindo acesso');
+                // Mostrar banner de demonstração
+                const demoNotice = document.getElementById('demo-notice');
+                if (demoNotice) {
+                    demoNotice.style.display = 'block';
+                }
+            } else if (!userData.email && !userData.id) {
+                console.log('❌ Usuário não encontrado, redirecionando para login...');
+                console.log('📊 Dados do usuário:', userData);
+                alert('Acesso negado. Faça login para acessar seu perfil.');
+                window.location.href = 'login.html';
+                return;
+            } else {
+                console.log('👤 Usuário regular detectado');
+            }
+            
+            // Mostrar banner de demonstração apenas para usuários demo
+            const demoNotice = document.getElementById('demo-notice');
+            if (demoNotice) {
+                demoNotice.style.display = isDemoUser() ? 'block' : 'none';
+            }
+            
+            // Atualizar informações do usuário
+            const fullName = `${userData.firstName || ''} ${userData.lastName || ''}`.trim();
+            document.getElementById('user-name').textContent = fullName || 'Usuário';
+            document.getElementById('profile-name').textContent = fullName || 'Usuário';
+            document.getElementById('profile-email').textContent = userData.email || 'Não informado';
+            
+            // Carregar foto do usuário no header
+            const headerPhoto = document.getElementById('header-user-photo');
+            const headerIcon = document.getElementById('header-default-icon');
+            
+            if (userData.profilePhoto) {
+                headerPhoto.src = userData.profilePhoto;
+                headerPhoto.classList.remove('hidden');
+                headerIcon.classList.add('hidden');
+            } else {
+                headerPhoto.classList.add('hidden');
+                headerIcon.classList.remove('hidden');
+            }
+            
+            console.log('✅ Dados do usuário carregados:', userData);
+        }
+
+        // Função para carregar estatísticas do usuário
+        function loadUserStats() {
+            console.log('📊 Carregando estatísticas do usuário...');
+            
+            // Carregar dados do localStorage
+            const orders = JSON.parse(localStorage.getItem('user_orders') || '[]');
+            const favorites = JSON.parse(localStorage.getItem('e2e_favorites') || '[]');
+            const reviews = JSON.parse(localStorage.getItem('user_reviews') || '[]');
+            
+            // Atualizar contadores
+            document.getElementById('orders-count').textContent = orders.length;
+            document.getElementById('favorites-count').textContent = (favorites || []).length;
+            document.getElementById('reviews-count').textContent = reviews.length;
+            
+            console.log('📊 Estatísticas carregadas:', {
+                orders: orders.length,
+                favorites: favorites.length,
+                reviews: reviews.length
+            });
+        }
+
+        // Função para carregar pedidos recentes
+        function loadRecentOrders() {
+            console.log('📦 Carregando pedidos recentes...');
+            
+            const orders = JSON.parse(localStorage.getItem('user_orders') || '[]');
+            const container = document.getElementById('recent-orders-content');
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-shopping-bag text-gray-400 text-4xl mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhum pedido realizado</h3>
+                        <p class="text-gray-500 mb-4">Seus pedidos aparecerão aqui quando você fizer compras</p>
+                        <a href="products.html" class="inline-flex items-center px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
+                            <i class="fas fa-shopping-cart mr-2"></i>
+                            Começar a comprar
+                        </a>
+                    </div>
+                `;
+            } else {
+                // Mostrar últimos 3 pedidos
+                const recentOrders = orders.slice(0, 3);
+                container.innerHTML = recentOrders.map(order => `
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-box text-gray-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Pedido #${order.id}</h4>
+                                <p class="text-sm text-gray-500">${order.date}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold text-gray-900">R$ ${order.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}">
+                                ${getStatusText(order.status)}
+                            </span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Função para carregar favoritos
+        function loadFavorites() {
+            console.log('❤️ Carregando favoritos...');
+            
+            // Sincronizar com e2e_favorites (IDs) como fonte única
+            const favoriteIds = JSON.parse(localStorage.getItem('e2e_favorites') || '[]');
+            const container = document.getElementById('favorites-content');
+            
+            if (!favoriteIds || favoriteIds.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-heart text-gray-400 text-4xl mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhum favorito</h3>
+                        <p class="text-gray-500 mb-4">Seus produtos favoritos aparecerão aqui</p>
+                        <a href="products.html" class="inline-flex items-center px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200">
+                            <i class="fas fa-heart mr-2"></i>
+                            Explorar produtos
+                        </a>
+                    </div>
+                `;
+            } else {
+                // Resolver produtos por ID a partir das fontes conhecidas
+                const local = (window.localProducts || []).concat([]);
+                let cached = [];
+                try { cached = JSON.parse(localStorage.getItem('e2e_products_cache') || '{}').products || []; } catch {}
+                const pool = [...local, ...cached];
+
+                function byId(id) { return pool.find(p => String(p.id) === String(id)); }
+
+                const resolved = favoriteIds.map(id => byId(id)).filter(Boolean);
+
+                // Atualizar contador
+                const favCountEl = document.getElementById('favorites-count');
+                if (favCountEl) favCountEl.textContent = favoriteIds.length;
+
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${resolved.map(product => `
+                            <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <img src="${product.image || 'assets/images/products/' + (product.imageFile || '')}" alt="${product.name || product.title}" class="w-12 h-12 object-cover rounded-xl">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 text-sm">${product.name || product.title}</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <span class="text-xs text-gray-500">${(product.rating || 4.5).toFixed ? (product.rating || 4.5).toFixed(1) : product.rating || 4.5}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-gray-900">R$ ${(product.price || product.priceFinal || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                                    <button class="w-8 h-8 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" onclick="removeFavorite('${product.id}')">
+                                        <i class="fas fa-heart text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // Funções auxiliares
+        function getStatusColor(status) {
+            const colors = {
+                'pending': 'bg-yellow-100 text-yellow-800',
+                'processing': 'bg-blue-100 text-blue-800',
+                'shipped': 'bg-purple-100 text-purple-800',
+                'delivered': 'bg-green-100 text-green-800',
+                'cancelled': 'bg-red-100 text-red-800'
+            };
+            return colors[status] || 'bg-gray-100 text-gray-800';
+        }
+
+        function getStatusText(status) {
+            const texts = {
+                'pending': 'Pendente',
+                'processing': 'Processando',
+                'shipped': 'Enviado',
+                'delivered': 'Entregue',
+                'cancelled': 'Cancelado'
+            };
+            return texts[status] || 'Desconhecido';
+        }
+
+        function removeFavorite(productId) {
+            if (confirm('Tem certeza que deseja remover dos favoritos?')) {
+                let favoriteIds = JSON.parse(localStorage.getItem('e2e_favorites') || '[]');
+                favoriteIds = favoriteIds.filter(id => String(id) !== String(productId));
+                localStorage.setItem('e2e_favorites', JSON.stringify(favoriteIds));
+                loadFavorites();
+                loadUserStats();
+            }
+        }
+
+        // Funções do modal de exclusão de conta
+        function openDeleteAccountModal() {
+            console.log('🗑️ Abrindo modal de exclusão de conta...');
+            const modal = document.getElementById('delete-account-modal');
+            modal.classList.remove('hidden');
+            
+            // Remover event listeners anteriores para evitar duplicação
+            modal.removeEventListener('click', handleDeleteModalClick);
+            
+            // Configurar event listener para fechar clicando fora
+            modal.addEventListener('click', handleDeleteModalClick);
+        }
+        
+        function handleDeleteModalClick(e) {
+            if (e.target === e.currentTarget) {
+                console.log('🖱️ Fechando modal de exclusão clicando fora');
+                closeDeleteAccountModal();
+            }
+        }
+
+        function closeDeleteAccountModal() {
+            console.log('❌ Fechando modal de exclusão de conta...');
+            document.getElementById('delete-account-modal').classList.add('hidden');
+        }
+
+        function confirmDeleteAccount() {
+            console.log('🗑️ Confirmando exclusão de conta...');
+            
+            // Segunda confirmação para garantir que o usuário realmente quer excluir
+            const finalConfirmation = confirm(
+                'ATENÇÃO: Esta ação é irreversível!\n\n' +
+                'Tem certeza absoluta que deseja excluir sua conta?\n\n' +
+                'Todos os seus dados serão perdidos permanentemente.'
+            );
+            
+            if (!finalConfirmation) {
+                console.log('❌ Exclusão cancelada pelo usuário');
+                return;
+            }
+            
+            // Excluir todos os dados do usuário
+            console.log('🗑️ Excluindo dados do usuário...');
+            
+            // Remover dados do usuário atual
+            localStorage.removeItem('e2e_current_user');
+            localStorage.removeItem('user');
+            
+            // Remover dados relacionados ao usuário
+            localStorage.removeItem('user_orders');
+            localStorage.removeItem('e2e_favorites');
+            localStorage.removeItem('user_reviews');
+            localStorage.removeItem('cart');
+            localStorage.removeItem('e2e_favorites');
+            
+            // Remover dados específicos de vendedor se existirem
+            localStorage.removeItem('vendor_data');
+            
+            console.log('✅ Dados do usuário excluídos com sucesso');
+            
+            // Mostrar mensagem de confirmação
+            showSuccessMessage('Conta excluída com sucesso!');
+            
+            // Fechar modal
+            closeDeleteAccountModal();
+            
+            // Redirecionar para a página inicial após um breve delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // Funções do modal de edição de perfil
+        function openEditProfileModal() {
+            console.log('📝 Abrindo modal de edição de perfil...');
+            
+            try {
+                const userData = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+                console.log('👤 Dados do usuário carregados:', userData);
+                
+                // Preencher campos com dados atuais
+                const firstNameField = document.getElementById('edit-first-name');
+                const lastNameField = document.getElementById('edit-last-name');
+                const emailField = document.getElementById('edit-email');
+                const passwordField = document.getElementById('edit-password');
+                
+                if (firstNameField) firstNameField.value = userData.firstName || '';
+                if (lastNameField) lastNameField.value = userData.lastName || '';
+                if (emailField) emailField.value = userData.email || '';
+                if (passwordField) passwordField.value = '';
+                
+                console.log('📝 Campos preenchidos');
+                
+                // Carregar foto do perfil
+                loadProfilePhoto();
+                
+                // Mostrar modal
+                const modal = document.getElementById('edit-profile-modal');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    console.log('✅ Modal de edição de perfil aberto');
+                } else {
+                    console.error('❌ Modal edit-profile-modal não encontrado');
+                }
+                
+                // Remover event listeners anteriores para evitar duplicação
+                modal.removeEventListener('click', handleEditModalClick);
+                
+                // Configurar event listener para fechar clicando fora
+                modal.addEventListener('click', handleEditModalClick);
+                
+            } catch (error) {
+                console.error('❌ Erro ao abrir modal de edição de perfil:', error);
+                alert('Erro ao abrir modal de edição de perfil. Verifique o console para mais detalhes.');
+            }
+        }
+        
+        function handleEditModalClick(e) {
+            if (e.target === e.currentTarget) {
+                console.log('🖱️ Fechando modal de edição clicando fora');
+                closeEditProfileModal();
+            }
+        }
+
+        function closeEditProfileModal() {
+            console.log('❌ Fechando modal de edição de perfil...');
+            document.getElementById('edit-profile-modal').classList.add('hidden');
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+            console.log('💾 Salvando perfil...');
+            
+            const firstName = document.getElementById('edit-first-name').value.trim();
+            const lastName = document.getElementById('edit-last-name').value.trim();
+            const email = document.getElementById('edit-email').value.trim();
+            const password = document.getElementById('edit-password').value;
+            
+            // Validações
+            if (!firstName || !lastName || !email) {
+                try { window.showErrorFeedback && window.showErrorFeedback('Por favor, preencha todos os campos obrigatórios.'); } catch {}
+                return;
+            }
+            
+            if (password && password.length < 10) {
+                try { window.showErrorFeedback && window.showErrorFeedback('A senha deve ter pelo menos 10 caracteres.'); } catch {}
+                return;
+            }
+            
+            // Carregar dados atuais do usuário
+            const userData = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+            
+            // Atualizar dados
+            userData.firstName = firstName;
+            userData.lastName = lastName;
+            userData.email = email;
+            
+            if (password) {
+                userData.password = password; // Em produção, criptografar aqui
+            }
+            
+            // Salvar foto do perfil se foi alterada
+            const photoInput = document.getElementById('profile-photo-input');
+            if (photoInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    userData.profilePhoto = e.target.result;
+                    localStorage.setItem('e2e_current_user', JSON.stringify(userData));
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            }
+            
+            // Salvar dados atualizados
+            localStorage.setItem('e2e_current_user', JSON.stringify(userData));
+            
+            // Atualizar interface
+            loadUserData();
+            
+            // Fechar modal
+            closeEditProfileModal();
+            
+            // Mostrar mensagem de sucesso
+            const successMessage = isDemoUser() 
+                ? 'Perfil atualizado com sucesso! (Demonstração - alterações não serão salvas permanentemente)'
+                : 'Perfil atualizado com sucesso!';
+            showSuccessMessage(successMessage);
+            
+            console.log('✅ Perfil salvo:', userData);
+        }
+
+        function showSuccessMessage(message) {
+            // Criar notificação de sucesso
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slideIn';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover após 3 segundos
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Funções para gerenciar foto do perfil
+        function handleProfilePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Validar tipo de arquivo
+            if (!file.type.startsWith('image/')) {
+                // toast moderno
+                try { window.showErrorFeedback && window.showErrorFeedback('Por favor, selecione apenas arquivos de imagem.'); } catch {}
+                return;
+            }
+
+            // Validar tamanho (máximo 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                try { window.showErrorFeedback && window.showErrorFeedback('A imagem deve ter no máximo 10MB.'); } catch {}
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('profile-photo-preview');
+                const defaultIcon = document.getElementById('default-avatar-icon');
+                const removeBtn = document.getElementById('remove-photo-btn');
+                
+                img.src = e.target.result;
+                img.classList.remove('hidden');
+                defaultIcon.classList.add('hidden');
+                removeBtn.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeProfilePhoto() {
+            const img = document.getElementById('profile-photo-preview');
+            const defaultIcon = document.getElementById('default-avatar-icon');
+            const removeBtn = document.getElementById('remove-photo-btn');
+            const input = document.getElementById('profile-photo-input');
+            
+            img.src = '';
+            img.classList.add('hidden');
+            defaultIcon.classList.remove('hidden');
+            removeBtn.classList.add('hidden');
+            input.value = '';
+        }
+
+        function loadProfilePhoto() {
+            const userData = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+            const img = document.getElementById('profile-photo-preview');
+            const defaultIcon = document.getElementById('default-avatar-icon');
+            const removeBtn = document.getElementById('remove-photo-btn');
+            
+            if (userData.profilePhoto) {
+                img.src = userData.profilePhoto;
+                img.classList.remove('hidden');
+                defaultIcon.classList.add('hidden');
+                removeBtn.classList.remove('hidden');
+            } else {
+                img.classList.add('hidden');
+                defaultIcon.classList.remove('hidden');
+                removeBtn.classList.add('hidden');
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 Inicializando página de perfil...');
+            
+            // Carregar dados do usuário
+            loadUserData();
+            loadUserStats();
+            loadRecentOrders();
+            loadFavorites();
+            
+            // Event listeners já configurados nas funções de abertura dos modais
+            
+            console.log('✅ Página de perfil inicializada');
+        });
+
+        // Event listeners para fechar modais com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeEditProfileModal();
+                closeDeleteAccountModal();
+            }
+        });
+    </script>
+    
+    <!-- Logo System -->
+    <!-- Logo System - Solução Direta -->
+    <script>
+        // Sistema de logo simplificado e robusto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Carregando logos...');
+            try {
+                if (typeof loadAllLogos === 'function') {
+                    loadAllLogos();
+                }
+            } catch (e) { console.warn('Falha ao carregar logos', e); }
+        });
+        
+        function loadAllLogos() {
+            // Carregar logos do header
+            const headerLogos = document.querySelectorAll('.header-logo');
+            headerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/header/logo-light.png' : 
+                    'assets/images/logo/header/logo-dark.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do header falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-sm"></i>
+                                </div>
+                                <span class="text-xl font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do header carregado: ${isDarkBackground ? 'light' : 'dark'}`);
+            });
+            
+            // Carregar logos do footer
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                logo.src = 'assets/images/logo/footer/logo-footer.png';
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do footer falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log('✅ Logo do footer carregado');
+            });
+            
+            // Carregar favicon
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = 'assets/images/logo/favicon/favicon.png';
+            } else {
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.type = 'image/png';
+                newFavicon.href = 'assets/images/logo/favicon/favicon.png';
+                document.head.appendChild(newFavicon);
+            }
+            console.log('✅ Favicon carregado');
+        }
+        
+        // Função para detectar se o fundo é escuro
+        function isElementDarkBackground(element) {
+            // Verificar classes CSS que indicam fundo escuro
+            const darkClasses = ['bg-gray-900', 'bg-black', 'bg-gray-800', 'bg-gray-700', 'bg-blue-900', 'bg-indigo-900'];
+            const parent = element.closest('header, footer, div');
+            
+            if (parent) {
+                // Verificar se o elemento pai tem classes de fundo escuro
+                for (let className of darkClasses) {
+                    if (parent.classList.contains(className)) {
+                        return true;
+                    }
+                }
+                
+                // Verificar estilos computados
+                const computedStyle = window.getComputedStyle(parent);
+                const backgroundColor = computedStyle.backgroundColor;
+                
+                if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
+                    const rgb = backgroundColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const r = parseInt(rgb[0]);
+                        const g = parseInt(rgb[1]);
+                        const b = parseInt(rgb[2]);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        return brightness < 128; // Se brightness < 128, é fundo escuro
+                    }
+                }
+            }
+            
+            // Por padrão, assumir fundo claro
+            return false;
+        }
+    </script>
+    
+    <!-- Sistema Demo para Cliente -->
+    <script>
+        // Sistema de dados demo para cliente (similar ao vendedor)
+        let clientData = {
+            orders: [],
+            favorites: [],
+            reviews: [],
+            totalSpent: 0,
+            memberSince: new Date(),
+            lastOrder: null
+        };
+
+        // Função para verificar se é conta demo
+        function isDemoClient() {
+            const currentUser = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+            // Lista de e-mails de demonstração suportados pelo sistema
+            const demoEmails = ['joao@email.com', 'maria@email.com', 'admin@email.com', 'joao@demo.com'];
+            
+            // Sem usuário: considerar demonstração
+            if (!currentUser || !currentUser.id) return true;
+            
+            // Regras de identificação de demo
+            if (demoEmails.includes(String(currentUser.email || '').toLowerCase())) return true;
+            if ((currentUser.profile || '').toLowerCase() === 'demo') return true;
+            if (String(currentUser.id).toLowerCase() === 'demo') return true;
+            if (String(currentUser.email || '').toLowerCase().includes('demo')) return true;
+            
+            return false;
+        }
+
+        // Função para criar conta demo de cliente
+        function createDemoClient() {
+            const demoClient = {
+                id: 'demo',
+                firstName: 'João',
+                lastName: 'Silva',
+                fullName: 'João Silva',
+                email: 'joao@demo.com',
+                password: 'demo123',
+                profile: 'demo',
+                role: 'cliente',
+                createdAt: new Date().toISOString(),
+                lastLogin: new Date().toISOString(),
+                avatar: 'assets/images/default-avatar.png'
+            };
+            localStorage.setItem('e2e_current_user', JSON.stringify(demoClient));
+            console.log('👤 Conta demo de cliente criada:', demoClient);
+            return demoClient;
+        }
+
+        // Função para gerar dados realistas do cliente
+        function generateRealisticClientData() {
+            console.log('🛍️ Gerando dados realistas para cliente demo...');
+            
+            // Dados de pedidos realistas para cliente recorrente
+            const orders = generateRecentOrders(15); // Mais pedidos para cliente recorrente
+            const favorites = generateFavoriteProducts(8); // Mais favoritos
+            const reviews = generateClientReviews(20); // Mais avaliações
+            const totalSpent = orders.reduce((sum, order) => sum + order.total, 0);
+            
+            return {
+                orders: orders,
+                favorites: favorites,
+                reviews: reviews,
+                totalSpent: totalSpent,
+                memberSince: new Date(Date.now() - Math.random() * 730 * 24 * 60 * 60 * 1000), // Últimos 2 anos
+                lastOrder: orders[0] || null
+            };
+        }
+
+        // Função para gerar pedidos recentes
+        function generateRecentOrders(count) {
+            const orders = [];
+            const statuses = ['Entregue', 'Em trânsito', 'Processando', 'Pendente'];
+            const products = [
+                'Smartphone Samsung Galaxy A54',
+                'Fone Bluetooth JBL',
+                'Monitor Dell 24"',
+                'Cafeteira Elétrica Mondial',
+                'Aspirador Robô Britânia',
+                'Smart TV Lenovo 55"',
+                'Headphone Sony WH-1000XM4',
+                'Tablet Apple iPad Air 5'
+            ];
+            
+            for (let i = 0; i < count; i++) {
+                const orderDate = new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000); // Últimos 60 dias
+                const total = 300 + Math.random() * 3000; // R$ 300 - R$ 3300 (cliente recorrente gasta mais)
+                const status = statuses[Math.floor(Math.random() * statuses.length)];
+                
+                orders.push({
+                    id: `ORD${String(i + 1).padStart(3, '0')}`,
+                    date: orderDate,
+                    total: total,
+                    status: status,
+                    product: products[Math.floor(Math.random() * products.length)],
+                    tracking: `BR${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+                });
+            }
+            
+            return orders.sort((a, b) => b.date - a.date);
+        }
+
+        // Função para gerar produtos favoritos
+        function generateFavoriteProducts(count) {
+            const products = [
+                { name: 'Smartphone Samsung Galaxy A54', price: 1299.99, image: '13_smartphone_samsung_galaxy_a54.jpg', rating: 4.8 },
+                { name: 'Fone Bluetooth JBL', price: 299.99, image: '02_fone_bluetooth_jbl_cancelamento_ruido.jpg', rating: 4.6 },
+                { name: 'Monitor Dell 24"', price: 899.99, image: '06_monitor_dell_24_75hz.jpg', rating: 4.7 },
+                { name: 'Cafeteira Elétrica Mondial', price: 199.99, image: '07_cafeteira_eletrica_mondial_18_xicaras.jpg', rating: 4.5 },
+                { name: 'Aspirador Robô Britânia', price: 799.99, image: '03_aspirador_robo_britania_wifi.jpg', rating: 4.9 },
+                { name: 'Smart TV Lenovo 55"', price: 2499.99, image: '01_smart_tv_lenovo_55_4k_uhd.jpg', rating: 4.8 }
+            ];
+            
+            return products.slice(0, count);
+        }
+
+        // Função para gerar avaliações do cliente
+        function generateClientReviews(count) {
+            const reviews = [];
+            const products = [
+                'Smartphone Samsung Galaxy A54',
+                'Fone Bluetooth JBL',
+                'Monitor Dell 24"',
+                'Cafeteira Elétrica Mondial',
+                'Aspirador Robô Britânia'
+            ];
+            
+            for (let i = 0; i < count; i++) {
+                const rating = 4.2 + Math.random() * 0.7; // 4.2-4.9 (cliente recorrente tem avaliações melhores)
+                const date = new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000); // Últimos 90 dias
+                
+                const comments = [
+                    'Excelente produto! Recomendo!',
+                    'Muito satisfeito com a compra.',
+                    'Produto de alta qualidade.',
+                    'Entrega rápida e produto perfeito.',
+                    'Superou minhas expectativas!',
+                    'Produto incrível, vale cada centavo!',
+                    'Qualidade excepcional!',
+                    'Comprei novamente, produto excelente!'
+                ];
+                
+                reviews.push({
+                    product: products[Math.floor(Math.random() * products.length)],
+                    rating: rating,
+                    date: date,
+                    comment: comments[Math.floor(Math.random() * comments.length)]
+                });
+            }
+            
+            return reviews.sort((a, b) => b.date - a.date);
+        }
+
+        // Função para carregar dados do cliente
+        function loadClientData() {
+            console.log('📊 Carregando dados do cliente...');
+            
+            try {
+                if (isDemoClient()) {
+                    console.log('🏢 Cliente demo detectado - carregando dados realistas');
+                    clientData = generateRealisticClientData();
+                    // Persistir para manter ao recarregar
+                    try {
+                        localStorage.setItem('user_orders', JSON.stringify(clientData.orders));
+                        localStorage.setItem('user_reviews', JSON.stringify(clientData.reviews));
+                        const favIds = (clientData.favorites || []).map((p, idx) => p.id || (idx + 1000));
+                        localStorage.setItem('e2e_favorites', JSON.stringify(favIds));
+                    } catch {}
+                    console.log('✅ Dados demo gerados:', {
+                        orders: clientData.orders.length,
+                        favorites: clientData.favorites.length,
+                        reviews: clientData.reviews.length,
+                        totalSpent: clientData.totalSpent
+                    });
+                } else {
+                    console.log('👤 Cliente real - carregando dados zerados');
+                    clientData = {
+                        orders: [],
+                        favorites: [],
+                        reviews: [],
+                        totalSpent: 0,
+                        memberSince: new Date(),
+                        lastOrder: null
+                    };
+                }
+                
+                // Atualizar interface
+                console.log('🔄 Atualizando interface...');
+                updateClientInterface();
+                console.log('✅ Interface atualizada com sucesso');
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados do cliente:', error);
+                // Fallback: dados básicos
+                clientData = {
+                    orders: [],
+                    favorites: [],
+                    reviews: [],
+                    totalSpent: 0,
+                    memberSince: new Date(),
+                    lastOrder: null
+                };
+                updateClientInterface();
+            }
+        }
+
+        // Função para atualizar interface do cliente
+        function updateClientInterface() {
+            console.log('🔄 Atualizando interface do cliente...');
+            
+            try {
+                // Atualizar estatísticas
+                const ordersCountEl = document.getElementById('orders-count');
+                const favoritesCountEl = document.getElementById('favorites-count');
+                const reviewsCountEl = document.getElementById('reviews-count');
+                
+                if (ordersCountEl) {
+                    ordersCountEl.textContent = clientData.orders.length;
+                    console.log('📊 Pedidos atualizados:', clientData.orders.length);
+                } else {
+                    console.warn('⚠️ Elemento orders-count não encontrado');
+                }
+                
+                if (favoritesCountEl) {
+                    favoritesCountEl.textContent = clientData.favorites.length;
+                    console.log('❤️ Favoritos atualizados:', clientData.favorites.length);
+                } else {
+                    console.warn('⚠️ Elemento favorites-count não encontrado');
+                }
+                
+                if (reviewsCountEl) {
+                    reviewsCountEl.textContent = clientData.reviews.length;
+                    console.log('⭐ Avaliações atualizadas:', clientData.reviews.length);
+                } else {
+                    console.warn('⚠️ Elemento reviews-count não encontrado');
+                }
+                
+                // Atualizar pedidos recentes
+                console.log('📦 Atualizando pedidos recentes...');
+                updateRecentOrders();
+                
+                // Atualizar produtos favoritos
+                console.log('❤️ Atualizando produtos favoritos...');
+                updateFavoriteProducts();
+                
+                console.log('✅ Interface do cliente atualizada com sucesso');
+            } catch (error) {
+                console.error('❌ Erro ao atualizar interface:', error);
+            }
+        }
+
+        // Função para atualizar pedidos recentes
+        function updateRecentOrders() {
+            console.log('📦 Atualizando pedidos recentes...');
+            const container = document.getElementById('recent-orders-content');
+            
+            if (!container) {
+                console.warn('⚠️ Container recent-orders-content não encontrado');
+                return;
+            }
+            
+            console.log('📊 Total de pedidos:', clientData.orders.length);
+            
+            if (clientData.orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shopping-bag text-gray-400 text-3xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Nenhum pedido realizado</h4>
+                        <p class="text-gray-500 mb-6">Seus pedidos aparecerão aqui quando você fizer compras</p>
+                        <a href="products.html" class="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-3 px-6 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Começar a comprar</span>
+                        </a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = clientData.orders.slice(0, 3).map(order => `
+                    <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 mb-4 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">${order.id}</h4>
+                                    <p class="text-sm text-gray-500">${order.product}</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">${order.status}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                ${order.date.toLocaleDateString('pt-BR')}
+                            </div>
+                            <div class="text-lg font-bold text-gray-900">
+                                R$ ${order.total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Função para atualizar produtos favoritos
+        function updateFavoriteProducts() {
+            console.log('❤️ Atualizando produtos favoritos...');
+            const container = document.getElementById('favorites-content');
+            
+            if (!container) {
+                console.warn('⚠️ Container favorites-content não encontrado');
+                return;
+            }
+            
+            console.log('❤️ Total de favoritos:', clientData.favorites.length);
+            
+            if (clientData.favorites.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heart text-gray-400 text-3xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Nenhum favorito</h4>
+                        <p class="text-gray-500 mb-6">Seus produtos favoritos aparecerão aqui</p>
+                        <a href="products.html" class="inline-flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-semibold py-3 px-6 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
+                            <i class="fas fa-heart"></i>
+                            <span>Explorar produtos</span>
+                        </a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${clientData.favorites.slice(0, 6).map(product => `
+                            <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <img src="assets/images/products/${product.image}" alt="${product.name}" class="w-12 h-12 object-cover rounded-xl">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 text-sm">${product.name}</h4>
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <span class="text-xs text-gray-500">${product.rating.toFixed(1)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-gray-900">R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                                    <button class="w-8 h-8 bg-pink-500 hover:bg-pink-600 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                                        <i class="fas fa-heart text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Inicializando perfil de cliente...');
+            
+            try {
+                // Carregar usuário atual
+                const currentUser = JSON.parse(localStorage.getItem('e2e_current_user') || '{}');
+                if (!currentUser || !currentUser.id) {
+                    console.log('⚠️ Nenhum usuário logado. Redirecionando para login.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Carregar dados do usuário primeiro
+                console.log('👤 Carregando dados do usuário real...');
+                loadUserData();
+                
+                // Carregar dados do cliente (vazio para novos usuários)
+                console.log('📊 Carregando dados do cliente...');
+                loadClientData();
+                
+                // Mostrar aviso de demo apenas se for explicitamente conta demo
+                const demoNotice = document.getElementById('demo-notice');
+                if (demoNotice && isDemoClient()) {
+                    demoNotice.style.display = 'block';
+                    console.log('📢 Aviso de demo exibido');
+                }
+                
+                console.log('✅ Perfil de cliente inicializado com sucesso');
+            } catch (error) {
+                console.error('❌ Erro ao inicializar perfil:', error);
+                // Fallback: mostrar dados básicos
+                const ordersCount = document.getElementById('orders-count');
+                const favoritesCount = document.getElementById('favorites-count');
+                const reviewsCount = document.getElementById('reviews-count');
+                if (ordersCount) ordersCount.textContent = '0';
+                if (favoritesCount) favoritesCount.textContent = '0';
+                if (reviewsCount) reviewsCount.textContent = '0';
+            }
+        });
+    </script>
+</body>
+</html>

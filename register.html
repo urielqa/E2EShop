@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - E2E SHOP</title>
+    <meta name="description" content="Crie sua conta E2E SHOP e comece a comprar produtos incríveis">
+    
+    <!-- Configuração de idioma para validações HTML5 -->
+    <meta http-equiv="Content-Language" content="pt-BR">
+    <meta name="language" content="pt-BR">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f97316">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+</head>
+<body class="bg-gradient-to-br from-primary-50 via-white to-primary-100 min-h-screen">
+    <!-- Header Moderno -->
+    <header class="bg-white shadow-xl border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-3">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-4 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+                        </a>
+                    </div>
+            
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-3">
+                        <button id="mobile-search-btn" class="md:hidden p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="mobile-search-bar" class="md:hidden hidden border-b border-gray-200 bg-white">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex rounded-xl border border-gray-300">
+                <input type="text" class="flex-1 w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                <button class="px-3 text-white bg-primary-500 rounded-r-xl"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen flex items-center justify-center py-12 px-4">
+        <div class="w-full max-w-2xl">
+            <!-- Register Card -->
+            <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-8 py-6 text-center">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-plus text-white text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white mb-2">Junte-se ao E2E SHOP!</h1>
+                    <p class="text-primary-100">Crie sua conta e comece a comprar</p>
+                </div>
+
+                <!-- Form -->
+                <div class="px-8 py-8">
+                    <form id="register-form" class="space-y-6">
+                        <!-- Nome e Sobrenome -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-user mr-2 text-primary-500"></i>
+                                    Nome *
+                                </label>
+                            <input type="text" id="firstName" name="firstName" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                                   placeholder="Seu nome" required
+                                   oninvalid="this.setCustomValidity('Por favor, digite seu nome')"
+                                   oninput="this.setCustomValidity('')">
+                                <div class="error-message hidden mt-1 text-sm text-red-600" id="firstName-error">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    <span>Nome deve ser legítimo (ex: João, Maria, Ana)</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-user mr-2 text-primary-500"></i>
+                                    Sobrenome *
+                                </label>
+                            <input type="text" id="lastName" name="lastName" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                                   placeholder="Seu sobrenome" required
+                                   oninvalid="this.setCustomValidity('Por favor, digite seu sobrenome')"
+                                   oninput="this.setCustomValidity('')">
+                                <div class="error-message hidden mt-1 text-sm text-red-600" id="lastName-error">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    <span>Sobrenome deve ser legítimo (ex: Silva, Santos, Costa)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope mr-2 text-primary-500"></i>
+                                Email *
+                            </label>
+                            <input type="email" id="email" name="email" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                                   placeholder="seu@email.com" required
+                                   oninvalid="this.setCustomValidity('Por favor, digite um email válido')"
+                                   oninput="this.setCustomValidity('')">
+                            <div class="error-message hidden mt-1 text-sm text-red-600" id="email-error">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <span>Email inválido. Use um email real como: joao@gmail.com</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Senha -->
+                        <div>
+                            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2 text-primary-500"></i>
+                                Senha *
+                            </label>
+                            <div class="relative">
+                                <input type="password" id="password" name="password" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 pr-12"
+                                       placeholder="Mínimo 10 caracteres" required
+                                       oninvalid="this.setCustomValidity('Por favor, digite uma senha válida')"
+                                       oninput="this.setCustomValidity('')">
+                                <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                                    <i class="fas fa-eye" id="password-toggle-icon"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Password Strength Meter -->
+                            <div class="mt-2">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <div class="flex-1 bg-gray-200 rounded-full h-2">
+                                        <div class="h-2 rounded-full transition-all duration-300" id="password-strength-bar"></div>
+                                    </div>
+                                    <span class="text-sm font-medium" id="password-strength-text">Digite uma senha</span>
+                                </div>
+                                <div class="text-xs text-gray-500">
+                                    A senha deve ter no mínimo 10 caracteres, incluindo números, letras e caracteres especiais.
+                                </div>
+                            </div>
+                            
+                            <div class="error-message hidden mt-1 text-sm text-red-600" id="password-error">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <span>Senha deve atender aos critérios de segurança</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Confirmação de Senha -->
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2 text-primary-500"></i>
+                                Confirmar Senha *
+                            </label>
+                            <div class="relative">
+                                <input type="password" id="confirmPassword" name="confirmPassword" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 pr-12"
+                                       placeholder="Digite a senha novamente" required
+                                       oninvalid="this.setCustomValidity('Por favor, confirme sua senha')"
+                                       oninput="this.setCustomValidity('')">
+                                <button type="button" onclick="toggleConfirmPassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                                    <i class="fas fa-eye" id="confirm-password-toggle-icon"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="error-message hidden mt-1 text-sm text-red-600" id="confirmPassword-error">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <span>As senhas não coincidem</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tipo de Conta -->
+                        <div>
+                            <label for="profile" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user-tag mr-2 text-primary-500"></i>
+                                Tipo de Conta *
+                            </label>
+                            <select id="profile" name="profile" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300" required
+                                    oninvalid="this.setCustomValidity('Por favor, selecione um tipo de conta')"
+                                    oninput="this.setCustomValidity('')">
+                                <option value="">Selecione o tipo de conta</option>
+                                <option value="cliente">Cliente - Comprar produtos</option>
+                                <option value="vendedor">Vendedor - Vender produtos</option>
+                            </select>
+                            <div class="error-message hidden mt-1 text-sm text-red-600" id="profile-error">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <span>Selecione um tipo de conta</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Criar Conta
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="bg-gray-50 px-8 py-6 text-center">
+                    <p class="text-gray-600">
+                        Já tem uma conta? 
+                        <a href="login.html" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-300">
+                            Faça login aqui
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Moderno Shopify-Style -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" 
+                             alt="E2E Shop Logo" 
+                             class="footer-logo h-8 w-auto"
+                             data-context="footer">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sua loja online moderna e tecnológica com os melhores produtos de qualidade. 
+                        Tecnologia, inovação e praticidade em um só lugar.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produtos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Conta -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-500 text-xs">Formas de Pagamento:</span>
+                        <div class="flex space-x-2">
+                            <i class="fab fa-cc-visa text-gray-400 text-lg"></i>
+                            <i class="fab fa-cc-mastercard text-gray-400 text-lg"></i>
+                            <i class="fas fa-credit-card text-gray-400 text-lg"></i>
+                            <i class="fas fa-mobile-alt text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/mobile-ui.js"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+    <script src="assets/js/clean-modals.js?v=3.3"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/cart-functions.js?v=1.0"></script>
+    
+    <script>
+        // Função para alternar visibilidade da senha
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('password-toggle-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Função para alternar visibilidade da confirmação de senha
+        function toggleConfirmPassword() {
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const toggleIcon = document.getElementById('confirm-password-toggle-icon');
+            
+            if (confirmPasswordInput.type === 'password') {
+                confirmPasswordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                confirmPasswordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Lista de TLDs válidos mais comuns (Top Level Domains)
+        const validTLDs = [
+            'com', 'org', 'net', 'edu', 'gov', 'mil', 'int', 'info', 'biz', 'name', 'pro',
+            'br', 'com.br', 'org.br', 'net.br', 'edu.br', 'gov.br', 'mil.br',
+            'uk', 'co.uk', 'org.uk', 'ac.uk', 'gov.uk',
+            'de', 'fr', 'it', 'es', 'pt', 'nl', 'be', 'ch', 'at', 'se', 'no', 'dk', 'fi',
+            'ca', 'au', 'nz', 'jp', 'cn', 'in', 'ru', 'mx', 'ar', 'cl', 'co', 've', 'pe',
+            'io', 'me', 'tv', 'cc', 'ly', 'gl', 'ai', 'app', 'dev', 'tech', 'online',
+            'site', 'website', 'store', 'shop', 'blog', 'news', 'email', 'cloud'
+        ];
+
+        // Lista de domínios conhecidos e confiáveis (principais provedores de email)
+        const trustedDomains = [
+            // Principais provedores internacionais
+            'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.uk', 'yahoo.fr', 'yahoo.de',
+            'hotmail.com', 'hotmail.co.uk', 'hotmail.fr', 'hotmail.de', 'hotmail.it', 'hotmail.es',
+            'outlook.com', 'outlook.co.uk', 'outlook.fr', 'outlook.de', 'outlook.it', 'outlook.es',
+            'live.com', 'live.co.uk', 'live.fr', 'live.de', 'live.it', 'live.es',
+            'msn.com', 'aol.com', 'icloud.com', 'me.com', 'mac.com',
+            
+            // Provedores seguros e privados
+            'protonmail.com', 'proton.me', 'tutanota.com', 'tutanota.de', 'tuta.io',
+            'fastmail.com', 'hey.com', 'zoho.com', 'yandex.com', 'yandex.ru',
+            
+            // Provedores asiáticos conhecidos
+            'mail.ru', 'qq.com', '163.com', '126.com', 'sina.com', 'sohu.com', 'naver.com',
+            
+            // Provedores brasileiros conhecidos
+            'terra.com.br', 'uol.com.br', 'bol.com.br', 'ig.com.br', 'globo.com', 'r7.com',
+            'zipmail.com.br', 'click21.com.br', 'pop.com.br', 'ibest.com.br', 'oi.com.br',
+            'superig.com.br', 'designmail.com.br', 'email.com.br', 'netsite.com.br',
+            
+            // Provedores educacionais e governamentais comuns
+            'edu', 'gov', 'ac.uk', 'edu.br', 'gov.br', 'mil.br'
+        ];
+
+        // Padrões de domínios empresariais válidos (para permitir emails corporativos)
+        const businessDomainPatterns = [
+            // Empresas conhecidas de tecnologia
+            'microsoft.com', 'apple.com', 'google.com', 'amazon.com', 'facebook.com', 'meta.com',
+            'twitter.com', 'linkedin.com', 'netflix.com', 'spotify.com', 'adobe.com', 'oracle.com',
+            'salesforce.com', 'ibm.com', 'intel.com', 'nvidia.com', 'amd.com', 'hp.com', 'dell.com',
+            
+            // Bancos e instituições financeiras brasileiras
+            'itau.com.br', 'bradesco.com.br', 'bb.com.br', 'santander.com.br', 'caixa.gov.br',
+            'nubank.com.br', 'inter.co', 'c6bank.com.br', 'original.com.br', 'safra.com.br',
+            
+            // Universidades brasileiras conhecidas
+            'usp.br', 'unicamp.br', 'ufrj.br', 'ufmg.br', 'ufsc.br', 'puc-rio.br', 'fgv.br'
+        ];
+
+        // Função para validar nome individual (uma palavra válida)
+        function validateName(name) {
+            // Remove espaços extras
+            const trimmedName = name.trim();
+            
+            // Deve ter pelo menos 2 caracteres
+            if (trimmedName.length < 2) {
+                return false;
+            }
+            
+            // Deve conter apenas letras (incluindo acentos) e espaços
+            // Permite nomes compostos como "João Pedro" ou "Maria Clara"
+            const nameRegex = /^[a-zA-ZÀ-ÿ\s]+$/;
+            if (!nameRegex.test(trimmedName)) {
+                return false;
+            }
+            
+            // Verifica se cada palavra tem pelo menos 2 caracteres
+            const words = trimmedName.split(/\s+/);
+            for (let word of words) {
+                if (word.length < 2) {
+                    return false;
+                }
+            }
+            
+            // VALIDAÇÃO ADICIONAL: Verificar apenas padrões realmente suspeitos
+            // Lista de padrões que indicam nomes não legítimos (apenas os mais óbvios)
+            const suspiciousPatterns = [
+                /^[a-z]{2}$/i,  // Apenas 2 letras minúsculas (ab, cd, etc.)
+            ];
+            
+            // Verificar se o nome não corresponde a padrões suspeitos
+            for (let pattern of suspiciousPatterns) {
+                if (pattern.test(trimmedName)) {
+                    return false;
+                }
+            }
+            
+            // VALIDAÇÃO ADICIONAL: Verificar apenas padrões muito suspeitos
+            // Padrões como "bcdf", "ghjk" são suspeitos (apenas consoantes consecutivas)
+            const consonantPattern = /^[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]+$/;
+            if (consonantPattern.test(trimmedName)) {
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Função para obter mensagem de erro específica do email
+        function getEmailErrorMessage(email) {
+            if (!email || typeof email !== 'string') {
+                return 'Email é obrigatório';
+            }
+            
+            email = email.trim().toLowerCase();
+            
+            // Verificar se tem @
+            if (!email.includes('@')) {
+                return 'Email deve conter @ (ex: joao@gmail.com)';
+            }
+            
+            // Verificar se tem apenas um @
+            const atCount = (email.match(/@/g) || []).length;
+            if (atCount > 1) {
+                return 'Email deve conter apenas um @ (ex: joao@gmail.com)';
+            }
+            
+            // Verificar formato básico
+            const [localPart, domainPart] = email.split('@');
+            if (!localPart || !domainPart) {
+                return 'Email incompleto. Use formato: nome@provedor.com';
+            }
+            
+            // Verificar domínio
+            if (!domainPart.includes('.')) {
+                return 'Email deve ter domínio válido (ex: joao@gmail.com)';
+            }
+            
+            // Verificar TLD duplicado
+            if (domainPart.includes('..') || domainPart.includes('.com.com')) {
+                return 'Email com formato inválido. Use: joao@gmail.com';
+            }
+            
+            // Verificar domínios conhecidos
+            const trustedDomains = [
+                'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'terra.com.br', 'uol.com.br'
+            ];
+            
+            if (!trustedDomains.some(domain => domainPart.includes(domain))) {
+                return 'Use um email de provedor confiável (Gmail, Hotmail, Outlook)';
+            }
+            
+            return 'Email inválido. Use um email real como: joao@gmail.com';
+        }
+
+        // Função para validar email com verificação profissional como grandes sites
+        function validateEmail(email) {
+            // Verificações básicas
+            if (!email || typeof email !== 'string') {
+                return false;
+            }
+
+            // Remove espaços
+            email = email.trim().toLowerCase();
+
+            // Deve ter exatamente um @
+            const atCount = (email.match(/@/g) || []).length;
+            if (atCount !== 1) {
+                return false;
+            }
+
+            // Divide em parte local e domínio
+            const [localPart, domainPart] = email.split('@');
+
+            // Validações da parte local (antes do @)
+            if (!localPart || localPart.length === 0 || localPart.length > 64) {
+                return false;
+            }
+
+            // Parte local não pode começar ou terminar com ponto
+            if (localPart.startsWith('.') || localPart.endsWith('.')) {
+                return false;
+            }
+
+            // Não pode ter pontos consecutivos na parte local
+            if (localPart.includes('..')) {
+                return false;
+            }
+
+            // Regex para parte local válida
+            const localRegex = /^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?$/;
+            if (!localRegex.test(localPart)) {
+                return false;
+            }
+
+            // Validações do domínio
+            if (!domainPart || domainPart.length === 0 || domainPart.length > 253) {
+                return false;
+            }
+
+            // CORREÇÃO: Verificar se domínio tem pontos duplos ou termina com ponto
+            if (domainPart.includes('..') || domainPart.startsWith('.') || domainPart.endsWith('.')) {
+                return false;
+            }
+
+            // CORREÇÃO: Verificar se não tem TLD duplicado (ex: .com.com)
+            const domainParts = domainPart.split('.');
+            if (domainParts.length < 2) {
+                return false;
+            }
+            
+            // Verificar se não há TLDs duplicados consecutivos
+            for (let i = 0; i < domainParts.length - 1; i++) {
+                if (domainParts[i] === domainParts[i + 1]) {
+                    return false;
+                }
+            }
+
+            // PRIMEIRA VERIFICAÇÃO: Domínios conhecidos e confiáveis (LISTA BRANCA)
+            if (trustedDomains.includes(domainPart)) {
+                return true;
+            }
+
+            // SEGUNDA VERIFICAÇÃO: Domínios empresariais conhecidos (LISTA BRANCA)
+            if (businessDomainPatterns.includes(domainPart)) {
+                return true;
+            }
+
+            // TERCEIRA VERIFICAÇÃO: Padrões educacionais e governamentais (LISTA BRANCA)
+            if (domainPart.endsWith('.edu') || domainPart.endsWith('.gov') || 
+                domainPart.endsWith('.edu.br') || domainPart.endsWith('.gov.br') ||
+                domainPart.endsWith('.ac.uk') || domainPart.endsWith('.mil.br')) {
+                return true;
+            }
+
+            // QUARTA VERIFICAÇÃO: Apenas domínios corporativos de empresas muito conhecidas
+            // Lista restrita de domínios corporativos que definitivamente existem
+            const verifiedCorporateDomains = [
+                // Tecnologia
+                'microsoft.com', 'apple.com', 'google.com', 'amazon.com', 'meta.com', 'facebook.com',
+                'twitter.com', 'x.com', 'linkedin.com', 'netflix.com', 'spotify.com', 'adobe.com',
+                'oracle.com', 'salesforce.com', 'ibm.com', 'intel.com', 'nvidia.com', 'amd.com',
+                
+                // Bancos brasileiros
+                'itau.com.br', 'bradesco.com.br', 'bb.com.br', 'santander.com.br', 'caixa.gov.br',
+                'nubank.com.br', 'inter.co', 'c6bank.com.br', 'original.com.br', 'safra.com.br',
+                
+                // Universidades brasileiras
+                'usp.br', 'unicamp.br', 'ufrj.br', 'ufmg.br', 'ufsc.br', 'puc-rio.br', 'fgv.br',
+                
+                // Empresas brasileiras conhecidas
+                'petrobras.com.br', 'vale.com', 'ambev.com.br', 'embraer.com.br', 'jbs.com.br',
+                'magazineluiza.com.br', 'americanas.com.br', 'mercadolivre.com.br', 'globo.com',
+                
+                // Mídia e comunicação
+                'cnn.com', 'bbc.com', 'reuters.com', 'bloomberg.com', 'wsj.com', 'nytimes.com'
+            ];
+
+            if (verifiedCorporateDomains.includes(domainPart)) {
+                return true;
+            }
+
+            // REJEITA TODOS OS OUTROS DOMÍNIOS
+            // Implementação de lista branca: se não está nas listas acima, é rejeitado
+            return false;
+        }
+
+        // Função para calcular força da senha
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            let feedback = [];
+
+            // Verificar comprimento mínimo
+            if (password.length >= 10) score += 1;
+            else feedback.push('Mínimo 10 caracteres');
+
+            // Verificar letras minúsculas
+            if (/[a-z]/.test(password)) score += 1;
+            else feedback.push('Letras minúsculas');
+
+            // Verificar letras maiúsculas
+            if (/[A-Z]/.test(password)) score += 1;
+            else feedback.push('Letras maiúsculas');
+
+            // Verificar números
+            if (/[0-9]/.test(password)) score += 1;
+            else feedback.push('Números');
+
+            // Verificar caracteres especiais
+            if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+            else feedback.push('Caracteres especiais (!@#$%^&*)');
+
+            // BONUS: Verificar se não é uma senha comum
+            const commonPasswords = [
+                'password', '123456', '123456789', 'qwerty', 'abc123', 'password123',
+                'admin', 'letmein', 'welcome', 'monkey', '1234567890', 'dragon',
+                'master', 'hello', 'freedom', 'whatever', 'qazwsx', 'trustno1'
+            ];
+            
+            if (!commonPasswords.includes(password.toLowerCase())) {
+                score += 0.5; // Bonus por não ser senha comum
+            } else {
+                feedback.push('Evite senhas comuns');
+            }
+
+            return { score, feedback };
+        }
+
+        // Função para atualizar medidor de força da senha
+        function updatePasswordStrength(password) {
+            const strengthBar = document.getElementById('password-strength-bar');
+            const strengthText = document.getElementById('password-strength-text');
+            
+            if (!password) {
+                strengthBar.className = 'h-2 rounded-full transition-all duration-300';
+                strengthText.textContent = 'Digite uma senha';
+                strengthText.className = 'text-sm font-medium';
+                return;
+            }
+
+            const { score, feedback } = calculatePasswordStrength(password);
+            
+            strengthBar.className = 'h-2 rounded-full transition-all duration-300';
+            
+            // Calcular porcentagem baseada no score
+            const percentage = Math.min((score / 5.5) * 100, 100);
+            strengthBar.style.width = percentage + '%';
+
+            if (score <= 2) {
+                strengthBar.classList.add('bg-red-500');
+                strengthText.textContent = 'Senha fraca - ' + feedback.slice(0, 2).join(', ');
+                strengthText.className = 'text-sm font-medium text-red-600';
+            } else if (score <= 3) {
+                strengthBar.classList.add('bg-yellow-500');
+                strengthText.textContent = 'Senha razoável - ' + feedback.slice(0, 1).join(', ');
+                strengthText.className = 'text-sm font-medium text-yellow-600';
+            } else if (score <= 4) {
+                strengthBar.classList.add('bg-blue-500');
+                strengthText.textContent = 'Senha boa';
+                strengthText.className = 'text-sm font-medium text-blue-600';
+            } else {
+                strengthBar.classList.add('bg-green-500');
+                strengthText.textContent = 'Senha forte ✓';
+                strengthText.className = 'text-sm font-medium text-green-600';
+            }
+        }
+
+        // Função para mostrar erro
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(inputId + '-error');
+            
+            input.classList.add('border-red-500', 'focus:ring-red-500');
+            input.classList.remove('border-green-500', 'focus:ring-green-500');
+            errorDiv.classList.remove('hidden');
+            errorDiv.querySelector('span').textContent = message;
+        }
+
+        // Função para mostrar sucesso
+        function showSuccess(inputId) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(inputId + '-error');
+            
+            input.classList.add('border-green-500', 'focus:ring-green-500');
+            input.classList.remove('border-red-500', 'focus:ring-red-500');
+            errorDiv.classList.add('hidden');
+        }
+
+        // Função para mostrar erro de campo (compatível com AuthSystem)
+        function showFieldError(fieldId, message) {
+            console.log(`🔄 Mostrando erro para campo: ${fieldId} - ${message}`);
+            
+            const input = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + '-error');
+            
+            console.log(`- Input encontrado:`, input ? '✅' : '❌');
+            console.log(`- Error div encontrado:`, errorDiv ? '✅' : '❌');
+            
+            if (input) {
+                input.classList.add('border-red-500', 'focus:ring-red-500');
+                input.classList.remove('border-green-500', 'focus:ring-green-500');
+                console.log(`- Classes de erro adicionadas ao input`);
+            }
+            
+            if (errorDiv) {
+                errorDiv.classList.remove('hidden');
+                const span = errorDiv.querySelector('span');
+                if (span) {
+                    span.textContent = message;
+                    console.log(`- Mensagem de erro atualizada: ${message}`);
+                } else {
+                    console.log(`- Span não encontrado no error div`);
+                }
+            }
+        }
+
+        // Função para mostrar sucesso de campo (compatível com AuthSystem)
+        function showFieldSuccess(fieldId) {
+            const input = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + '-error');
+            
+            if (input) {
+                input.classList.add('border-green-500', 'focus:ring-green-500');
+                input.classList.remove('border-red-500', 'focus:ring-red-500');
+            }
+            
+            if (errorDiv) {
+                errorDiv.classList.add('hidden');
+            }
+        }
+
+        // Função de validação manual como fallback
+        function validateFormManually() {
+            console.log('🔄 Executando validação manual...');
+            
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const profile = document.getElementById('profile');
+            
+            if (!firstName || !lastName || !email || !password || !confirmPassword || !profile) {
+                console.error('❌ Elementos do formulário não encontrados!');
+                return false;
+            }
+            
+            const firstNameValue = firstName.value.trim();
+            const lastNameValue = lastName.value.trim();
+            const emailValue = email.value.trim();
+            const passwordValue = password.value;
+            const confirmPasswordValue = confirmPassword.value;
+            const profileValue = profile.value;
+            
+            let hasErrors = false;
+            
+            // Limpar erros anteriores
+            ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'profile'].forEach(fieldId => {
+                const input = document.getElementById(fieldId);
+                const errorDiv = document.getElementById(fieldId + '-error');
+                if (input) input.classList.remove('border-red-500', 'focus:ring-red-500');
+                if (errorDiv) errorDiv.classList.add('hidden');
+            });
+            
+            // Validações
+            if (!firstNameValue) {
+                console.log('❌ Nome vazio');
+                showFieldError('firstName', 'Por favor, digite seu nome');
+                hasErrors = true;
+            }
+            
+            if (!lastNameValue) {
+                console.log('❌ Sobrenome vazio');
+                showFieldError('lastName', 'Por favor, digite seu sobrenome');
+                hasErrors = true;
+            }
+            
+            if (!emailValue) {
+                console.log('❌ Email vazio');
+                showFieldError('email', 'Por favor, digite um email válido');
+                hasErrors = true;
+            }
+            
+            if (!passwordValue) {
+                console.log('❌ Senha vazia');
+                showFieldError('password', 'Por favor, digite uma senha válida');
+                hasErrors = true;
+            }
+            
+            if (!confirmPasswordValue) {
+                console.log('❌ Confirmação de senha vazia');
+                showFieldError('confirmPassword', 'Por favor, confirme sua senha');
+                hasErrors = true;
+            } else if (passwordValue && confirmPasswordValue && passwordValue !== confirmPasswordValue) {
+                console.log('❌ Senhas não coincidem');
+                showFieldError('confirmPassword', 'As senhas não coincidem');
+                hasErrors = true;
+            }
+            
+            if (!profileValue) {
+                console.log('❌ Tipo de conta vazio');
+                showFieldError('profile', 'Por favor, selecione um tipo de conta');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) {
+                console.log('❌ Validação falhou - campos obrigatórios vazios');
+                return false;
+            }
+            
+            console.log('✅ Validação manual passou - todos os campos preenchidos');
+            return true;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 Inicializando página de cadastro...');
+            
+            const form = document.getElementById('register-form');
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const profileSelect = document.getElementById('profile');
+            
+            // Debug: verificar se elementos foram encontrados
+            console.log('🔍 Debug - Elementos encontrados:');
+            console.log('- Formulário:', form ? '✅' : '❌');
+            console.log('- Nome:', firstNameInput ? '✅' : '❌');
+            console.log('- Sobrenome:', lastNameInput ? '✅' : '❌');
+            console.log('- Email:', emailInput ? '✅' : '❌');
+            console.log('- Senha:', passwordInput ? '✅' : '❌');
+            console.log('- Confirmação de Senha:', confirmPasswordInput ? '✅' : '❌');
+            console.log('- Tipo de Conta:', profileSelect ? '✅' : '❌');
+
+            // Verificar se todos os elementos foram encontrados
+            if (!form || !firstNameInput || !lastNameInput || !emailInput || !passwordInput || !confirmPasswordInput || !profileSelect) {
+                console.error('❌ Alguns elementos do formulário não foram encontrados!');
+                return;
+            }
+
+            // Validação em tempo real para nome
+            firstNameInput.addEventListener('input', function() {
+                // Bloquear números e caracteres especiais em tempo real
+                this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+                const value = this.value.trim();
+                if (value && !validateName(value)) {
+                    showFieldError('firstName', 'Nome deve ser legítimo (ex: João, Maria, Ana)');
+                } else if (value) {
+                    showFieldSuccess('firstName');
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('firstName-error').classList.add('hidden');
+                }
+            });
+
+            // Validação em tempo real para sobrenome
+            lastNameInput.addEventListener('input', function() {
+                // Bloquear números e caracteres especiais em tempo real
+                this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+                const value = this.value.trim();
+                if (value && !validateName(value)) {
+                    showFieldError('lastName', 'Sobrenome deve ser legítimo (ex: Silva, Santos, Costa)');
+                } else if (value) {
+                    showFieldSuccess('lastName');
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('lastName-error').classList.add('hidden');
+                }
+            });
+
+            // Validação em tempo real para email
+            emailInput.addEventListener('input', function() {
+                // Bloquear caracteres inválidos em tempo real
+                this.value = this.value.replace(/[^a-zA-Z0-9@._-]/g, '');
+                const value = this.value.trim();
+                if (value && !validateEmail(value)) {
+                    const errorMessage = getEmailErrorMessage(value);
+                    showFieldError('email', errorMessage);
+                } else if (value) {
+                    // Validação com duplicidade ao digitar
+                    const existingUsers = JSON.parse(localStorage.getItem('e2e_users') || '[]');
+                    const emailExists = existingUsers.some(user => user.email.toLowerCase() === value.toLowerCase());
+                    if (emailExists) {
+                        showFieldError('email', 'Este email já está cadastrado. Use outro email ou faça login.');
+                    } else {
+                        showFieldSuccess('email');
+                    }
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('email-error').classList.add('hidden');
+                }
+            });
+
+            // Validação em tempo real para senha
+            passwordInput.addEventListener('input', function() {
+                const value = this.value;
+                updatePasswordStrength(value);
+                
+                if (value) {
+                    const { score } = calculatePasswordStrength(value);
+                    if (score >= 4) {
+                        showFieldSuccess('password');
+                    } else {
+                        showFieldError('password', 'Senha deve atender aos critérios de segurança');
+                    }
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('password-error').classList.add('hidden');
+                }
+                
+                // Validar confirmação de senha quando a senha principal muda
+                const confirmPasswordValue = confirmPasswordInput.value;
+                if (confirmPasswordValue) {
+                    if (value === confirmPasswordValue) {
+                        showFieldSuccess('confirmPassword');
+                    } else {
+                        showFieldError('confirmPassword', 'As senhas não coincidem');
+                    }
+                }
+            });
+
+            // Validação em tempo real para confirmação de senha
+            confirmPasswordInput.addEventListener('input', function() {
+                const value = this.value;
+                const passwordValue = passwordInput.value;
+                
+                if (value) {
+                    if (passwordValue && value === passwordValue) {
+                        showFieldSuccess('confirmPassword');
+                    } else if (passwordValue) {
+                        showFieldError('confirmPassword', 'As senhas não coincidem');
+                    } else {
+                        showFieldError('confirmPassword', 'Digite a senha primeiro');
+                    }
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('confirmPassword-error').classList.add('hidden');
+                }
+            });
+
+            // Validação em tempo real para tipo de conta
+            profileSelect.addEventListener('change', function() {
+                if (this.value) {
+                    showFieldSuccess('profile');
+                } else {
+                    this.classList.remove('border-red-500', 'border-green-500', 'focus:ring-red-500', 'focus:ring-green-500');
+                    document.getElementById('profile-error').classList.add('hidden');
+                }
+            });
+
+            // Validação do formulário completo - versão simplificada
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('🔄 Formulário submetido, iniciando validação...');
+                console.log('🔄 Evento de submit capturado com sucesso!');
+                
+                // Executar validação manual
+                const isValid = validateFormManually();
+                
+                // Se validação passou e AuthSystem estiver disponível, chamar ele
+                if (isValid && window.authSystem && typeof window.authSystem.handleRegister === 'function') {
+                    console.log('✅ Validação passou, chamando AuthSystem...');
+                    window.authSystem.handleRegister(e);
+                } else if (!isValid) {
+                    console.log('❌ Validação falhou, não prosseguindo');
+                } else {
+                    console.warn('⚠️ AuthSystem não encontrado');
+                }
+            });
+            
+            // Teste adicional: adicionar listener no botão também
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.addEventListener('click', function(e) {
+                    console.log('🔄 Botão de submit clicado!');
+                    // Forçar submit do formulário
+                    form.dispatchEvent(new Event('submit'));
+                });
+            }
+            
+            // Teste adicional: adicionar listener global para qualquer clique
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('button[type="submit"]') || e.target.closest('button[type="submit"]')) {
+                    console.log('🔄 Clique em botão de submit detectado globalmente!');
+                }
+            });
+            
+            console.log('✅ Página de cadastro inicializada');
+        });
+    </script>
+    
+    <!-- Logo System -->
+    <!-- Logo System - Solução Direta -->
+    <script>
+        // Sistema de logo simplificado e robusto
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Carregando logos...');
+            loadAllLogos();
+        });
+        
+        function loadAllLogos() {
+            // Carregar logos do header
+            const headerLogos = document.querySelectorAll('.header-logo');
+            headerLogos.forEach(logo => {
+                // Detectar se o fundo é escuro ou claro
+                const isDarkBackground = isElementDarkBackground(logo);
+                const logoUrl = isDarkBackground ? 
+                    'assets/images/logo/header/logo-light.png' : 
+                    'assets/images/logo/header/logo-dark.png';
+                
+                logo.src = logoUrl;
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do header falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-sm"></i>
+                                </div>
+                                <span class="text-xl font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log(`✅ Logo do header carregado: ${isDarkBackground ? 'light' : 'dark'}`);
+            });
+            
+            // Carregar logos do footer
+            const footerLogos = document.querySelectorAll('.footer-logo');
+            footerLogos.forEach(logo => {
+                logo.src = 'assets/images/logo/footer/logo-footer.png';
+                logo.alt = 'E2E Shop';
+                logo.onerror = function() {
+                    console.warn('⚠️ Logo do footer falhou, usando fallback');
+                    this.style.display = 'none';
+                    const parent = this.parentElement;
+                    if (parent) {
+                        parent.innerHTML = `
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <i class="fas fa-shopping-bag text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg font-bold text-gray-900">E2E SHOP</span>
+                            </div>
+                        `;
+                    }
+                };
+                console.log('✅ Logo do footer carregado');
+            });
+            
+            // Carregar favicon
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = 'assets/images/logo/favicon/favicon.png';
+            } else {
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.type = 'image/png';
+                newFavicon.href = 'assets/images/logo/favicon/favicon.png';
+                document.head.appendChild(newFavicon);
+            }
+            console.log('✅ Favicon carregado');
+        }
+        
+        // Função para detectar se o fundo é escuro
+        function isElementDarkBackground(element) {
+            // Verificar classes CSS que indicam fundo escuro
+            const darkClasses = ['bg-gray-900', 'bg-black', 'bg-gray-800', 'bg-gray-700', 'bg-blue-900', 'bg-indigo-900'];
+            const parent = element.closest('header, footer, div');
+            
+            if (parent) {
+                // Verificar se o elemento pai tem classes de fundo escuro
+                for (let className of darkClasses) {
+                    if (parent.classList.contains(className)) {
+                        return true;
+                    }
+                }
+                
+                // Verificar estilos computados
+                const computedStyle = window.getComputedStyle(parent);
+                const backgroundColor = computedStyle.backgroundColor;
+                
+                if (backgroundColor && backgroundColor !== 'rgba(0, 0, 0, 0)') {
+                    const rgb = backgroundColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const r = parseInt(rgb[0]);
+                        const g = parseInt(rgb[1]);
+                        const b = parseInt(rgb[2]);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        return brightness < 128; // Se brightness < 128, é fundo escuro
+                    }
+                }
+            }
+            
+            // Por padrão, assumir fundo claro
+            return false;
+        }
+    </script>
+</body>
+</html>

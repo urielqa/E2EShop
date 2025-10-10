@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frete e Entrega - E2E Shop</title>
+    <link rel="icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <!-- Top Bar -->
+        <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white py-2">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm font-medium flex items-center space-x-2 animate-pulse-slow">
+                            <i class="fas fa-truck text-primary-200"></i>
+                            <span>Frete grátis para pedidos acima de R$ 99</span>
+                        </span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="tel:+5511999999999" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 99999-9999</span>
+                        </a>
+                        <a href="mailto:contato@e2eshop.com" class="text-sm hover:text-primary-200 transition-all duration-300 flex items-center space-x-2 hover:scale-105">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@e2eshop.com</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="bg-white py-3 border-b border-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="assets/images/logo/header/logo-dark.png" 
+                                 alt="E2E Shop Logo" 
+                                 class="header-logo h-10 w-auto transition-all duration-300 group-hover:scale-105"
+                                 data-context="header">
+                        </a>
+                    </div>
+            
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-3">
+                        <button id="mobile-search-btn" class="md:hidden p-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="mobile-search-bar" class="md:hidden hidden border-b border-gray-200 bg-white">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex rounded-xl border border-gray-300">
+                <input type="text" class="flex-1 w-full px-4 py-2.5 border-0 focus:ring-0 focus:outline-none text-gray-700 placeholder-gray-400" placeholder="Buscar produtos, marcas e mais...">
+                <button class="px-3 text-white bg-primary-500 rounded-r-xl"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        <!-- Page Header -->
+        <div class="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
+                        <i class="fas fa-shipping-fast mr-3"></i>
+                        Frete e Entrega
+                    </h1>
+                    <p class="text-xl opacity-90 animate-slide-up">
+                        Informações sobre prazos e valores de frete
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <section class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Free Shipping Banner -->
+                    <div class="bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl p-8 mb-12 text-center">
+                        <h2 class="text-3xl font-bold mb-4">
+                            <i class="fas fa-gift mr-3"></i>
+                            Frete Grátis!
+                        </h2>
+                        <p class="text-xl opacity-90">Para pedidos acima de R$ 99 em todo o Brasil</p>
+                    </div>
+
+                    <!-- Shipping Options -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        <!-- Standard Shipping -->
+                        <div class="bg-white rounded-2xl shadow-xl p-8">
+                            <div class="text-center mb-6">
+                                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-truck text-primary-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">Entrega Padrão</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Prazo:</span>
+                                    <span class="font-semibold text-gray-900">3-7 dias úteis</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Cobertura:</span>
+                                    <span class="font-semibold text-gray-900">Todo o Brasil</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Valor:</span>
+                                    <span class="font-semibold text-gray-900">R$ 15,90</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Express Shipping -->
+                        <div class="bg-white rounded-2xl shadow-xl p-8">
+                            <div class="text-center mb-6">
+                                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-rocket text-primary-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-900">Entrega Expressa</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Prazo:</span>
+                                    <span class="font-semibold text-gray-900">1-2 dias úteis</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Cobertura:</span>
+                                    <span class="font-semibold text-gray-900">Grandes centros</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Valor:</span>
+                                    <span class="font-semibold text-gray-900">R$ 29,90</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Timeline -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Como Funciona a Entrega</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Pedido Confirmado</h4>
+                                <p class="text-sm text-gray-600">Seu pedido é processado em até 24h</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Preparação</h4>
+                                <p class="text-sm text-gray-600">Produto é separado e embalado</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Envio</h4>
+                                <p class="text-sm text-gray-600">Produto é enviado pelos Correios</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Entrega</h4>
+                                <p class="text-sm text-gray-600">Produto entregue em sua casa</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Information -->
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">
+                            <i class="fas fa-exclamation-triangle text-yellow-600 mr-2"></i>
+                            Informações Importantes
+                        </h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• Os prazos de entrega são contados em dias úteis (segunda a sexta)</li>
+                            <li>• Em caso de ausência, o produto será devolvido aos Correios</li>
+                            <li>• Você pode rastrear seu pedido através do código enviado por e-mail</li>
+                            <li>• Para dúvidas sobre entrega, entre em contato conosco</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Moderno Shopify-Style -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="assets/images/logo/footer/logo-white.png" 
+                             alt="E2E Shop Logo" 
+                             class="footer-logo h-8 w-auto"
+                             data-context="footer">
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sua loja online moderna e tecnológica com os melhores produtos de qualidade. 
+                        Tecnologia, inovação e praticidade em um só lugar.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="Twitter">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-500 transition-colors duration-300" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produtos -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Produtos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html?category=smartphones" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Smartphones</a></li>
+                        <li><a href="products.html?category=notebooks" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Notebooks</a></li>
+                        <li><a href="products.html?category=tablets" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Tablets</a></li>
+                        <li><a href="products.html?category=acessorios" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Acessórios</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Suporte -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Contato</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Perguntas Frequentes</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Frete e Entrega</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Devoluções</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Conta -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Conta</h3>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Entrar</a></li>
+                        <li><a href="register.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Cadastrar</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meu Perfil</a></li>
+                        <li><a href="orders.html" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-center md:text-left">
+                        <p class="text-gray-400 text-sm">&copy; 2024 E2E SHOP. Todos os direitos reservados.</p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Desenvolvido por: <strong>Uriel</strong>, <strong>Heraldo</strong>, <strong>Bruno</strong>, <strong>Fernanda</strong>, <strong>Samuel</strong>
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-500 text-xs">Formas de Pagamento:</span>
+                        <div class="flex space-x-2">
+                            <i class="fab fa-cc-visa text-gray-400 text-lg"></i>
+                            <i class="fab fa-cc-mastercard text-gray-400 text-lg"></i>
+                            <i class="fas fa-credit-card text-gray-400 text-lg"></i>
+                            <i class="fas fa-mobile-alt text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/clean-modals.js?v=3.3"></script>
+    <script src="assets/js/categories.js?v=4.0"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/mobile-ui.js"></script>
+</body>
+</html>
