@@ -184,7 +184,7 @@ Este é um projeto de equipe desenvolvido por:
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-ACESSAR PAGINA: https://urielqa.github.io/E2EShop/
+LINK DA PAGINA: https://urielqa.github.io/E2EShop/
 
 ---
 
